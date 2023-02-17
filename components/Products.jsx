@@ -2,10 +2,10 @@
 
 const Products = ({ products }) => {
   return (
-    <div>
-      {products.map((product) => (
+    <div className="bg-gray-">
+      {/* {products.map((product) => (
         <h1>{product.title}</h1>
-      ))}
+      ))} */}
     </div>
   )
 }

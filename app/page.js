@@ -1,20 +1,21 @@
+import Categories from "@/components/Categories";
 import Products from "@/components/Products";
 import { client } from "@/lib/sanity.client";
 import { groq } from "next-sanity"
 
 
-const query = groq`
-  *[_type=='products'] {
+const catQuery = groq`
+  *[_type=='categories'] {
     ...
   }
 `;
 
 export default async function Home() {
-  const products = await client.fetch(query)
-
+  const categories = await client.fetch(catQuery)
+  
   return (
     <main>
-      <Products products={products} />
+      <Categories categories={categories} />
     </main>
   )
 }
