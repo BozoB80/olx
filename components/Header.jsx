@@ -3,8 +3,7 @@
 import Image from "next/image"
 import logo from '../assets/logo.svg'
 import Link from "next/link"
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { AccountCircleOutlined, ChatOutlined, SavingsOutlined } from "@mui/icons-material";
+import { ChevronDownIcon, UserCircleIcon, ChatBubbleBottomCenterTextIcon, CircleStackIcon } from '@heroicons/react/24/outline'
 import SearchBar from "./SearchBar";
 
 
@@ -26,23 +25,23 @@ const Header = () => {
               <Link href="/">Marketing</Link>
               <Link href="/">Blog</Link>
               <Link href="/">Create Add</Link>
-              <Link href="/">
+              <Link href="/" className="flex">
                 Other
-                <KeyboardArrowDownIcon />
+                <ChevronDownIcon className="h-6 w-6" />
               </Link>
             </div>
             <div className="flex justify-center items-center gap-3">
               <Link href="/">
-                <ChatOutlined />
+                <ChatBubbleBottomCenterTextIcon className="h-6 w-6" />
               </Link>
               <button type="button" className="flex pl-2 gap-2 border-l border-gray-400">
-                <SavingsOutlined  />
+                <CircleStackIcon className="h-6 w-6"  />
                 <p className="px-1 rounded-sm bg-orange-300">56</p>
               </button>
               <div className="flex pl-2 gap-2 border-l border-gray-400">
-                <AccountCircleOutlined  />
+                <UserCircleIcon className="h-6 w-6"  />
                 <h2>My Account</h2>
-                <KeyboardArrowDownIcon />
+                <ChevronDownIcon className="h-6 w-6" />
               </div>
             </div>
           </div>

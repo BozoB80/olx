@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'olx.ba',
+        hostname: 'cdn.sanity.io',
         port: '',
         pathname: '/**',
       },

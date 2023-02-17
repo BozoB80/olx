@@ -1,12 +1,15 @@
 export default {
-  name: 'categories',
+  name: 'categoryList',
   type: 'document',
-  title: 'Categories',
+  title: 'CategoryList',
   fields: [
     {
-      name: 'imageUrl',
-      type: 'url',
-      title: 'Image URL'
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true
+      }
     },
     {
       name: 'description',
