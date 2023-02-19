@@ -11,7 +11,6 @@ const catQuery = groq`
 
 export default async function Home() {
   const categories = await client.fetch(catQuery)
-  console.log(categories);
   
   return (
     <main>

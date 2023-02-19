@@ -9,12 +9,33 @@ export default {
       title: 'Title'
     },
     {
+      name: 'slug',
+      type: 'Slug',
+      title: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      }
+    },
+    {
+      name: 'user',
+      title: 'reference',
+      type: 'User',      
+      to: {type: 'user'}
+    },
+    {
       name: 'image',
-      type: 'image',
       title: 'Image',
+      type: 'array',
+      of: [{ type: 'image' }],      
       options: {
         hotspot: true
       }
+    },
+    {
+      name: 'publishedAt',
+      title: 'Published At',
+      type: 'datetime',      
     },
     {
       name: 'price',

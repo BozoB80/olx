@@ -10,7 +10,7 @@ const Categories = ({ categories }) => {
   return (
     <div className="flex justify-between items-center w-full px-10 py-4">
       {categories.map((category) => (
-      <div key={category._id} className="flex flex-col justify-center px-3 py-2 items-center min-w-fit">
+      <div key={category._id} className="flex flex-col justify-center items-center">
         <div style={{ backgroundColor: category.bgcolor }} className={`flex justify-center items-center border w-16 h-16 rounded-full `}>
           <Image 
             src={urlFor(category.image).url()}
