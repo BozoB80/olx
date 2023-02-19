@@ -1,16 +1,19 @@
 'use client'
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import logo from '../assets/logo.svg'
 import Link from "next/link"
 import { ChevronDownIcon, UserCircleIcon, ChatBubbleBottomCenterTextIcon, CircleStackIcon } from '@heroicons/react/24/outline'
 import SearchBar from "./SearchBar";
-import { signOut } from "firebase/auth"
+import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
 
 
 const Header = () => {
+  const [toggleMenu, setToggleMenu] = useState(false)
+  const [userName, setUserName] = useState('')
   const router = useRouter()
 
   const logoutUser = () => {
@@ -21,6 +24,22 @@ const Header = () => {
         // An error happened.
       });
   }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        
+        const uid = user.uid;
+        console.log(user)
+        setUserName(user.displayName)
+        
+      } else {
+        // User is signed out
+        setUserName('')
+      }
+    });
+  }, [])
+  
 
 
   return (
@@ -50,7 +69,7 @@ const Header = () => {
 
             <div className="flex justify-center items-center">
               <div className="font-semibold">
-                <Link href="/auth/login" className=" mr-2">Sign In</Link>
+                <Link href="/auth/login" className=" mr-2">{userName ? userName : "Sign In"}</Link>
                 <Link href="/auth/register" className="border-l border-gray-400 pl-2">Registration</Link>
               </div>
             </div>

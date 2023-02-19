@@ -1,14 +1,33 @@
 'use client'
 
+import { useState } from "react"
 import Image from "next/image"
 import logo from '../../../assets/logo.svg'
 import Link from "next/link"
 import { useRouter } from 'next/navigation'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import padlock from '../../../assets/padlock.svg'
+import { sendPasswordResetEmail } from "firebase/auth"
+import { auth } from "@/firebase"
 
 const ResetPassword = () => {
+  const [email, setEmail] = useState('')
   const router = useRouter()
+
+  const resetPassword = (e) => {
+    e.preventDefault()
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
 
   return (
     <div className='relative flex justify-center items-center w-full h-screen mx-auto bg-[#012f34]'>
@@ -39,13 +58,16 @@ const ResetPassword = () => {
           </div>
           <h1 className="w-full items-start text-2xl mb-3">Forgotten password</h1>
 
-          <form 
+          <form
+            onSubmit={resetPassword} 
             className="flex flex-col w-full space-y-3"
           >
             <label htmlFor="email" className="uppercase text-xs font-semibold">Email</label>
             <input 
               type="email" 
-              id="email" 
+              id="email"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
               className="w-full bg-gray-200 rounded-sm py-2" 
             />
 

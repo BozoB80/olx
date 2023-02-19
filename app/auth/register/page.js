@@ -4,14 +4,14 @@ import Image from "next/image"
 import logo from '../../../assets/logo.svg'
 import Link from "next/link"
 import { useState } from "react"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { auth } from '../../../firebase'
 import { useRouter } from "next/navigation"
 
 const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userName, setUserName] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [gender, setGender] = useState('')
   const [region, setRegion] = useState('')
   const router = useRouter()
@@ -23,6 +23,9 @@ const Register = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        updateProfile(auth.currentUser, {
+          displayName: displayName
+        }).
         console.log(user)
         router.push('/auth/login')
       })
@@ -72,8 +75,8 @@ const Register = () => {
               type="text" 
               id="name"
               required
-              value={userName} 
-              onChange={(e) => setUserName(e.target.value)} 
+              value={displayName} 
+              onChange={(e) => setDisplayName(e.target.value)} 
               className="w-full bg-gray-200 rounded-sm py-2" 
             />
             <label htmlFor="gender" className="uppercase text-xs font-semibold">Choose gender</label>
