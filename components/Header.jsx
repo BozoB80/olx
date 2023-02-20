@@ -10,6 +10,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
 import { createOrGetUser } from "@/utils/getUser"
+import { client } from "@/lib/sanity.client"
 
 
 const Header = () => {
@@ -21,6 +22,7 @@ const Header = () => {
     signOut(auth).then(() => {
         console.log("Sign-out successful")
         router.push('/')
+        localStorage.clear()
       }).catch((error) => {
         // An error happened.
       });
@@ -30,11 +32,22 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       
       if (user) {
-        
         const uid = user.uid;
-        console.log(user)
-        
+        console.log(user)        
         setUserName(user.displayName)
+
+        const doc = {
+          _id: uid,
+          _type: 'user',
+          userName: user.displayName,
+          gender: user.gender,
+          region: user.region
+        }
+
+        client.createIfNotExists(doc)
+          .then((res) => {
+            router.refresh()
+          })
         
       } else {
         // User is signed out
