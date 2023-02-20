@@ -10,8 +10,8 @@ export default {
     },
     {
       name: 'slug',
-      type: 'Slug',
-      title: 'slug',
+      type: 'slug',
+      title: 'Slug',
       options: {
         source: 'title',
         maxLength: 96,
@@ -19,8 +19,8 @@ export default {
     },
     {
       name: 'user',
-      title: 'reference',
-      type: 'User',      
+      title: 'User',
+      type: 'reference',      
       to: {type: 'user'}
     },
     {

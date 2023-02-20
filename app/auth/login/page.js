@@ -8,6 +8,7 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
 
+
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -20,6 +21,7 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        
         router.push('/')
         
       })
