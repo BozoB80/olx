@@ -55,7 +55,7 @@ const Login = () => {
               autoComplete="username"
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="w-full bg-gray-200 rounded-sm py-2" 
+              className="w-full bg-gray-200 rounded-sm py-2 px-2" 
             />
             <label htmlFor="password" className="uppercase text-xs font-semibold">Password</label>
             <input 
@@ -64,7 +64,7 @@ const Login = () => {
               autoComplete="current-password"
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="w-full bg-gray-200 rounded-sm py-2" 
+              className="w-full bg-gray-200 rounded-sm py-2 px-2" 
             />
             <Link href="/auth/reset" className="w-full text-right text-base mb-3">Forgot Password?</Link>
 

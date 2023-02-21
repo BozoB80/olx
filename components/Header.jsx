@@ -9,13 +9,15 @@ import SearchBar from "./SearchBar";
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
-import { createOrGetUser } from "@/utils/getUser"
+import { useDispatch } from "react-redux"
+import { setActiveUser, removeActiveUser } from "@/redux/slice/authSlice"
 
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false)
   const [userName, setUserName] = useState('')
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const logoutUser = () => {
     signOut(auth).then(() => {
@@ -30,15 +32,19 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       
       if (user) {
-        
         const uid = user.uid;
-        console.log(user)
-        
         setUserName(user.displayName)
+
+        dispatch(setActiveUser({
+          email: user.email,
+          userName: user.displayName,
+          userID: user.uid,
+        }))
         
       } else {
         // User is signed out
         setUserName('')
+        dispatch(removeActiveUser())
       }
     });
   }, [])

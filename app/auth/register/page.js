@@ -7,6 +7,9 @@ import { useState } from "react"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { auth } from '../../../firebase'
 import { useRouter } from "next/navigation"
+import { useSelector } from "react-redux"
+import { selectIsLoggedIn } from "@/redux/slice/authSlice"
+
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -15,6 +18,7 @@ const Register = () => {
   const [gender, setGender] = useState('')
   const [region, setRegion] = useState('')
   const router = useRouter()
+  const loggedIn = useSelector(selectIsLoggedIn)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +31,8 @@ const Register = () => {
           displayName: displayName
         }).
         console.log(user)
-        router.push('/auth/login')
+        router.push('/auth/greetings')
+        loggedIn(true)
       })
       .catch((error) => {
         const errorCode = error.code;
