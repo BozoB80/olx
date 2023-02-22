@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import logo from '../assets/logo.svg'
 import Link from "next/link"
-import { ChevronDownIcon, UserCircleIcon, ChatBubbleBottomCenterTextIcon, CircleStackIcon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon, UserCircleIcon, ChatBubbleBottomCenterTextIcon, CircleStackIcon, XMarkIcon, ArrowLeftOnRectangleIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import SearchBar from "./SearchBar";
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "@/firebase"
@@ -97,7 +97,7 @@ const Header = () => {
                 <div className="flex justify-center items-center pl-2 gap-3 border-l border-gray-400">
                   <UserCircleIcon className="h-10 w-10"  />
                   <button type="button">{userName}</button>
-                  <button type="button" onClick={() => setToggleMenu(true)}><ChevronDownIcon className="h-6 w-6" /></button>
+                  <button type="button" onClick={() => setToggleMenu(true)}><Bars3Icon className="h-6 w-6" /></button>
                 </div>
               </div>
 
