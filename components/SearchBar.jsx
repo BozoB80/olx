@@ -7,17 +7,17 @@ import { selectCategories } from "@/redux/slice/categorySlice"
 import Image from "next/image"
 import ostalo from '../assets/ostalo.svg'
 import { useRouter } from "next/navigation"
+import { selectIsLoggedIn } from "@/redux/slice/authSlice"
 
 
 const SearchBar = () => {
   const [search, setSearch] = useState('')
   const [publish, setPublish] = useState(false)
   const categoryList = useSelector(selectCategories)
+  const loggedIn = useSelector(selectIsLoggedIn)
   const router = useRouter()
 
-  const handlePublish = () => {
-    
-  }
+
 
   return (
     <div className='relative flex justify-between items-center w-full gap-5 mt-5'>
@@ -110,7 +110,7 @@ const SearchBar = () => {
             </div>
           </div>
         </div>
-      )}
+        )} 
     </div>
   )
 }

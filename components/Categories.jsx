@@ -24,7 +24,7 @@ const Categories = () => {
           id: doc.id,
           ...doc.data()
         }))
-        console.log(allCategories);
+        
         setCategories(allCategories)
         dispatch(storeCategories({
           categories: allCategories

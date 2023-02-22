@@ -33,6 +33,7 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       
       if (user) {
+        console.log(user);
         const uid = user.uid;
         setUserName(user.displayName)
 

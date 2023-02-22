@@ -11,17 +11,24 @@ const Cars = () => {
         <form
           className="flex flex-col justify-center items-center"
         >
-          <div>
-            <h1 className="text-3xl font-normal mb-4">Make and Model</h1>
+          <div className="w-full">
+            <h1 className="text-2xl text-center font-normal mb-4">Make and Model</h1>
             <label htmlFor="manufacturer" className="uppercase text-xs font-semibold">Manufacturer</label>
             <select 
-              type="email" 
               id="manufacturer"
-              autoComplete="manufacturer"
-              value={make} 
-              onChange={(e) => setMake(e.target.value)} 
-              className="w-full bg-gray-200 rounded-sm py-2 px-2" 
+              className="w-full bg-gray-100 rounded-md p-2" 
             />
+            <label htmlFor="model" className="uppercase text-xs font-semibold">Model</label>
+            <select 
+              id="model"
+              className="w-full bg-gray-100 rounded-md p-2" 
+            />
+          </div>
+          <div className="w-full">
+            <div>
+              {}
+            </div>
+
           </div>
         </form>
       </div>      

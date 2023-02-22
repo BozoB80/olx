@@ -28,8 +28,8 @@ const Register = () => {
         // Signed in 
         const user = userCredential.user;
         updateProfile(auth.currentUser, {
-          displayName: displayName
-        }).
+          displayName: displayName,
+        })
         console.log(user)
         router.push('/auth/greetings')
         loggedIn(true)
