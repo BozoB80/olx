@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.sanity.io',
+        hostname: 'firebasestorage.googleapis.com',
         port: '',
         pathname: '/**',
       },

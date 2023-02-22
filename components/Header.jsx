@@ -9,13 +9,8 @@ import SearchBar from "./SearchBar";
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
-<<<<<<< HEAD
 import { useDispatch } from "react-redux"
 import { setActiveUser, removeActiveUser } from "@/redux/slice/authSlice"
-=======
-import { createOrGetUser } from "@/utils/getUser"
-import { client } from "@/lib/sanity.client"
->>>>>>> 6a2ac581f41745d12efa207ab101f8a5e85dfa66
 
 
 const Header = () => {
@@ -39,7 +34,6 @@ const Header = () => {
       
       if (user) {
         const uid = user.uid;
-<<<<<<< HEAD
         setUserName(user.displayName)
 
         dispatch(setActiveUser({
@@ -47,23 +41,6 @@ const Header = () => {
           userName: user.displayName,
           userID: user.uid,
         }))
-=======
-        console.log(user)        
-        setUserName(user.displayName)
-
-        const doc = {
-          _id: uid,
-          _type: 'user',
-          userName: user.displayName,
-          gender: user.gender,
-          region: user.region
-        }
-
-        client.createIfNotExists(doc)
-          .then((res) => {
-            router.refresh()
-          })
->>>>>>> 6a2ac581f41745d12efa207ab101f8a5e85dfa66
         
       } else {
         // User is signed out
