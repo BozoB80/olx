@@ -6,12 +6,18 @@ import { useSelector } from "react-redux"
 import { selectCategories } from "@/redux/slice/categorySlice"
 import Image from "next/image"
 import ostalo from '../assets/ostalo.svg'
+import { useRouter } from "next/navigation"
 
 
 const SearchBar = () => {
   const [search, setSearch] = useState('')
   const [publish, setPublish] = useState(false)
   const categoryList = useSelector(selectCategories)
+  const router = useRouter()
+
+  const handlePublish = () => {
+    
+  }
 
   return (
     <div className='relative flex justify-between items-center w-full gap-5 mt-5'>
@@ -53,7 +59,7 @@ const SearchBar = () => {
 
               <div className="grid grid-cols-2 mt-5 gap-5 w-full pb-8 border-b">
                 {categoryList.slice(1, 5).map((category) => (
-                  <div key={category.id} className="flex w-full justify-items-start items-center cursor-pointer">
+                  <div onClick={() => router.push(`/publish/${category.name}`)} key={category.id} className="flex w-full justify-items-start items-center cursor-pointer">
                     <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-16 h-16 rounded-full">
                       <Image 
                         src={category.imageURL}
@@ -67,7 +73,7 @@ const SearchBar = () => {
                   </div>
                 ))}
               </div>
-              <div className="w-full my-5">
+              <div className=" flex w-full justify-start items-center my-5">
                 <div className="flex justify-center items-center border w-16 h-16 rounded-full">
                   <Image 
                     src={ostalo}
@@ -77,8 +83,30 @@ const SearchBar = () => {
                     className="object-contain bg-transparent hover:scale-110 transition-all cursor-pointer"
                   />  
                 </div>
+                <h1 className="pl-5">Publish something else</h1>
               </div>
 
+              <div className="bg-gray-100 w-full rounded-md mb-3">
+                <div className="flex flex-col p-2">
+                  <h1 className="text-xl font-semibold mb-3">Remaining number of ads</h1>
+                  <div className="flex justify-between items-center">
+                    <h1>Cars</h1>
+                    <h1 className="font-semibold">0 of 3</h1>                    
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <h1>Real estates</h1>
+                    <h1 className="font-semibold">0 of 2</h1>                    
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <h1>Other</h1>
+                    <h1 className="font-semibold">1 of 85</h1>                    
+                  </div>
+                </div>                
+              </div>
+
+              <button className="w-full bg-black text-white py-3 rounded-md">
+                Become OLX pro
+              </button>
             </div>
           </div>
         </div>
