@@ -58,8 +58,13 @@ const SearchBar = () => {
               </div>
 
               <div className="grid grid-cols-2 mt-5 gap-5 w-full pb-8 border-b">
-                {categoryList.slice(1, 5).map((category) => (
-                  <div onClick={() => router.push(`/publish/${category.name}`)} key={category.id} className="flex w-full justify-items-start items-center cursor-pointer">
+                {categoryList.slice(1, 5).map((category) => {
+                  const handlePublish = () => {
+                    setPublish(false)
+                    router.push(`/publish/${category.name}`)
+                  }
+                  return (
+                  <div onClick={handlePublish} key={category.id} className="flex w-full justify-items-start items-center cursor-pointer">
                     <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-16 h-16 rounded-full">
                       <Image 
                         src={category.imageURL}
@@ -71,7 +76,7 @@ const SearchBar = () => {
                     </div>
                     <h1 className="pl-5">{category.name}</h1>
                   </div>
-                ))}
+                )})}
               </div>
               <div className=" flex w-full justify-start items-center my-5">
                 <div className="flex justify-center items-center border w-16 h-16 rounded-full">
