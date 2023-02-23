@@ -7,12 +7,10 @@ const ChildrenList = ({ path }) => {
   const query = collection(db, path)
   const [docs, loading, error] = useCollectionData(query)
 
-  console.log(docs);
-
   return (
     <>
       {docs?.map((doc) => (
-        <option key={doc.id} value={doc.model}>
+        <option key={doc.id}>
           {doc.model}
         </option>
       ))}

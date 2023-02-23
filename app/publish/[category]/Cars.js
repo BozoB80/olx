@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from "@/firebase"
-import { collection } from "firebase/firestore"
+import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChildrenList from "./ChildrenList"
 import { useState } from "react"
@@ -12,16 +12,50 @@ const Cars = () => {
   const [docs, loading, error] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
   const [region, setRegion] = useState('')
-  const [year, setYear] = useState(Number)
+  
+  const [product, setProduct] = useState({
+    manufacturer: "",
+    model: "",
+    price: 0,
+    title: "",
+    region: "",
+    year: 0,
+  })
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setProduct({...product, [name]: value})
+  }
+  const handleImageChange = (e) => {}
 
   const handleLocation = () => {
     setToggleLocation(prev => !prev)
+  }
+
+  const addCars = (e) => {
+    e.preventDefault()
+    console.log(product);
+
+    try {
+      const docRef = addDoc(collection(db, "products"), {
+        manufacturer: product.manufacturer,
+        model: product.model,
+        price: Number(product.price),
+        title: product.title,
+        region: product.region,
+        year: Number(product.year),
+        createdAt: Timestamp.now().toDate()
+      });
+    } catch (error) {
+      console.log('Something failed');
+    }
   }
 
   return (
     <div className="flex justify-center pt-10 w-full bg-gray-100 h-screen">
       <div className="w-[800px] h-[600px] bg-white rounded-md px-3 pt-6">
         <form
+          onSubmit={addCars}
           className="flex flex-col justify-center items-center"
         >
           <div className="w-full">
@@ -30,7 +64,10 @@ const Cars = () => {
             <select 
               id="make"
               required
-               className="w-full bg-gray-100 rounded-md p-3" 
+              name="manufacturer"
+              value={product.manufacturer}
+              onChange={(e) => handleInputChange(e)}
+              className="w-full bg-gray-100 rounded-md p-3" 
             > 
               {docs?.map((doc) => (
                 <option key={doc.id} value={doc.name}>
@@ -43,10 +80,13 @@ const Cars = () => {
             <select 
               id="model"
               required
-               className="w-full bg-gray-100 rounded-md p-3" 
+              name="model"
+              value={product.model}
+              onChange={(e) => handleInputChange(e)}
+              className="w-full bg-gray-100 rounded-md p-3" 
             > 
               {docs?.map((doc) => (
-                <ChildrenList key={doc.id} path={`cars/${doc.name}/model`} />
+                <ChildrenList key={Math.random()} path={`cars/${doc.name}/model`} />
               ))}
             </select>
 
@@ -57,14 +97,17 @@ const Cars = () => {
                   <input  
                     type="text"
                     placeholder="Posušje"
+                    value={product.region} 
+                    onChange={(e) => handleInputChange(e)}  
                     disabled
                     className="w-full rounded-md px-3 py-3 outline-none"
                   />
                 ) : (
                   <select 
-                    value={region} 
-                    onChange={(e) => setRegion(e.target.value)}
                     id="region" 
+                    name="region"
+                    value={product.region} 
+                    onChange={(e) => handleInputChange(e)}                    
                     className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                   >
                     <option defaultValue disabled>Choose region</option>
@@ -127,7 +170,11 @@ const Cars = () => {
                 <div className="flex space-x-8 w-full justify-between items-center">
                   <div className="flex w-full items-center justify-center">
                     <input 
-                      type="text"
+                      type="number"
+                      name="price"
+                      required
+                      value={product.price}
+                      onChange={(e) => handleInputChange(e)}
                       className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
                     />
                     <h1 className="uppercase bg-gray-100 rounded-r-md border-l border-gray-300 text-xs p-4 font-semibold">EUR</h1>
@@ -151,14 +198,18 @@ const Cars = () => {
                   <h1 className="uppercase text-xs font-semibold">title</h1>
                   <input 
                       type="text"
+                      name="title"
+                      value={product.title}
+                      onChange={(e) => handleInputChange(e)}
                       className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
                     />
                 </div>
                 <div className="flex flex-col w-full">
                   <h1 className="uppercase text-xs font-semibold">Production year</h1>
                   <select 
-                    value={year} 
-                    onChange={(e) => setYear(e.target.value)}
+                    name="year"
+                    value={product.year} 
+                    onChange={(e) => handleInputChange(e)}
                     id="region" 
                     className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                   >
@@ -177,6 +228,10 @@ const Cars = () => {
                 </div>
 
               </div>
+
+              <button type="submit" className="w-full mt-3 p-2 border-4 rounded-md font-semibold ">
+                Publish
+              </button>
                   
             </div>      
 
