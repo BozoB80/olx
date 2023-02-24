@@ -11,7 +11,7 @@ const ChildrenList = ({ path }) => {
     <>
       {docs?.map((doc) => (
         <option key={doc.id}>
-          {doc.model}
+          {doc.name}
         </option>
       ))}
         

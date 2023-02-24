@@ -1,17 +1,17 @@
 'use client'
 
-import { db } from "@/firebase"
+import { db, storage } from "@/firebase"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChildrenList from "./ChildrenList"
 import { useState } from "react"
 import { MapPinIcon } from "@heroicons/react/24/outline"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 const Cars = () => {
-  const query = collection(db, "cars")
+  const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
   const [docs, loading, error] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
-  const [region, setRegion] = useState('')
   
   const [product, setProduct] = useState({
     manufacturer: "",
@@ -20,13 +20,37 @@ const Cars = () => {
     title: "",
     region: "",
     year: 0,
+    imageURL: "",
+    description: "",
   })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setProduct({...product, [name]: value})
   }
-  const handleImageChange = (e) => {}
+  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    console.log(file);
+
+    const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        }, 
+        (error) => {
+          console.log('upload error');
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setProduct({...product, imageURL: downloadURL})
+            console.log('Image uploaded successfully');
+          });
+        }
+      );
+  }
 
   const handleLocation = () => {
     setToggleLocation(prev => !prev)
@@ -44,6 +68,8 @@ const Cars = () => {
         title: product.title,
         region: product.region,
         year: Number(product.year),
+        imageURL: product.imageURL,
+        description: product.description,
         createdAt: Timestamp.now().toDate()
       });
     } catch (error) {
@@ -52,8 +78,8 @@ const Cars = () => {
   }
 
   return (
-    <div className="flex justify-center pt-10 w-full bg-gray-100 h-screen">
-      <div className="w-[800px] h-[600px] bg-white rounded-md px-3 pt-6">
+    <div className="flex justify-center pt-10 w-full bg-gray-100 pb-20">
+      <div className="w-[800px] h-full bg-white rounded-md px-3 py-6">
         <form
           onSubmit={addCars}
           className="flex flex-col justify-center items-center"
@@ -86,7 +112,7 @@ const Cars = () => {
               className="w-full bg-gray-100 rounded-md p-3" 
             > 
               {docs?.map((doc) => (
-                <ChildrenList key={Math.random()} path={`cars/${doc.name}/model`} />
+                <ChildrenList key={Math.random()} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.name}/model`} />
               ))}
             </select>
 
@@ -199,6 +225,7 @@ const Cars = () => {
                   <input 
                       type="text"
                       name="title"
+                      required
                       value={product.title}
                       onChange={(e) => handleInputChange(e)}
                       className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
@@ -208,6 +235,7 @@ const Cars = () => {
                   <h1 className="uppercase text-xs font-semibold">Production year</h1>
                   <select 
                     name="year"
+                    required
                     value={product.year} 
                     onChange={(e) => handleInputChange(e)}
                     id="region" 
@@ -226,10 +254,37 @@ const Cars = () => {
                     <option>2014</option>                    
                   </select>
                 </div>
-
+              </div>
+              
+              <div>
+                <label className="uppercase text-xs font-semibold mt-5">Image:</label>
+                <div className="flex flex-col border-2 rounded-md gap-2">                
+                  <input 
+                    type="file" 
+                    placeholder="Category Image" 
+                    accept="image/*"
+                    name="image"
+                    required
+                    onChange={(e) => handleImageChange(e)}
+                    className="p-5 border-2 rounded-md"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex flex-col">
+                <label className="uppercase text-xs font-semibold mt-5">Product Description</label>
+                <textarea
+                  name="description"
+                  required
+                  value={product.description}
+                  onChange={(e) => handleInputChange(e)}
+                  cols="30"
+                  rows="10"
+                  className="border-2 rounded-md"
+                />
               </div>
 
-              <button type="submit" className="w-full mt-3 p-2 border-4 rounded-md font-semibold ">
+              <button type="submit" className="w-full bg-black text-white active:bg-white active:text-black active:border-2 active:border-black mt-3 p-2 outline-none rounded-md font-semibold ">
                 Publish
               </button>
                   
