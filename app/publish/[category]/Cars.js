@@ -20,6 +20,12 @@ const Cars = () => {
     title: "",
     region: "",
     year: 0,
+    mileage: 0,
+    cubic: 0,
+    kilowatts: 0,
+    transmission: "",
+    type: "",
+    color: "",
     imageURL: "",
     description: "",
   })
@@ -68,12 +74,18 @@ const Cars = () => {
         title: product.title,
         region: product.region,
         year: Number(product.year),
+        mileage: Number(product.mileage),
+        cubic: Number(product.cubic),
+        kilowatts: Number(product.kilowatts),
+        transmission: product.transmission,
+        type: product.type,
+        color: product.color,
         imageURL: product.imageURL,
         description: product.description,
         createdAt: Timestamp.now().toDate()
       });
     } catch (error) {
-      console.log('Something failed');
+      console.log('You did not add new product');
     }
   }
 
@@ -105,8 +117,8 @@ const Cars = () => {
             <label htmlFor="model" className="uppercase text-xs font-semibold">Model</label>
             <select 
               id="model"
-              required
               name="model"
+              required
               value={product.model}
               onChange={(e) => handleInputChange(e)}
               className="w-full bg-gray-100 rounded-md p-3" 
@@ -198,6 +210,8 @@ const Cars = () => {
                     <input 
                       type="number"
                       name="price"
+                      min="1"
+                      max="10000000"
                       required
                       value={product.price}
                       onChange={(e) => handleInputChange(e)}
@@ -219,7 +233,7 @@ const Cars = () => {
             </div>
 
             <div className="w-full">
-              <div className="flex justify-start items-center gap-10">
+              <div className="flex justify-start items-center gap-4">
                 <div className="flex flex-col w-full">
                   <h1 className="uppercase text-xs font-semibold">title</h1>
                   <input 
@@ -228,7 +242,7 @@ const Cars = () => {
                       required
                       value={product.title}
                       onChange={(e) => handleInputChange(e)}
-                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                      className="w-full bg-gray-100 rounded-md p-3 outline-none"
                     />
                 </div>
                 <div className="flex flex-col w-full">
@@ -236,6 +250,7 @@ const Cars = () => {
                   <select 
                     name="year"
                     required
+                    defaultValue={"default"}
                     value={product.year} 
                     onChange={(e) => handleInputChange(e)}
                     id="region" 
@@ -255,7 +270,214 @@ const Cars = () => {
                   </select>
                 </div>
               </div>
-              
+
+              <div className="w-full my-4 flex space-x-4">
+                <div className="flex w-full flex-col">
+                  <h1 className="uppercase text-xs font-semibold">Number of doors</h1>
+                  <div className="flex justify-between items-center gap-4">
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>2/3</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>4/5</h1>
+                    </button>
+                  </div>
+                </div>
+                <div className="flex w-full flex-col">
+                <h1 className="uppercase text-xs font-semibold">mileage</h1>
+                  <input 
+                      type="number"
+                      name="mileage"
+                      min="1"
+                      max="500000"
+                      required
+                      value={product.mileage}
+                      onChange={(e) => handleInputChange(e)}
+                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                    />
+                </div>                
+              </div>
+
+              <div className="w-full my-4 flex space-x-4">
+                <div className="w-full flex flex-col">
+                  <h1 className="uppercase text-xs font-semibold">Fuel</h1>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Diesel</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Petrol</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Gas</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Hybrid</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Electric</h1>
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-start items-center w-full gap-4">
+                  <div className="w-full">
+                    <label htmlFor="cubic" className="uppercase text-xs font-semibold">Cubic capacity</label>
+                    <select 
+                      id="cubic" 
+                      name="cubic"
+                      defaultValue="default"
+                      value={product.cubic} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="default" disabled>-- Choose capacity --</option>                    
+                      <option value="1.0">1.0</option>                     
+                      <option value="1.5">1.5</option>
+                      <option value="1.9">1.9</option>
+                      <option value="2.0">2.0</option>
+                      <option value="2.5">2.5</option>
+                      <option value="3.0">3.0</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="kilowatts" className="uppercase text-xs font-semibold">kilowatts</label>
+                    <input 
+                      type="number"
+                      name="kilowatts"
+                      min="1"
+                      max="1000"
+                      required
+                      value={product.kilowatts}
+                      onChange={(e) => handleInputChange(e)}
+                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-full my-4 flex space-x-4">
+                <div className="w-full flex flex-col">
+                  <h1 className="uppercase text-xs font-semibold">Transmission</h1>
+                  <fieldset className="grid grid-cols-2 gap-4">
+                    <input 
+                      type="button"
+                      id="automatic"
+                      name="transmission"
+                      value="Automatic"
+                      checked={product.transmission === "Automatic"}
+                      onChange={handleInputChange}
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    />
+                    <input 
+                      type="button"
+                      id="semiautomatic"
+                      name="transmission"
+                      value="Semi-automatic"
+                      checked={product.transmission === "Semi-Automatic"}
+                      onChange={handleInputChange}
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    />
+                    <input 
+                      type="button"
+                      id="manual"
+                      name="transmission"
+                      value="Manual"
+                      checked={product.transmission === "Manual"}
+                      onChange={handleInputChange}
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    />
+                      {/* <h1>Automatic</h1>
+                    
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Semiautomatic</h1>
+                    </button>
+                    <button 
+                      type="button"
+                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                    >
+                      <h1>Manual</h1>
+                    </button> */}
+                  </fieldset>
+                </div>
+                <div className="flex flex-col justify-start items-center w-full gap-4">
+                  <div className="w-full">
+                    <label htmlFor="type" className="uppercase text-xs font-semibold">Type</label>
+                    <select 
+                      id="type" 
+                      name="type"
+                      defaultValue="default"
+                      value={product.type} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="default" disabled>-- Choose type --</option>                    
+                      <option value="Limousine">Limousine</option>                     
+                      <option value="smallCar">Small car</option>
+                      <option value="caravan">Caravan</option>
+                      <option value="van">Van</option>
+                      <option value="suv">SUV</option>
+                      <option value="convertible">Convertible</option>
+                      <option value="sportsCar">Sports Car</option>
+                      <option value="offRoad">Off Road</option>
+                      <option value="caddy">Caddy</option>
+                      <option value="pickup">Pick-up</option>
+                      <option value="oldtimer">Oldtimer</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="color" className="uppercase text-xs font-semibold">color</label>
+                    <select 
+                      id="color" 
+                      name="color"
+                      defaultValue="default"
+                      value={product.color} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="default" disabled>-- Choose color --</option>                    
+                      <option value="beige">Beige</option>                     
+                      <option value="black">Black</option>
+                      <option value="blue">Blue</option>
+                      <option value="brown">Brown</option>
+                      <option value="gold">Gold</option>
+                      <option value="gray">Gray</option>
+                      <option value="green">Green</option>
+                      <option value="orange">Orange</option>
+                      <option value="purple">Purple</option>
+                      <option value="red">Red</option>
+                      <option value="silver">Silver</option>
+                      <option value="white">White</option>
+                      <option value="yellow">Yellow</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+             
               <div>
                 <label className="uppercase text-xs font-semibold mt-5">Image:</label>
                 <div className="flex flex-col border-2 rounded-md gap-2">                
@@ -280,7 +502,7 @@ const Cars = () => {
                   onChange={(e) => handleInputChange(e)}
                   cols="30"
                   rows="10"
-                  className="border-2 rounded-md"
+                  className="p-2 border-2 rounded-md"
                 />
               </div>
 
