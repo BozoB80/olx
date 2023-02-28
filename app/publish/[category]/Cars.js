@@ -1,6 +1,6 @@
 'use client'
 
-import { db, storage } from "@/firebase"
+import { auth, db, storage } from "@/firebase"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChildrenList from "./ChildrenList"
@@ -9,12 +9,15 @@ import { MapPinIcon } from "@heroicons/react/24/outline"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useSelector } from "react-redux"
 import { selectUserName } from "@/redux/slice/authSlice"
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Cars = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
-  const [docs, loading, error] = useCollectionData(query)
+  const [docs] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
-  const user = useSelector(selectUserName)
+  const [user] = useAuthState(auth)
+  console.log(user);
+  // const user = useSelector(selectUserName)
   
   const [product, setProduct] = useState({
     manufacturer: "",
