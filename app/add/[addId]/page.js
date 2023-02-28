@@ -1,11 +1,11 @@
 import React from 'react'
-import AddDetails from './AddDetails';
+import CarsDetails from './CarsDetails';
 
 const page = ( {params} ) => {
   
   return (
     <div>
-      <AddDetails id={params.addId} />
+      <CarsDetails id={params.addId} />
     </div>
   )
 }
