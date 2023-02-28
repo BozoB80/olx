@@ -1,9 +1,12 @@
 import React from 'react'
+import AddDetails from './AddDetails';
 
-const page = ( {params: addId} ) => {
-
+const page = ( {params} ) => {
+  
   return (
-    <div>page</div>
+    <div>
+      <AddDetails id={params.addId} />
+    </div>
   )
 }
 

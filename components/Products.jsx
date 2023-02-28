@@ -1,17 +1,17 @@
 'use client'
 
 import { db } from "@/firebase";
-import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useCollection, useCollectionData } from "react-firebase-hooks/firestore"
+import { useDispatch } from "react-redux";
+import { storeAdds } from "@/redux/slice/addsSlice";
 
 
 const Products = () => {
   const [adds, setAdds] = useState([])
-  // const [adds] = useCollectionData(collection(db, "products"))
-  // const [adds] = useCollection(collection(db, "products"))
+  const dispatch = useDispatch()
 
   const getAdds = () => {
     try {
@@ -19,13 +19,16 @@ const Products = () => {
       const q = query(addsRef, orderBy("createdAt", "asc"));
       
       onSnapshot(q, (snapshot) => {
-        // console.log(snapshot.docs)
         const allAdds = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data()
         }))
         
         setAdds(allAdds)
+        dispatch(storeAdds({
+          adds: allAdds
+        }))
+
         
       });
       

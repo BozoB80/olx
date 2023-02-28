@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Image from "next/image"
 import { useDispatch } from 'react-redux'
 import { storeCategories } from '@/redux/slice/categorySlice'
+import Link from 'next/link'
 
 
 const Categories = () => {
@@ -43,7 +44,7 @@ const Categories = () => {
   return (
     <div className="flex justify-between items-center w-full px-3 py-4">
       {categories.map((category) => (
-      <div key={category.id} className="flex flex-col w-36 justify-center items-center">
+      <Link href={`/${category.name}`} key={category.id} className="flex flex-col w-36 justify-center items-center">
         <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-16 h-16 rounded-full">
           <Image 
             src={category.imageURL}
@@ -54,7 +55,7 @@ const Categories = () => {
           />
         </div>
         <h3 className="text-sm mt-1 w-full text-center">{category.name}</h3>
-      </div>  
+      </Link>  
       ))}
           
     </div>

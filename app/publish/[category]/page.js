@@ -2,10 +2,11 @@ import React from 'react'
 import Cars from './Cars'
 
 
-const Publish = () => {
+const Publish = ({ params }) => {
+  
   return (
     <div>
-      <Cars />
+      {params.category === "Cars" ? <Cars /> : "Not here"}
       
     </div>
   )
