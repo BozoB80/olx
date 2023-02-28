@@ -7,11 +7,14 @@ import ChildrenList from "./ChildrenList"
 import { useState } from "react"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { useSelector } from "react-redux"
+import { selectUserName } from "@/redux/slice/authSlice"
 
 const Cars = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
   const [docs, loading, error] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
+  const user = useSelector(selectUserName)
   
   const [product, setProduct] = useState({
     manufacturer: "",
@@ -28,6 +31,8 @@ const Cars = () => {
     color: "",
     imageURL: "",
     description: "",
+    category: "Cars",
+    createdBy: user,
   })
 
   const handleInputChange = (e) => {
@@ -82,6 +87,8 @@ const Cars = () => {
         color: product.color,
         imageURL: product.imageURL,
         description: product.description,
+        category: product.category,
+        createdBy: product.createdBy,
         createdAt: Timestamp.now().toDate()
       });
     } catch (error) {
