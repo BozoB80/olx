@@ -13,7 +13,7 @@ const CarsItem = ({add, grid}) => {
             height={300}
             className="object-cover w-[274px] h-[160px] rounded-t-md"
           />
-          <div className={`flex flex-col gap-2 p-2`}>
+          <div className="flex flex-col gap-2 p-2">
             <h1 className="pb-2">{add.title}</h1>
             <div className="flex gap-2">
               <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">Diesel</p>

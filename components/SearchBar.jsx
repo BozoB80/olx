@@ -22,9 +22,9 @@ const SearchBar = () => {
   }
 
   return (
-    <div className='relative flex justify-between items-center w-full gap-5 mt-5'>
+    <div className='relative flex justify-between items-center w-full sm:gap-5 sm:mt-5'>
       <form
-       className="flex justify-center items-center border-2 border-gray-200 w-full p-3 rounded-md shadow-md"
+       className="flex justify-center bg-gray-100 sm:bg-white items-center border-2 border-gray-200 w-full p-3 rounded-md shadow-md"
       >
         <div className="mr-3">
           <MagnifyingGlassIcon className="h-6 w-6" />
@@ -34,7 +34,7 @@ const SearchBar = () => {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder='Search'
-          className="w-full focus:outline-none"
+          className="w-full focus:outline-none bg-gray-100 sm:bg-white"
         />
         {search ? <button onClick={() => setSearch('')}><XMarkIcon className="h-6 w-6" /></button> : ''}
         
@@ -42,7 +42,7 @@ const SearchBar = () => {
       <button 
         type="button"
         onClick={publishAdd}
-        className="flex justify-center items-center gap-2 h-14 w-60 bg-black text-white py-2.5 px-8 rounded-md"
+        className="hidden sm:flex justify-center items-center gap-2 h-14 w-60 bg-black text-white py-2.5 px-8 rounded-md"
       >
         <FolderPlusIcon className="h-6 w-6" />
         <h1>Publish Add</h1>
@@ -80,7 +80,7 @@ const SearchBar = () => {
                   </div>
                 )})}
               </div>
-              <div className=" flex w-full justify-start items-center my-5">
+              <div className="flex w-full justify-start items-center my-5">
                 <div className="flex justify-center items-center border w-16 h-16 rounded-full">
                   <Image 
                     src={ostalo}

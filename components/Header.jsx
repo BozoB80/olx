@@ -53,8 +53,8 @@ const Header = () => {
 
 
   return (
-    <header className="flex flex-col w-full p-4">
-
+    <>
+    <header className="hidden sm:flex flex-col w-full p-4">
       <div className="flex">
         <div className="flex w-full">
           <Link href="/">
@@ -122,10 +122,22 @@ const Header = () => {
 
       <div>
         <SearchBar />
-      </div>
-      
-      
+      </div> 
     </header>
+
+                {/* Small navbar */}
+    <header className="flex sm:hidden justify-center items-center gap-4 p-3 w-full">
+      <Link href="/">
+        <Image 
+          src={logo}
+          alt="logo"
+          width={42}
+          height={42}
+        />
+      </Link>
+      <SearchBar />               
+    </header>
+    </>
   )
 }
 

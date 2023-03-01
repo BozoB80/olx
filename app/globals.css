@@ -4,7 +4,7 @@
 
 @layer components {
   .gridStyle {
-    @apply w-full p-5 grid gap-5 grid-cols-2 xl:grid-cols-7
+    @apply w-full p-3 sm:p-5 grid gap-3 sm:gap-5 grid-cols-2 xl:grid-cols-7
   }
 
   .listStyle {

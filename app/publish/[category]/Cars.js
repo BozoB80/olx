@@ -160,21 +160,21 @@ const Cars = () => {
                   >
                     <option value="" disabled>-- Choose region --</option>
                     <option disabled className="text-red-400">Federation BiH</option>
-                    <option value="1">West Hercegovina</option>
-                    <option value="2">Hercegovačko-neretvanska</option>
-                    <option value="3">Unsko-sanska</option>
-                    <option value="4">Posavska</option>
-                    <option value="5">Tuzlanska</option>
-                    <option value="6">Zeničko-dobojska</option>
-                    <option value="7">Bosansko-podrinjska</option>
-                    <option value="8">Srednja bosna</option>
-                    <option value="9">Sarajevo</option>
+                    <option value="West Hercegovina">West Hercegovina</option>
+                    <option value="Hercegovačko-neretvanska">Hercegovačko-neretvanska</option>
+                    <option value="Unsko-sanska">Unsko-sanska</option>
+                    <option value="Posavska">Posavska</option>
+                    <option value="Tuzlanska">Tuzlanska</option>
+                    <option value="Zeničko-dobojska">Zeničko-dobojska</option>
+                    <option value="Bosansko-podrinjska">Bosansko-podrinjska</option>
+                    <option value="Srednja bosna">Srednja bosna</option>
+                    <option value="Sarajevo">Sarajevo</option>
                     <option disabled className="text-red-400">Republika Srpska</option>
-                    <option value="10">Banjalučka</option>
-                    <option value="11">Dobojsko-bijeljinska</option>
-                    <option value="12">Sarajevsko-zvornička</option>
-                    <option value="13">Trebinjsko-fočanska</option>
-                    <option value="14">Brčko distrikt</option>
+                    <option value="Banjalučka">Banjalučka</option>
+                    <option value="Dobojsko-bijeljinska">Dobojsko-bijeljinska</option>
+                    <option value="Sarajevsko-zvornička">Sarajevsko-zvornička</option>
+                    <option value="Trebinjsko-fočanska">Trebinjsko-fočanska</option>
+                    <option value="Brčko distrikt">Brčko distrikt</option>
                     <option value="Ouside of B&H">Ouside of B&H</option>
                   </select>
                 )}
