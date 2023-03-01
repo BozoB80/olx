@@ -17,7 +17,9 @@ const SearchBar = () => {
   const loggedIn = useSelector(selectIsLoggedIn)
   const router = useRouter()
 
-
+  const publishAdd = () => {
+    loggedIn ? setPublish(true) : router.push('/auth/login')
+  }
 
   return (
     <div className='relative flex justify-between items-center w-full gap-5 mt-5'>
@@ -39,7 +41,7 @@ const SearchBar = () => {
       </form> 
       <button 
         type="button"
-        onClick={() => setPublish(true)}
+        onClick={publishAdd}
         className="flex justify-center items-center gap-2 h-14 w-60 bg-black text-white py-2.5 px-8 rounded-md"
       >
         <FolderPlusIcon className="h-6 w-6" />

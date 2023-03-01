@@ -7,17 +7,15 @@ import ChildrenList from "./ChildrenList"
 import { useState } from "react"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useSelector } from "react-redux"
 import { selectUserName } from "@/redux/slice/authSlice"
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Cars = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
   const [docs] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
-  const [user] = useAuthState(auth)
-  console.log(user);
-  // const user = useSelector(selectUserName)
+  const user = useSelector(selectUserName)
   
   const [product, setProduct] = useState({
     manufacturer: "",
@@ -25,7 +23,7 @@ const Cars = () => {
     price: 0,
     title: "",
     region: "",
-    available: "",
+    availability: "",
     year: 0,
     mileage: 0,
     cubic: "",
@@ -82,7 +80,7 @@ const Cars = () => {
         price: Number(product.price),
         title: product.title,
         region: product.region,
-        available: product.available,
+        availability: product.availability,
         year: Number(product.year),
         mileage: Number(product.mileage),
         cubic: product.cubic,

@@ -33,7 +33,6 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       
       if (user) {
-        console.log(user.metadata.lastSignInTime);
         const uid = user.uid;
         setUserName(user.displayName)
 
