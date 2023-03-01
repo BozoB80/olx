@@ -25,6 +25,7 @@ const Cars = () => {
     price: 0,
     title: "",
     region: "",
+    available: "",
     year: 0,
     mileage: 0,
     cubic: "",
@@ -81,6 +82,7 @@ const Cars = () => {
         price: Number(product.price),
         title: product.title,
         region: product.region,
+        available: product.available,
         year: Number(product.year),
         mileage: Number(product.mileage),
         cubic: product.cubic,
@@ -134,7 +136,7 @@ const Cars = () => {
               className="w-full bg-gray-100 rounded-md p-3" 
             > 
               {docs?.map((doc) => (
-                <ChildrenList key={Math.random()} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.name}/model`} />
+                <ChildrenList key={doc.id} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.name}/model`} />
               ))}
             </select>
 
@@ -144,7 +146,7 @@ const Cars = () => {
                 {!toggleLocation ? (
                   <input  
                     type="text"
-                    placeholder="Posušje"
+                    placeholder="West Hercegovina"
                     value={product.region} 
                     onChange={(e) => handleInputChange(e)}  
                     disabled
@@ -158,12 +160,24 @@ const Cars = () => {
                     onChange={(e) => handleInputChange(e)}                    
                     className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                   >
-                    <option defaultValue disabled>Choose region</option>
+                    <option value="" disabled>-- Choose region --</option>
                     <option disabled className="text-red-400">Federation BiH</option>
-                    <option>West Herzegowina</option>
-                    <option disabled className="text-red-400">Srpska</option>
-                    <option>Banjalučka</option>
-                    <option>Ouside of B&H</option>
+                    <option value="1">West Hercegovina</option>
+                    <option value="2">Hercegovačko-neretvanska</option>
+                    <option value="3">Unsko-sanska</option>
+                    <option value="4">Posavska</option>
+                    <option value="5">Tuzlanska</option>
+                    <option value="6">Zeničko-dobojska</option>
+                    <option value="7">Bosansko-podrinjska</option>
+                    <option value="8">Srednja bosna</option>
+                    <option value="9">Sarajevo</option>
+                    <option disabled className="text-red-400">Republika Srpska</option>
+                    <option value="10">Banjalučka</option>
+                    <option value="11">Dobojsko-bijeljinska</option>
+                    <option value="12">Sarajevsko-zvornička</option>
+                    <option value="13">Trebinjsko-fočanska</option>
+                    <option value="14">Brčko distrikt</option>
+                    <option value="Ouside of B&H">Ouside of B&H</option>
                   </select>
                 )}
                 <button 
@@ -179,20 +193,31 @@ const Cars = () => {
               <div className="w-full my-4 flex space-x-4">
                 <div className="flex w-full flex-col">
                   <h1 className="uppercase text-xs font-semibold">Availability</h1>
-                  <div className="flex justify-between items-center gap-4">
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Available immediately</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Not available now</h1>
-                    </button>
-                  </div>
+                  <fieldset className="flex justify-between items-center gap-4">
+                    <input 
+                      type="radio"
+                      id="available"
+                      name="availability"
+                      value={product.available}
+                      onChange={(e) => handleInputChange(e)} 
+                      className=""
+                    />
+                      <label 
+                        htmlFor="available"
+                        className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
+                      >Available immediately</label>
+                    
+                    <input 
+                      type="radio"
+                      id="notAvailable"
+                      name="availability"
+                      value={product.available}
+                      onChange={(e) => handleInputChange(e)} 
+                      className=""
+                    />
+                      <label htmlFor="notAvailable" className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center">Not available now</label>
+
+                  </fieldset>
                 </div>
                 <div className="flex w-full flex-col">
                   <h1 className="uppercase text-xs font-semibold">State</h1>
@@ -259,24 +284,29 @@ const Cars = () => {
                   <h1 className="uppercase text-xs font-semibold">Production year</h1>
                   <select 
                     name="year"
-                    required
-                    defaultValue={"default"}
+                    id="year" 
                     value={product.year} 
-                    onChange={(e) => handleInputChange(e)}
-                    id="region" 
+                    onChange={(e) => handleInputChange(e)}                   
                     className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                   >
-                    <option defaultValue disabled>Choose year</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>                    
+                    <option value="" disabled>-- Choose year --</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>                    
+                    <option value="2013">2013</option>                    
+                    <option value="2012">2012</option>                    
+                    <option value="2011">2011</option>                    
+                    <option value="2010">2010</option>                    
+                    <option value="2009">2009</option>                    
+                    <option value="2008">2008</option>                    
+                    <option value="2007">2007</option>                    
                   </select>
                 </div>
               </div>
@@ -356,12 +386,11 @@ const Cars = () => {
                     <select 
                       id="cubic" 
                       name="cubic"
-                      defaultValue="default"
                       value={product.cubic} 
                       onChange={(e) => handleInputChange(e)}                    
                       className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                     >
-                      <option value="default" disabled>-- Choose capacity --</option>                    
+                      <option value="" disabled>-- Choose capacity --</option>                    
                       <option value="1.0">1.0</option>                     
                       <option value="1.5">1.5</option>
                       <option value="1.9">1.9</option>
@@ -438,13 +467,12 @@ const Cars = () => {
                     <label htmlFor="type" className="uppercase text-xs font-semibold">Type</label>
                     <select 
                       id="type" 
-                      name="type"
-                      defaultValue="default"
+                      name="type"                     
                       value={product.type} 
                       onChange={(e) => handleInputChange(e)}                    
                       className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                     >
-                      <option value="default" disabled>-- Choose type --</option>                    
+                      <option value="" disabled>-- Choose type --</option>                    
                       <option value="Limousine">Limousine</option>                     
                       <option value="smallCar">Small car</option>
                       <option value="caravan">Caravan</option>
@@ -464,12 +492,11 @@ const Cars = () => {
                     <select 
                       id="color" 
                       name="color"
-                      defaultValue="default"
                       value={product.color} 
                       onChange={(e) => handleInputChange(e)}                    
                       className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
                     >
-                      <option value="default" disabled>-- Choose color --</option>                    
+                      <option value="" disabled>-- Choose color --</option>                    
                       <option value="beige">Beige</option>                     
                       <option value="black">Black</option>
                       <option value="blue">Blue</option>
