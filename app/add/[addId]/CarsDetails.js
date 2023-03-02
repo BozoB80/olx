@@ -1,26 +1,29 @@
 'use client'
 
 import { auth, db } from '@/firebase';
-import { ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, ShareIcon, TagIcon } from '@heroicons/react/24/outline';
+import { BuildingOfficeIcon, ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, ShareIcon, StarIcon, TagIcon } from '@heroicons/react/24/outline';
 import { doc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { useRouter } from 'next/navigation';
 import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
+import { ArrowLeftIcon, EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 
 
 const CarsDetails = ({id}) => {
   const [details] = useDocumentData(doc(db, "products", id))
   const [user] = useAuthState(auth)
+  const router = useRouter()
   
   console.log(details);
   console.log(user);
     
   return (
     <div className='bg-[#f1f4f5] w-full py-10 flex justify-center items-start gap-6 '>
-      <div className='flex w-[1180px] gap-6'>
+      <div className='hidden sm:flex w-[1180px] gap-6'>
       <div className=' flex flex-col space-y-4'>
         {/* Main details */}
         <div className='w-[832px] bg-white p-4 rounded-[4px]'>
@@ -190,6 +193,61 @@ const CarsDetails = ({id}) => {
               <p>Message</p>
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Small screen */}
+      <div className='absolute top-0 w-full z-50 bg-white sm:hidden'>
+        <div className='relative'>
+          <Image 
+            src={details?.imageURL}
+            alt={details?.title}
+            width={500}
+            height={500}
+            className='w-full h-full object-contain'
+          />
+          <div className='absolute w-full px-3 flex justify-between top-5'>
+            <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />
+            <div className='flex gap-3'>
+              <StarIcon className='w-6 h-6 text-white' />
+              <ShareIcon className='w-6 h-6 text-white' />
+              <EllipsisVerticalIcon className='w-6 h-6 text-white' />
+            </div>
+          </div>
+          <div className='flex flex-col p-2'>
+            <div className='mb-3'>
+              <h1 className='text-2xl capitalize'>{details?.title}</h1>
+              <h1 className='text-2xl font-semibold mt-3 '>{details?.price} EUR</h1>
+            </div>
+            <div className='flex flex-wrap gap-3'>
+                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+                  <MapPinIcon className='w-5 h-5' />
+                  {details?.region}
+                </h1>
+                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+                  <TagIcon className='w-5 h-5' />
+                  Used
+                </h1>
+                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+                  <ClockIcon className='w-5 h-5' />
+                  2 hours ago
+                </h1>
+                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+                  <InformationCircleIcon className='w-5 h-5' />
+                  ID: {id.slice(0, 8)}
+                </h1>
+                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+                  <BuildingOfficeIcon className='w-5 h-5' />
+                  {details?.manufacturer}
+                </h1>
+            </div> 
+          </div>
+
+          <div className='bg-[#f1f4f5] w-full'>
+            what?
+
+          </div>
+
         </div>
       </div>
 
