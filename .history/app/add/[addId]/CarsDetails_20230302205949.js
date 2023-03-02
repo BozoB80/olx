@@ -333,7 +333,7 @@ const CarsDetails = ({id}) => {
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
               <ExclamationCircleIcon className='w-5 h-5' />
-              <h1 className='uppercase text-xs'>Report the add</h1>
+              <h1 className='uppercase text-sm'>Report the add</h1>
             </button>
 
 

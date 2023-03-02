@@ -1,7 +1,7 @@
 'use client'
 
 import { auth, db } from '@/firebase';
-import { BuildingOfficeIcon, ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, RectangleStackIcon, ShareIcon, StarIcon, TagIcon } from '@heroicons/react/24/outline';
+import { BuildingOfficeIcon, ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, ShareIcon, StarIcon, TagIcon } from '@heroicons/react/24/outline';
 import { doc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
-import { ArrowLeftIcon, ChatBubbleLeftRightIcon, EllipsisVerticalIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 
 
 const CarsDetails = ({id}) => {
@@ -240,106 +240,40 @@ const CarsDetails = ({id}) => {
                   <BuildingOfficeIcon className='w-5 h-5' />
                   {details?.manufacturer}
                 </h1>
-                <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
-                  <RectangleStackIcon className='w-5 h-5' />
-                  {details?.model}
-                </h1>
             </div> 
           </div>
 
-          <div className='bg-[#f1f4f5] p-2 w-full'>
-            <div className='p-2 bg-white shadow-md rounded-[4px] w-full'>
+          <div className='bg-[#f1f4f5] p-1 w-full'>
+            <div className='p-2 bg-white w-full'>
+              <h1 className='text-sm font-semibold mb-3'>USER</h1>
               <div className='flex justify-start items-center'>
                 <Image
                   src={olxMale}
                   alt="avatarphoto"
-                  width={56}
-                  height={56}
+                  width={72}
+                  height={72}
                   className="rounded-full"
                 />
                 <div className='flex flex-col ml-5'>
                   <h1 className='font-semibold'>{details?.createdBy}</h1>
+                  <h1 className='text-gray-400'>Last signed in</h1>
                   <div className='flex gap-3'>
                     <Image src={medal1} alt="medal1" width={25} height={25} />
                     <Image src={medal2} alt="medal2" width={25} height={25} />
                   </div>
-                  <p className='text-sm'>Usual reply time 1 hour</p>
                 </div>
+              </div>
+              <div className='mt-3 bg-[#f1f4f5] p-2 runded-md font-semibold '>
+                <p className='text-sm'>Usual reply time 1 hour</p>
               </div>
             </div>
 
-            <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-sm'>Category</h4>
-              <hr />
-              <p className='text-sm mb-1'>{details?.category}</p>
-              <h4 className='uppercase text-sm'>View count</h4>
-              <hr />
-              <p className='text-sm mb-1'>467</p>
-              <h4 className='uppercase text-sm'>Created</h4>
-              <hr />
-              <p className='text-sm mb-1'>8 hours ago</p>
-            </div>
-
-            <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
-              <h1 className='uppercase text-sm'>Characteristics</h1>
-              <hr />
-              <table className='flex w-full'>
-                <tbody className='grid grid-cols-1 w-full text-sm capitalize'>
-                  <tr className='flex justify-between px-1'>
-                    <td>Mileage</td>
-                    <td className='text-black/80'>{details?.mileage}</td>
-                  </tr>
-                  <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
-                    <td>Year</td>
-                    <td className='text-black/80'>{details?.year}</td>
-                  </tr>
-                  <tr className='flex justify-between px-1'>
-                    <td>Fuel</td>
-                    <td className='text-black/80'>Diesel</td>
-                  </tr>
-                  <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
-                    <td>Cubics</td>
-                    <td className='text-black/80'>{details?.cubic}</td>
-                  </tr>
-                  <tr className='flex justify-between px-1'>
-                    <td>Kilowatts</td>
-                    <td className='text-black/80'>{details?.kilowatts}</td>
-                  </tr>
-                  <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
-                    <td>Number of doors</td>
-                    <td className='text-black/80'>4/5</td>
-                  </tr>
-                  <tr className='flex justify-between px-1'>
-                    <td>Transmission</td>
-                    <td className='text-black/80'>{details?.transmission}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-sm'>Detailed description</h4>
-              <h1 className='text-sm'>{details?.description}</h1>
-            </div>
-
-            <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
-              <ChatBubbleLeftRightIcon className='w-5 h-5' />
-              <h1 className='uppercase text-sm'>Questions & Answers (0)</h1>
-            </button>
-
-            <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
-            </div>
-
-            <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
-              <ExclamationCircleIcon className='w-5 h-5' />
-              <h1 className='uppercase text-xs'>Report the add</h1>
-            </button>
-
-
           </div>
+
         </div>
-      </div>    
+      </div>
+
+      
     </div>
   )
 }

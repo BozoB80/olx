@@ -324,16 +324,16 @@ const CarsDetails = ({id}) => {
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
               <ChatBubbleLeftRightIcon className='w-5 h-5' />
-              <h1 className='uppercase text-sm'>Questions & Answers (0)</h1>
+              <h1>Questions & Answers (0)</h1>
             </button>
 
             <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
+              <h4 className='uppercase text-sm'>Similar adds</h4>
             </div>
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
               <ExclamationCircleIcon className='w-5 h-5' />
-              <h1 className='uppercase text-xs'>Report the add</h1>
+              <h1>Report the add</h1>
             </button>
 
 

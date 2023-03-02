@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
-import { ArrowLeftIcon, ChatBubbleLeftRightIcon, EllipsisVerticalIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 
 
 const CarsDetails = ({id}) => {
@@ -285,7 +285,7 @@ const CarsDetails = ({id}) => {
               <hr />
               <table className='flex w-full'>
                 <tbody className='grid grid-cols-1 w-full text-sm capitalize'>
-                  <tr className='flex justify-between px-1'>
+                  <tr className='flex justify-between'>
                     <td>Mileage</td>
                     <td className='text-black/80'>{details?.mileage}</td>
                   </tr>
@@ -293,7 +293,7 @@ const CarsDetails = ({id}) => {
                     <td>Year</td>
                     <td className='text-black/80'>{details?.year}</td>
                   </tr>
-                  <tr className='flex justify-between px-1'>
+                  <tr className='flex justify-between'>
                     <td>Fuel</td>
                     <td className='text-black/80'>Diesel</td>
                   </tr>
@@ -301,7 +301,7 @@ const CarsDetails = ({id}) => {
                     <td>Cubics</td>
                     <td className='text-black/80'>{details?.cubic}</td>
                   </tr>
-                  <tr className='flex justify-between px-1'>
+                  <tr className='flex justify-between'>
                     <td>Kilowatts</td>
                     <td className='text-black/80'>{details?.kilowatts}</td>
                   </tr>
@@ -309,37 +309,19 @@ const CarsDetails = ({id}) => {
                     <td>Number of doors</td>
                     <td className='text-black/80'>4/5</td>
                   </tr>
-                  <tr className='flex justify-between px-1'>
+                  <tr className='flex justify-between'>
                     <td>Transmission</td>
                     <td className='text-black/80'>{details?.transmission}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-
-            <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-sm'>Detailed description</h4>
-              <h1 className='text-sm'>{details?.description}</h1>
-            </div>
-
-            <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
-              <ChatBubbleLeftRightIcon className='w-5 h-5' />
-              <h1 className='uppercase text-sm'>Questions & Answers (0)</h1>
-            </button>
-
-            <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
-            </div>
-
-            <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
-              <ExclamationCircleIcon className='w-5 h-5' />
-              <h1 className='uppercase text-xs'>Report the add</h1>
-            </button>
-
-
           </div>
+
         </div>
-      </div>    
+      </div>
+
+      
     </div>
   )
 }
