@@ -2,6 +2,7 @@
 
 import { auth, db } from '@/firebase';
 import { BuildingOfficeIcon, ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, RectangleStackIcon, ShareIcon, StarIcon, TagIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ChatBubbleLeftRightIcon, EllipsisVerticalIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import { doc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -10,7 +11,6 @@ import { useRouter } from 'next/navigation';
 import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
-import { ArrowLeftIcon, ChatBubbleLeftRightIcon, EllipsisVerticalIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 
 
 const CarsDetails = ({id}) => {
@@ -29,7 +29,7 @@ const CarsDetails = ({id}) => {
         <div className='w-[832px] bg-white p-4 rounded-[4px]'>
           <div className='flex flex-col w-full space-y-3'>
             <h1 className='text-2xl uppercase'>{details?.title}</h1>
-            <h1 className='text-3xl font-bold'>{details?.price} EUR</h1>
+            <h1 className='text-3xl font-bold'>{details?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</h1>
             <div className='flex justify-between items-center'>
               <p>{details?.category}</p>
               <div className='flex gap-3'>
@@ -96,7 +96,7 @@ const CarsDetails = ({id}) => {
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Mileage:</td>
-                  <td className='text-black/80'>{details?.mileage}</td>
+                  <td className='text-black/80'>{details?.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Cubics:</td>
@@ -217,7 +217,7 @@ const CarsDetails = ({id}) => {
           <div className='flex flex-col p-2'>
             <div className='mb-3'>
               <h1 className='text-2xl capitalize'>{details?.title}</h1>
-              <h1 className='text-2xl font-semibold mt-3 '>{details?.price} EUR</h1>
+              <h1 className='text-2xl font-semibold mt-3'>{details?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</h1>
             </div>
             <div className='flex flex-wrap gap-3'>
                 <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
@@ -284,10 +284,10 @@ const CarsDetails = ({id}) => {
               <h1 className='uppercase text-sm'>Characteristics</h1>
               <hr />
               <table className='flex w-full'>
-                <tbody className='grid grid-cols-1 w-full text-sm capitalize'>
+                <tbody className='grid grid-cols-1 w-full text-xs capitalize'>
                   <tr className='flex justify-between px-1'>
                     <td>Mileage</td>
-                    <td className='text-black/80'>{details?.mileage}</td>
+                    <td className='text-black/80'>{details?.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</td>
                   </tr>
                   <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
                     <td>Year</td>
@@ -319,7 +319,7 @@ const CarsDetails = ({id}) => {
 
             <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
               <h4 className='uppercase text-sm'>Detailed description</h4>
-              <h1 className='text-sm'>{details?.description}</h1>
+              <h1 className='text-xs'>{details?.description}</h1>
             </div>
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>

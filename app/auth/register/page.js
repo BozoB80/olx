@@ -103,12 +103,24 @@ const Register = () => {
               id="region" 
               className="w-full bg-gray-200 rounded-sm py-2 outline-none"
             >
-              <option defaultValue disabled>Choose region</option>
+              <option value="" disabled>-- Choose region --</option>
               <option disabled className="text-red-400">Federation BiH</option>
-              <option>West Herzegowina</option>
-              <option disabled className="text-red-400">Srpska</option>
-              <option>Banjalučka</option>
-              <option>Ouside of B&H</option>
+              <option value="West Hercegovina">West Hercegovina</option>
+              <option value="Hercegovačko-neretvanska">Hercegovačko-neretvanska</option>
+              <option value="Unsko-sanska">Unsko-sanska</option>
+              <option value="Posavska">Posavska</option>
+              <option value="Tuzlanska">Tuzlanska</option>
+              <option value="Zeničko-dobojska">Zeničko-dobojska</option>
+              <option value="Bosansko-podrinjska">Bosansko-podrinjska</option>
+              <option value="Srednja bosna">Srednja bosna</option>
+              <option value="Sarajevo">Sarajevo</option>
+              <option disabled className="text-red-400">Republika Srpska</option>
+              <option value="Banjalučka">Banjalučka</option>
+              <option value="Dobojsko-bijeljinska">Dobojsko-bijeljinska</option>
+              <option value="Sarajevsko-zvornička">Sarajevsko-zvornička</option>
+              <option value="Trebinjsko-fočanska">Trebinjsko-fočanska</option>
+              <option value="Brčko distrikt">Brčko distrikt</option     >
+              <option value="Ouside of B&H">Ouside of B&H</option>
             </select>
 
             <div>
