@@ -6,14 +6,16 @@ import ostalo from '../assets/ostalo.svg'
 import { useSelector } from "react-redux"
 import { selectCategories } from "@/redux/slice/categorySlice"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const PublishAdd = ({ setPublish }) => {
+  const [toggle, setToggle] = useState(false)
   const categoryList = useSelector(selectCategories)
   const router = useRouter()
 
   return (
         <>
-        <div className="hidden sm:absolute top-0 sm:-top-20 left-0 sm:-left-5 right-0 bottom-0 w-screen h-screen bg-slate-400/50">
+        <div className="hidden sm:absolute top-0 -left-5 right-0 bottom-0 z-50 w-screen h-screen bg-slate-400/50">
           <div className="absolute inset-1/3 w-[550px] h-[550px] bg-white rounded-md">
             <div className="flex flex-col w-full justify-center items-center p-3">
               <div className="flex w-full justify-between items-center">
@@ -54,7 +56,13 @@ const PublishAdd = ({ setPublish }) => {
                     className="object-contain bg-transparent hover:scale-110 transition-all cursor-pointer"
                   />  
                 </div>
-                <h1 className="pl-5">Publish something else</h1>
+                <button onClick={() => setToggle(true)} className="pl-5">Publish something else</button>
+
+                {toggle && (
+                  <div className="absolute top-0 left-0 bg-indigo-500 w-28 h-28">
+                    Hello World
+                  </div>
+                )}
               </div>
 
               <div className="bg-gray-100 w-full rounded-md mb-3">

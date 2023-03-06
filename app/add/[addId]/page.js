@@ -1,7 +1,7 @@
 import React from 'react'
 import CarsDetails from './CarsDetails';
 
-const page = ( {params} ) => {
+const page = ({ params }) => {
   
   return (
     <div>
