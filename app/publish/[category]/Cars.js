@@ -27,7 +27,9 @@ const Cars = () => {
     availability: "",
     state: "",
     year: 0,
+    doors: "",
     mileage: 0,
+    fuel: "",
     cubic: "",
     kilowatts: 0,
     transmission: "",
@@ -85,7 +87,9 @@ const Cars = () => {
         availability: product.availability,
         state: product.state,
         year: Number(product.year),
+        doors: product.doors,
         mileage: Number(product.mileage),
+        fuel: product.fuel,
         cubic: product.cubic,
         kilowatts: Number(product.kilowatts),
         transmission: product.transmission,
@@ -398,18 +402,37 @@ const Cars = () => {
                 <div className="flex w-full flex-col">
                   <h1 className="uppercase text-xs font-semibold">Number of doors</h1>
                   <div className="flex justify-between items-center gap-4">
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>2/3</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>4/5</h1>
-                    </button>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="doors1"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        2/3
+                        <input 
+                          type="radio"
+                          id="doors1"
+                          name="doors"
+                          value="2/3"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.doors === "2/3"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">  
+                      <label htmlFor="doors2" className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                        4/5
+                        <input 
+                          type="radio"
+                          id="doors2"
+                          name="doors"
+                          value="4/5"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.doors === "4/5"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div className="flex w-full flex-col">
@@ -431,36 +454,91 @@ const Cars = () => {
                 <div className="w-full flex flex-col">
                   <h1 className="uppercase text-xs font-semibold">Fuel</h1>
                   <div className="grid grid-cols-2 gap-4">
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Diesel</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Petrol</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Gas</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Hybrid</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Electric</h1>
-                    </button>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="fuel1"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Diesel
+                        <input 
+                          type="radio"
+                          id="fuel1"
+                          name="fuel"
+                          value="Diesel"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.fuel === "Diesel"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="fuel2"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Petrol
+                        <input 
+                          type="radio"
+                          id="fuel2"
+                          name="fuel"
+                          value="Petrol"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.fuel === "Petrol"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="fuel3"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Gas
+                        <input 
+                          type="radio"
+                          id="fuel3"
+                          name="fuel"
+                          value="Gas"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.fuel === "Gas"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="fuel4"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Hybrid
+                        <input 
+                          type="radio"
+                          id="fuel4"
+                          name="fuel"
+                          value="Hybrid"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.fuel === "Hybrid"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="fuel5"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Electric
+                        <input 
+                          type="radio"
+                          id="fuel5"
+                          name="fuel"
+                          value="Electric"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.fuel === "Electric"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col justify-start items-center w-full gap-4">
@@ -502,47 +580,57 @@ const Cars = () => {
                 <div className="w-full flex flex-col">
                   <h1 className="uppercase text-xs font-semibold">Transmission</h1>
                   <fieldset className="grid grid-cols-2 gap-4">
-                    <input 
-                      type="button"
-                      id="automatic"
-                      name="transmission"
-                      value="Automatic"
-                      checked={product.transmission === "Automatic"}
-                      onChange={handleInputChange}
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    />
-                    <input 
-                      type="button"
-                      id="semiautomatic"
-                      name="transmission"
-                      value="Semi-automatic"
-                      checked={product.transmission === "Semi-Automatic"}
-                      onChange={handleInputChange}
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    />
-                    <input 
-                      type="button"
-                      id="manual"
-                      name="transmission"
-                      value="Manual"
-                      checked={product.transmission === "Manual"}
-                      onChange={handleInputChange}
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    />
-                      {/* <h1>Automatic</h1>
-                    
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Semiautomatic</h1>
-                    </button>
-                    <button 
-                      type="button"
-                      className="w-full py-3 border-2 text-sm border-gray-400 text-gray-400 focus:border-black focus:text-black focus:bg-gray-200 rounded-md flex justify-center items-center"
-                    >
-                      <h1>Manual</h1>
-                    </button> */}
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="trans1"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Automatic
+                        <input 
+                          type="radio"
+                          id="trans1"
+                          name="transmission"
+                          value="Automatic"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.transmission === "Automatic"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="trans2"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Semi-automatic
+                        <input 
+                          type="radio"
+                          id="trans2"
+                          name="transmission"
+                          value="Semi-automatic"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.transmission === "Semi-automatic"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="trans3"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                      >
+                        Manual
+                        <input 
+                          type="radio"
+                          id="trans3"
+                          name="transmission"
+                          value="Manual"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.transmission === "Manual"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
                   </fieldset>
                 </div>
                 <div className="flex flex-col justify-start items-center w-full gap-4">
