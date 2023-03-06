@@ -17,9 +17,6 @@ const CarsDetails = ({id}) => {
   const [details] = useDocumentData(doc(db, "products", id))
   const [user] = useAuthState(auth)
   const router = useRouter()
-  
-  console.log(details);
-  console.log(user);
     
   return (
     <div className='bg-[#f1f4f5] w-full py-10 flex justify-center items-start gap-6 '>
@@ -42,7 +39,7 @@ const CarsDetails = ({id}) => {
               alt={details?.title}
               width={500}
               height={500}
-              className='w-full h-[550px] object-contain'
+              className='w-full h-[550px] object-cover'
             />
           </div>       
         </div>
@@ -56,7 +53,7 @@ const CarsDetails = ({id}) => {
               </h1>
               <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                 <TagIcon className='w-5 h-5' />
-                Used
+                {details?.state}
               </h1>
               <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                 <ClockIcon className='w-5 h-5' />
@@ -84,11 +81,11 @@ const CarsDetails = ({id}) => {
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Doors:</td>
-                  <td className='text-black/80'>4/5</td>
+                  <td className='text-black/80'>{details?.doors}</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Fuel:</td>
-                  <td className='text-black/80'>Diesel</td>
+                  <td className='text-black/80'>{details?.fuel}</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Year:</td>
@@ -135,7 +132,7 @@ const CarsDetails = ({id}) => {
 
             <div>
               <h1 className='text-2xl'>Detailed description:</h1>
-              <h1 className='p-2'>{details?.description}</h1>
+              <h1 className='py-2'>{details?.description}</h1>
             </div>
           </div>
         </div>
@@ -226,7 +223,7 @@ const CarsDetails = ({id}) => {
                 </h1>
                 <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                   <TagIcon className='w-5 h-5' />
-                  Used
+                  {details?.state}
                 </h1>
                 <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                   <ClockIcon className='w-5 h-5' />
@@ -295,7 +292,7 @@ const CarsDetails = ({id}) => {
                   </tr>
                   <tr className='flex justify-between px-1'>
                     <td>Fuel</td>
-                    <td className='text-black/80'>Diesel</td>
+                    <td className='text-black/80'>{details?.fuel}</td>
                   </tr>
                   <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
                     <td>Cubics</td>
@@ -307,7 +304,7 @@ const CarsDetails = ({id}) => {
                   </tr>
                   <tr className='flex justify-between bg-[#f1f4f5] px-1 rounded-sm'>
                     <td>Number of doors</td>
-                    <td className='text-black/80'>4/5</td>
+                    <td className='text-black/80'>{details?.doors}</td>
                   </tr>
                   <tr className='flex justify-between px-1'>
                     <td>Transmission</td>
@@ -333,7 +330,7 @@ const CarsDetails = ({id}) => {
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>
               <ExclamationCircleIcon className='w-5 h-5' />
-              <h1 className='uppercase text-xs'>Report the add</h1>
+              <h1 className='uppercase text-xs'>Report add</h1>
             </button>
 
 

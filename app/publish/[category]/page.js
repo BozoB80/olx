@@ -1,12 +1,12 @@
 import React from 'react'
-import Cars from './Cars'
+import CarsForm from './CarsForm'
 
 
 const Publish = ({ params }) => {
   
   return (
     <div>
-      {params.category === "Cars" ? <Cars /> : "Not here"}
+      {params.category === "Cars" ? <CarsForm /> : "Not here"}
       
     </div>
   )

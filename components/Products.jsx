@@ -44,7 +44,7 @@ const Products = () => {
   
 
   return (
-    <div className="bg-[#f1f4f5] w-full p-5 grid gap-5 grid-cols-2 xl:grid-cols-7">
+    <div className="bg-[#f1f4f5] w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 xl:grid-cols-7">
       {adds?.map((add) => (
         <Link href={`/add/${add.id}`} key={add.id} className="flex flex-col h-[270px] rounded-md bg-white cursor-pointer">
           <Image 
@@ -57,14 +57,14 @@ const Products = () => {
           <div className="flex flex-col gap-2 p-2">
             <h1 className="pb-2 truncate">{add.title}</h1>
             <div className="flex gap-2">
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">Diesel</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.fuel}</p>
               <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.mileage}</p>
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">
                 2 days ago
               </h1>
-              <p className="font-semibold">{add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</p>
+              <p className="font-semibold text-sm sm:text-base">{add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</p>
             </div>
           </div>
         </Link>

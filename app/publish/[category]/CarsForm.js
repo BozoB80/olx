@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useSelector } from "react-redux"
 import { selectUserName } from "@/redux/slice/authSlice"
 
-const Cars = () => {
+const CarsForm = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
   const [docs] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
@@ -32,6 +32,8 @@ const Cars = () => {
     fuel: "",
     cubic: "",
     kilowatts: 0,
+    drive: "",
+    emission: "",
     transmission: "",
     type: "",
     color: "",
@@ -92,6 +94,8 @@ const Cars = () => {
         fuel: product.fuel,
         cubic: product.cubic,
         kilowatts: Number(product.kilowatts),
+        drive: product.drive,
+        emission: product.emission,
         transmission: product.transmission,
         type: product.type,
         color: product.color,
@@ -104,11 +108,34 @@ const Cars = () => {
     } catch (error) {
       console.log('You did not add new product');
     }
+
+    setProduct({
+      manufacturer: "",
+      model: "",
+      price: 0,
+      title: "",
+      region: "",
+      availability: "",
+      state: "",
+      year: 0,
+      doors: "",
+      mileage: 0,
+      fuel: "",
+      cubic: "",
+      kilowatts: 0,
+      drive: "",
+      emission: "",
+      transmission: "",
+      type: "",
+      color: "",
+      imageURL: "",
+      description: "",
+    })
   }
 
   return (
-    <div className="flex justify-center pt-10 w-full bg-gray-100 pb-20">
-      <div className="w-[800px] h-full bg-white rounded-md px-3 py-6">
+    <div className="flex justify-center pt-3 sm:pt-10 w-full bg-gray-100 pb-3 sm:pb-10">
+      <div className="w-full sm:w-[800px] h-full bg-white rounded-md px-1 sm:px-3 py-6">
         <form
           onSubmit={addCars}
           className="flex flex-col justify-center items-center"
@@ -122,7 +149,7 @@ const Cars = () => {
               name="manufacturer"
               value={product.manufacturer}
               onChange={(e) => handleInputChange(e)}
-              className="w-full bg-gray-100 rounded-md p-3" 
+              className="w-full bg-gray-100 text-sm sm:text-base rounded-md p-3" 
             > 
               <option value="" disabled>-- Choose brand --</option>
               {docs?.map((doc) => (
@@ -132,14 +159,14 @@ const Cars = () => {
               ))}
             </select>
 
-            <label htmlFor="model" className="uppercase text-xs font-semibold">Model</label>
+            <label htmlFor="model" className="uppercase text-sm font-semibold">Model</label>
             <select 
               id="model"
               name="model"
               required
               value={product.model}
               onChange={(e) => handleInputChange(e)}
-              className="w-full bg-gray-100 rounded-md p-3" 
+              className="w-full bg-gray-100 text-sm sm:text-base rounded-md p-3" 
             > 
               <option value="" disabled>-- Choose model --</option>
               {docs?.map((doc) => (
@@ -148,8 +175,8 @@ const Cars = () => {
             </select>
 
             <div className="w-full my-4">
-              <h1 className="uppercase text-xs font-semibold">LOCATION</h1>
-              <div className="flex space-x-4">
+              <h1 className="uppercase text-sm sm:text-base font-semibold">LOCATION</h1>
+              <div className="flex space-x-1 sm:space-x-4">
                 {!toggleLocation ? (
                   <input  
                     type="text"
@@ -157,7 +184,7 @@ const Cars = () => {
                     value={product.region} 
                     onChange={(e) => handleInputChange(e)}  
                     disabled
-                    className="w-full rounded-md px-3 py-3 outline-none"
+                    className="w-full rounded-md text-sm sm:text-base px-3 py-3 outline-none"
                   />
                 ) : (
                   <select 
@@ -165,7 +192,7 @@ const Cars = () => {
                     name="region"
                     value={product.region} 
                     onChange={(e) => handleInputChange(e)}                    
-                    className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                    className="w-full bg-gray-100 text-xs sm:text-base rounded-md px-3 py-3 outline-none"
                   >
                     <option value="" disabled>-- Choose region --</option>
                     <option disabled className="text-red-400">Federation BiH</option>
@@ -191,20 +218,20 @@ const Cars = () => {
                   type="button"
                   value={toggleLocation}
                   onClick={handleLocation}
-                  className="w-full py-3 border-2 border-black rounded-md flex justify-center items-center"
+                  className="w-full py-3 border-2 text-xs sm:text-base border-black rounded-md flex justify-center items-center"
                 >
                   <MapPinIcon className="w-6 h-6" />
                   <h1>{!toggleLocation ? "Change location" : "Back to the registered location"}</h1>
                 </button>
               </div>
-              <div className="w-full my-4 flex space-x-4">
+              <div className="w-full my-4 flex justify-between space-x-4">
                 <div className="flex w-full flex-col">
                   <h1 className="uppercase text-xs font-semibold">Availability</h1>
                   <fieldset className="flex justify-between items-center gap-4">
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="available"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-1 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
                       >Available immediately</label>
                       <input 
                         type="radio"
@@ -218,7 +245,7 @@ const Cars = () => {
                     </div>
 
                     <div className="flex relative w-full">  
-                      <label htmlFor="notAvailable" className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">Not available now</label>
+                      <label htmlFor="notAvailable" className="w-full cursor-pointer px-1 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">Not available now</label>
                       <input 
                         type="radio"
                         id="notAvailable"
@@ -237,7 +264,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="new"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         New
                       </label>
@@ -253,7 +280,7 @@ const Cars = () => {
                     </div>
 
                     <div className="flex relative w-full">  
-                      <label htmlFor="used" className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">Used</label>
+                      <label htmlFor="used" className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">Used</label>
                       <input 
                         type="radio"
                         id="used"
@@ -276,11 +303,11 @@ const Cars = () => {
                       type="number"
                       name="price"
                       min="1"
-                      max="10000000"
+                      max="1000000"
                       required
                       value={product.price}
                       onChange={(e) => handleInputChange(e)}
-                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                      className="w-full bg-gray-100 text-sm sm:text-base rounded-l-md p-3 outline-none"
                     />
                     <h1 className="uppercase bg-gray-100 rounded-r-md border-l border-gray-300 text-xs p-4 font-semibold">EUR</h1>
                   </div>
@@ -311,13 +338,13 @@ const Cars = () => {
                     />
                 </div>
                 <div className="flex flex-col w-full">
-                  <h1 className="uppercase text-xs font-semibold">Production year</h1>
+                  <label htmlFor="year" className="uppercase text-xs font-semibold">Production year</label>
                   <select 
                     name="year"
                     id="year" 
                     value={product.year} 
                     onChange={(e) => handleInputChange(e)}                   
-                    className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                    className="w-full bg-gray-100 rounded-md text-sm sm:text-base px-3 py-3 outline-none"
                   >
                     <option value="" disabled>-- Choose year --</option>
                     <option value="2023">2023</option>
@@ -405,7 +432,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="doors1"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         2/3
                         <input 
@@ -420,7 +447,7 @@ const Cars = () => {
                       </label>
                     </div>
                     <div className="flex relative w-full">  
-                      <label htmlFor="doors2" className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                      <label htmlFor="doors2" className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
                         4/5
                         <input 
                           type="radio"
@@ -445,7 +472,7 @@ const Cars = () => {
                       required
                       value={product.mileage}
                       onChange={(e) => handleInputChange(e)}
-                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                      className="w-full bg-gray-100 text-sm sm:text-base rounded-l-md p-3 outline-none"
                     />
                 </div>                
               </div>
@@ -457,7 +484,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel1"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Diesel
                         <input 
@@ -474,7 +501,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel2"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Petrol
                         <input 
@@ -491,7 +518,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel3"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Gas
                         <input 
@@ -508,7 +535,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel4"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Hybrid
                         <input 
@@ -525,7 +552,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel5"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Electric
                         <input 
@@ -549,19 +576,25 @@ const Cars = () => {
                       name="cubic"
                       value={product.cubic} 
                       onChange={(e) => handleInputChange(e)}                    
-                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                      className="w-full bg-gray-100 rounded-md text-xs sm:text-sm px-3 py-3 outline-none"
                     >
                       <option value="" disabled>-- Choose capacity --</option>                    
                       <option value="1.0">1.0</option>                     
+                      <option value="1.2">1.2</option>                     
                       <option value="1.5">1.5</option>
+                      <option value="1.6">1.6</option>
                       <option value="1.9">1.9</option>
                       <option value="2.0">2.0</option>
+                      <option value="2.2">2.2</option>
                       <option value="2.5">2.5</option>
                       <option value="3.0">3.0</option>
+                      <option value="3.5">3.5</option>
+                      <option value="4.0">4.0</option>
+                      <option value="5.0">5.0</option>
                     </select>
                   </div>
                   <div className="w-full">
-                    <label htmlFor="kilowatts" className="uppercase text-xs font-semibold">kilowatts</label>
+                    <label htmlFor="kilowatts" className="uppercase text-xs sm:text-sm font-semibold">kilowatts</label>
                     <input 
                       type="number"
                       name="kilowatts"
@@ -570,11 +603,130 @@ const Cars = () => {
                       required
                       value={product.kilowatts}
                       onChange={(e) => handleInputChange(e)}
-                      className="w-full bg-gray-100 rounded-l-md p-3 outline-none"
+                      className="w-full bg-gray-100 text-sm sm:text-base rounded-l-md p-3 outline-none"
                     />
                   </div>
                 </div>
               </div>
+
+              <div className="w-full my-4 flex space-x-4">
+                <div className="flex w-full flex-col">
+                  <h1 className="uppercase text-xs font-semibold">Drive</h1>
+                  <fieldset className="flex justify-between items-center gap-4">
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="front"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Front
+                        <input 
+                          type="radio"
+                          id="front"
+                          name="drive"
+                          value="Front"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.drive === "Front"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="rear"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Rear
+                        <input 
+                          type="radio"
+                          id="rear"
+                          name="drive"
+                          value="Rear"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.drive === "Rear"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>                 
+                  </fieldset>
+                </div>
+                <div className="flex w-full flex-col">
+                  <h1 className="uppercase text-xs font-semibold">Emission</h1>
+                  <fieldset className="grid grid-cols-2 justify-between items-center gap-4">
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="euro3"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Euro 3
+                        <input 
+                          type="radio"
+                          id="euro3"
+                          name="emission"
+                          value="Euro 3"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.emission === "Euro 3"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="euro4"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Euro 4
+                        <input 
+                          type="radio"
+                          id="euro4"
+                          name="emission"
+                          value="Euro 4"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.emission === "Euro 4"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="euro5"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Euro 5
+                        <input 
+                          type="radio"
+                          id="euro5"
+                          name="emission"
+                          value="Euro 5"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.emission === "Euro 5"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex relative w-full">
+                      <label 
+                        htmlFor="euro6"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >
+                        Euro 6
+                        <input 
+                          type="radio"
+                          id="euro6"
+                          name="emission"
+                          value="Euro 6"
+                          onChange={(e) => handleInputChange(e)} 
+                          checked={product.emission === "Euro 6"}
+                          className="absolute right-2 top-0 bottom-0"
+                        />
+                      </label>
+                    </div>
+
+                    
+                  </fieldset>                
+                </div>                
+              </div>
+
+
 
               <div className="w-full my-4 flex space-x-4">
                 <div className="w-full flex flex-col">
@@ -583,7 +735,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="trans1"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Automatic
                         <input 
@@ -600,7 +752,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="trans2"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Semi-automatic
                         <input 
@@ -617,7 +769,7 @@ const Cars = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="trans3"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
                       >
                         Manual
                         <input 
@@ -641,21 +793,21 @@ const Cars = () => {
                       name="type"                     
                       value={product.type} 
                       onChange={(e) => handleInputChange(e)}                    
-                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
                     >
                       <option value="" disabled>-- Choose type --</option>                    
                       <option value="Limousine">Limousine</option>                     
-                      <option value="smallCar">Small car</option>
-                      <option value="caravan">Caravan</option>
-                      <option value="van">Van</option>
-                      <option value="suv">SUV</option>
-                      <option value="convertible">Convertible</option>
-                      <option value="sportsCar">Sports Car</option>
-                      <option value="offRoad">Off Road</option>
-                      <option value="caddy">Caddy</option>
-                      <option value="pickup">Pick-up</option>
-                      <option value="oldtimer">Oldtimer</option>
-                      <option value="other">Other</option>
+                      <option value="Small Car">Small car</option>
+                      <option value="Caravan">Caravan</option>
+                      <option value="Van">Van</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Convertible">Convertible</option>
+                      <option value="Sports-car">Sports Car</option>
+                      <option value="Off-Road">Off Road</option>
+                      <option value="Caddy">Caddy</option>
+                      <option value="Pickup">Pick-up</option>
+                      <option value="Oldtimer">Oldtimer</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
                   <div className="w-full">
@@ -665,7 +817,7 @@ const Cars = () => {
                       name="color"
                       value={product.color} 
                       onChange={(e) => handleInputChange(e)}                    
-                      className="w-full bg-gray-100 rounded-md px-3 py-3 outline-none"
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
                     >
                       <option value="" disabled>-- Choose color --</option>                    
                       <option value="beige">Beige</option>                     
@@ -727,4 +879,4 @@ const Cars = () => {
   )
 }
 
-export default Cars
+export default CarsForm
