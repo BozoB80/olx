@@ -201,7 +201,7 @@ const CarsDetails = ({id}) => {
             alt={details?.title}
             width={500}
             height={500}
-            className='w-full h-full object-contain'
+            className='w-full h-[300px] object-cover'
           />
           <div className='absolute w-full px-3 flex justify-between top-5'>
             <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />

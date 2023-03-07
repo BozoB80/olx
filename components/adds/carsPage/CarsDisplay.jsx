@@ -19,7 +19,6 @@ const CarsDisplay = () => {
           id: doc.id,
           ...doc.data()
         }))
-        
         setAdds(allAdds)      
       });
       

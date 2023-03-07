@@ -37,14 +37,8 @@ const FooterNav = () => {
   }, [prevScrollPos, visible, handleScroll]);
 
   return (
-    // <div className={`fixed h-20 w-full bg-indigo-500 text-center z-50 bottom-${visible ? 0 : -50}`}>
-    //   Hello World
-    // </div>
-
-    //<div className="flex bottom-0 z-50 bg-white shadow-black shadow-xl w-full justify-around items-center py-2"></div>
-
     <section className="flex sm:hidden">
-      <div className={`flex fixed bottom-${visible ? 0 : -60} z-50 bg-white shadow-black shadow-xl w-full justify-around items-center py-2`}>
+      <div className={`flex fixed ${visible ? 'bottom-0' : '-bottom-50 -z-10'} z-50 bg-white shadow-black shadow-xl w-full justify-around items-center py-2`}>
         <Link href="/" className="flex flex-col justify-center items-center">
           <HomeIcon className="w-5 h-5" />
           <p className="text-xs">Home</p>

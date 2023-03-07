@@ -170,7 +170,7 @@ const CarsForm = () => {
             > 
               <option value="" disabled>-- Choose model --</option>
               {docs?.map((doc) => (
-                <ChildrenList key={doc.id} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.name}/model`} />
+                <ChildrenList key={doc.id} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.id}/model`} />
               ))}
             </select>
 
@@ -231,8 +231,8 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="available"
-                        className="w-full cursor-pointer px-1 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
-                      >Available immediately</label>
+                        className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                      >Available immediately
                       <input 
                         type="radio"
                         id="available"
@@ -242,10 +242,12 @@ const CarsForm = () => {
                         checked={product.availability === "Available immediately"}
                         className="absolute right-2 top-0 bottom-0"
                       />
+                      </label>
                     </div>
 
                     <div className="flex relative w-full">  
-                      <label htmlFor="notAvailable" className="w-full cursor-pointer px-1 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">Not available now</label>
+                      <label htmlFor="notAvailable" className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                        Not available
                       <input 
                         type="radio"
                         id="notAvailable"
@@ -255,6 +257,7 @@ const CarsForm = () => {
                         checked={product.availability === "Not available now"}
                         className="absolute right-2 top-0 bottom-0"
                       />
+                      </label>
                     </div>
                   </fieldset>
                 </div>
@@ -297,7 +300,7 @@ const CarsForm = () => {
 
               <div className="w-full mt-5 flex flex-col">
                 <h1 className="uppercase text-xs font-semibold">Price</h1>
-                <div className="flex space-x-8 w-full justify-between items-center">
+                <div className="flex space-x-4 sm:space-x-8 w-full justify-between items-center">
                   <div className="flex w-full items-center justify-center">
                     <input 
                       type="number"
@@ -309,7 +312,7 @@ const CarsForm = () => {
                       onChange={(e) => handleInputChange(e)}
                       className="w-full bg-gray-100 text-sm sm:text-base rounded-l-md p-3 outline-none"
                     />
-                    <h1 className="uppercase bg-gray-100 rounded-r-md border-l border-gray-300 text-xs p-4 font-semibold">EUR</h1>
+                    <h1 className="uppercase bg-gray-100 rounded-r-md border-l border-gray-300 text-sm sm:text-base p-3 font-semibold">EUR</h1>
                   </div>
 
                   <h1 className="uppercase bg-gray-100 p-4 rounded-full text-xs font-semibold">OR</h1>
@@ -484,7 +487,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel1"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Diesel
                         <input 
@@ -501,7 +504,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel2"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-start items-center"
                       >
                         Petrol
                         <input 
@@ -511,14 +514,14 @@ const CarsForm = () => {
                           value="Petrol"
                           onChange={(e) => handleInputChange(e)} 
                           checked={product.fuel === "Petrol"}
-                          className="absolute right-2 top-0 bottom-0"
+                          className="absolute right-2 top-0 bottom-0 w-3"
                         />
                       </label>
                     </div>
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel3"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-start items-center"
                       >
                         Gas
                         <input 
@@ -535,7 +538,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel4"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-start items-center"
                       >
                         Hybrid
                         <input 
@@ -552,7 +555,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="fuel5"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-start items-center"
                       >
                         Electric
                         <input 
@@ -616,7 +619,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="front"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Front
                         <input 
@@ -633,7 +636,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="rear"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Rear
                         <input 
@@ -655,7 +658,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="euro3"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Euro 3
                         <input 
@@ -672,7 +675,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="euro4"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Euro 4
                         <input 
@@ -689,7 +692,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="euro5"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Euro 5
                         <input 
@@ -706,7 +709,7 @@ const CarsForm = () => {
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="euro6"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-start items-center"
                       >
                         Euro 6
                         <input 
@@ -719,14 +722,10 @@ const CarsForm = () => {
                           className="absolute right-2 top-0 bottom-0"
                         />
                       </label>
-                    </div>
-
-                    
+                    </div>                 
                   </fieldset>                
                 </div>                
               </div>
-
-
 
               <div className="w-full my-4 flex space-x-4">
                 <div className="w-full flex flex-col">
@@ -745,7 +744,7 @@ const CarsForm = () => {
                           value="Automatic"
                           onChange={(e) => handleInputChange(e)} 
                           checked={product.transmission === "Automatic"}
-                          className="absolute right-2 top-0 bottom-0"
+                          className="absolute right-2 top-2 "
                         />
                       </label>
                     </div>
@@ -762,14 +761,14 @@ const CarsForm = () => {
                           value="Semi-automatic"
                           onChange={(e) => handleInputChange(e)} 
                           checked={product.transmission === "Semi-automatic"}
-                          className="absolute right-2 top-0 bottom-0"
+                          className="absolute right-2 top-2"
                         />
                       </label>
                     </div>
                     <div className="flex relative w-full">
                       <label 
                         htmlFor="trans3"
-                        className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                        className="w-full cursor-pointer px-2 sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-start items-center"
                       >
                         Manual
                         <input 
@@ -779,7 +778,7 @@ const CarsForm = () => {
                           value="Manual"
                           onChange={(e) => handleInputChange(e)} 
                           checked={product.transmission === "Manual"}
-                          className="absolute right-2 top-0 bottom-0"
+                          className="absolute right-2 top-2"
                         />
                       </label>
                     </div>

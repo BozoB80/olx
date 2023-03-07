@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { selectCategories } from "@/redux/slice/categorySlice"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import Link from "next/link"
 
 const PublishAdd = ({ setPublish }) => {
   const [toggle, setToggle] = useState(false)
@@ -15,7 +16,7 @@ const PublishAdd = ({ setPublish }) => {
 
   return (
         <>
-        <div className="hidden sm:absolute top-0 -left-5 right-0 bottom-0 z-50 w-screen h-screen bg-slate-400/50">
+        <div className="hidden sm:block absolute -top-20 -left-5 right-0 bottom-0 z-40 w-screen h-screen bg-slate-400/50">
           <div className="absolute inset-1/3 w-[550px] h-[550px] bg-white rounded-md">
             <div className="flex flex-col w-full justify-center items-center p-3">
               <div className="flex w-full justify-between items-center">
@@ -59,8 +60,14 @@ const PublishAdd = ({ setPublish }) => {
                 <button onClick={() => setToggle(true)} className="pl-5">Publish something else</button>
 
                 {toggle && (
-                  <div className="absolute top-0 left-0 bg-indigo-500 w-28 h-28">
-                    Hello World
+                  <div className="absolute inset-1 bg-[#f1f4f5] z-50 w-64 h-auto">
+                    <ul>
+                      {categoryList.map((category) => (
+                        <Link href={`/${category.name}`} key={category.id} onClick={() => {setToggle(false); setPublish(false)}}>
+                          <li>{category.name}</li>
+                        </Link>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>

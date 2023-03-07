@@ -6,7 +6,7 @@ const Publish = ({ params }) => {
   
   return (
     <div>
-      {params.category === "Cars" ? <CarsForm /> : "Not here"}
+      {params.category === "Cars" ? <CarsForm /> : "Form not available yet"}
       
     </div>
   )
