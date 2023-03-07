@@ -47,7 +47,7 @@ const PublishAdd = ({ setPublish }) => {
                   </div>
                 )})}
               </div>
-              <div className="flex w-full justify-start items-center my-5">
+              <div onClick={() => setToggle(true)} className="flex w-full justify-start items-center my-5">
                 <div className="flex justify-center items-center border w-16 h-16 rounded-full">
                   <Image 
                     src={ostalo}
@@ -57,16 +57,21 @@ const PublishAdd = ({ setPublish }) => {
                     className="object-contain bg-transparent hover:scale-110 transition-all cursor-pointer"
                   />  
                 </div>
-                <button onClick={() => setToggle(true)} className="pl-5">Publish something else</button>
+                <button className="pl-5">Publish something else</button>
 
                 {toggle && (
                   <div className="absolute inset-1 bg-[#f1f4f5] z-50 w-64 h-auto">
                     <ul>
-                      {categoryList.map((category) => (
-                        <Link href={`/${category.name}`} key={category.id} onClick={() => {setToggle(false); setPublish(false)}}>
+                      {categoryList.map((category) => {
+                        const handlePublish = () => {
+                          setPublish(false)
+                          router.push(`/publish/${category.name}`)
+                        }
+                        return (
+                        <div key={category.id} onClick={handlePublish} className="cursor-pointer p-1 font-semibold">
                           <li>{category.name}</li>
-                        </Link>
-                      ))}
+                        </div>
+                      )})}
                     </ul>
                   </div>
                 )}

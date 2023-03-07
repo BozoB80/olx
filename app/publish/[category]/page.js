@@ -1,14 +1,18 @@
 import React from 'react'
 import CarsForm from './CarsForm'
+import MobilePhonesForm from './MobilePhonesForm'
 
 
 const Publish = ({ params }) => {
-  
+
   return (
-    <div>
-      {params.category === "Cars" ? <CarsForm /> : "Form not available yet"}
-      
-    </div>
+    <>
+      {
+        params.category === "Cars" ? <CarsForm /> :
+        params.category === "Mobile%20Phones" ? <MobilePhonesForm /> :
+        "Form not available yet"
+      }
+    </>
   )
 }
 
