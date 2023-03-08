@@ -9,7 +9,6 @@ import { auth, db } from '../../../firebase'
 import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
-import createUser from "./createUser"
 
 
 const Register = () => {
