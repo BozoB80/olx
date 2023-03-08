@@ -5,10 +5,11 @@ import logo from '../../../assets/logo.svg'
 import Link from "next/link"
 import { useState } from "react"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { auth } from '../../../firebase'
+import { auth, db } from '../../../firebase'
 import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
+import createUser from "./createUser"
 
 
 const Register = () => {

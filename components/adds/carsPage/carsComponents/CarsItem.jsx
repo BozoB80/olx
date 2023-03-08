@@ -1,8 +1,13 @@
+import { getTimeAgo } from '@/utils/dateUtils';
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const CarsItem = ({add, grid}) => {
+
+  const createdAt = add.createdAt.toDate();
+  const timeAgo = getTimeAgo(createdAt);
+
   return (
     <div>
       <Link href={`/add/${add.id}`} key={add.id} className={`w-full flex ${grid && 'flex-col'} shadow-md h-[270px] rounded-md bg-white cursor-pointer`}>
@@ -21,7 +26,7 @@ const CarsItem = ({add, grid}) => {
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">
-                2 days ago
+                {timeAgo}
               </h1>
               <p className="font-semibold">{add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</p>
             </div>

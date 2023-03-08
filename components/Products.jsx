@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { storeAdds } from "@/redux/slice/addsSlice";
+import { getTimeAgo } from "@/utils/dateUtils";
 
 
 const Products = () => {
@@ -40,12 +41,16 @@ const Products = () => {
   useEffect(() => {
     getAdds()
   }, [])
-  
-  
+
 
   return (
     <div className="bg-[#f1f4f5] w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 xl:grid-cols-7">
-      {adds?.map((add) => (
+      {adds?.map((add) => {
+
+        const createdAt = add.createdAt.toDate();
+        const timeAgo = getTimeAgo(createdAt);
+
+        return (
         <Link href={`/add/${add.id}`} key={add.id} className="flex flex-col h-[270px] rounded-md bg-white cursor-pointer">
           <Image 
             src={add.imageURL}
@@ -62,13 +67,13 @@ const Products = () => {
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">
-                2 days ago
+                {timeAgo}
               </h1>
               <p className="font-semibold text-sm sm:text-base">{add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</p>
             </div>
           </div>
         </Link>
-      ))}
+      )})}
     </div>
   )
 }

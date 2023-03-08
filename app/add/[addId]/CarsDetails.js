@@ -11,12 +11,16 @@ import { useRouter } from 'next/navigation';
 import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
+import { getTimeAgo } from '@/utils/dateUtils';
 
 
 const CarsDetails = ({id}) => {
   const [details] = useDocumentData(doc(db, "products", id))
   const [user] = useAuthState(auth)
   const router = useRouter()
+
+  const createdAt = details?.createdAt.toDate();
+  const timeAgo = getTimeAgo(createdAt);
     
   return (
     <div className='bg-[#f1f4f5] w-full py-10 flex justify-center items-start gap-6 '>
@@ -57,7 +61,7 @@ const CarsDetails = ({id}) => {
               </h1>
               <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                 <ClockIcon className='w-5 h-5' />
-                Renewed: 2 hours ago
+                Created: {timeAgo}
               </h1>
               <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                 <InformationCircleIcon className='w-5 h-5' />
@@ -227,7 +231,7 @@ const CarsDetails = ({id}) => {
                 </h1>
                 <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                   <ClockIcon className='w-5 h-5' />
-                  2 hours ago
+                  {timeAgo}
                 </h1>
                 <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                   <InformationCircleIcon className='w-5 h-5' />

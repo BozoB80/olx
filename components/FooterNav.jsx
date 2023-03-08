@@ -38,7 +38,7 @@ const FooterNav = () => {
 
   return (
     <section className="flex sm:hidden">
-      <div className={`flex fixed ${visible ? 'bottom-0' : '-bottom-50 -z-10'} z-50 bg-white shadow-black shadow-xl w-full justify-around items-center py-2`}>
+      <div className={`flex fixed ${visible ? 'bottom-0 z-50' : '-bottom-50 -z-10'} bg-white shadow-black shadow-xl w-full justify-around items-center py-2`}>
         <Link href="/" className="flex flex-col justify-center items-center">
           <HomeIcon className="w-5 h-5" />
           <p className="text-xs">Home</p>
