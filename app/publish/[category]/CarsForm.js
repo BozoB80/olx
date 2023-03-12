@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useSelector } from "react-redux"
 import { selectUserName } from "@/redux/slice/authSlice"
+import { useRouter } from "next/navigation"
 
 const CarsForm = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
@@ -18,6 +19,7 @@ const CarsForm = () => {
   const user = useSelector(selectUserName)
   const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"),
   {snapshotListenOptions: { includeMetadataChanges: true }})
+  const router = useRouter()
   
   const [product, setProduct] = useState({
     manufacturer: "",
@@ -132,6 +134,8 @@ const CarsForm = () => {
       imageURL: "",
       description: "",
     })
+
+    router.push("/")
   }
 
   return (
