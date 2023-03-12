@@ -8,6 +8,14 @@
   }
 
   .listStyle {
-    @apply w-full p-5
+    @apply w-full p-3 space-y-2 
   }
+}
+
+html::-webkit-scrollbar{
+  display: none;
+}
+
+html{
+  scrollbar-width: none;
 }

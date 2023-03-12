@@ -9,13 +9,13 @@ const CarsList = ({ adds }) => {
   const [sort, setSort] = useState('latest')
 
   return (
-    <div className='flex flex-col bg-[#f1f4f5]'>
+    <div className='flex flex-col w-full bg-[#f1f4f5]'>
       <div className='flex w-full justify-center items-center px-3 pt-3 sm:p-4'>
-        <div className='flex bg-white px-1 sm:px-6 py-2 rounded-l-md shadow-xl border-r'>
+        <div className='flex w-1/3 bg-white px-1 sm:px-6 py-2 rounded-l-md shadow-xl border-r'>
           <Squares2X2Icon className='w-6 h-6 cursor-pointer' onClick={() => setGrid(true)} />
           <ListBulletIcon className='w-6 h-6 cursor-pointer' onClick={() => setGrid(false)} />
         </div>
-        <div className="flex bg-white px-1 sm:backdrop:px-5 py-2 shadow-xl border-r">
+        <div className="flex w-1/3 bg-white px-1 sm:backdrop:px-5 py-2 shadow-xl border-r">
             <AdjustmentsHorizontalIcon className='w-6 h-6' />
             <select id="sort" name="sort" value={sort} onChange={(e) => setSort(e.target.value)} className='w-20'>
               <option value="" disabled>Sort By</option>
@@ -26,8 +26,8 @@ const CarsList = ({ adds }) => {
               <option value="z-a">Z - A</option>
             </select>
         </div>
-        <div>
-          <button className='flex items-center bg-white px-1 sm:px-6 py-2 gap-3 rounded-r-md shadow-xl'>
+        <div className='flex w-1/3 bg-white px-1 sm:px-6 py-2 rounded-r-md shadow-xl'>
+          <button className='flex items-center gap-3'>
             <MagnifyingGlassIcon className='w-4 h-4' />
             Filter
           </button>

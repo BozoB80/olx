@@ -10,15 +10,15 @@ const CarsItem = ({add, grid}) => {
 
   return (
     <div>
-      <Link href={`/add/${add.id}`} key={add.id} className={`w-full flex ${grid && 'flex-col'} shadow-md h-[270px] rounded-md bg-white cursor-pointer`}>
+      <Link href={`/add/${add.id}`} key={add.id} className={`w-full flex ${grid && 'flex-col h-[270px]'} shadow-md h-[100px] rounded-md bg-white cursor-pointer`}>
           <Image 
             src={add.imageURL}
             alt={add.title}
             width={300}
             height={300}
-            className="object-cover w-[274px] h-[160px] rounded-t-md"
+            className={`object-cover ${grid && 'w-[274px] h-[160px] rounded-t-md'} w-[100px] h-[100px] rounded-l-md `}
           />
-          <div className="flex flex-col gap-2 p-2">
+          <div className="flex flex-1 flex-col w-full overflow-hidden gap-2 p-2">
             <h1 className="pb-2 truncate">{add.title}</h1>
             <div className="flex gap-2">
               <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.fuel}</p>
