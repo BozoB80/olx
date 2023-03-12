@@ -134,8 +134,6 @@ const CarsForm = () => {
       imageURL: "",
       description: "",
     })
-
-    router.push("/")
   }
 
   return (
