@@ -2,7 +2,7 @@
 
 import { auth, db, storage } from "@/firebase"
 import { addDoc, collection, Timestamp } from "firebase/firestore"
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useCollection, useCollectionData } from 'react-firebase-hooks/firestore'
 import ChildrenList from "./ChildrenList"
 import { useState } from "react"
 import { MapPinIcon } from "@heroicons/react/24/outline"
@@ -16,7 +16,8 @@ const CarsForm = () => {
   const [docs] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
   const user = useSelector(selectUserName)
-
+  const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"),
+  {snapshotListenOptions: { includeMetadataChanges: true }})
   
   const [product, setProduct] = useState({
     manufacturer: "",
@@ -169,7 +170,7 @@ const CarsForm = () => {
               className="w-full bg-gray-100 text-sm sm:text-base rounded-md p-3" 
             > 
               <option value="" disabled>-- Choose model --</option>
-              {docs?.map((doc) => (
+              {models?.docs.map((doc) => (
                 <ChildrenList key={doc.id} path={`categories/PE2j37QZeo1UwY4TKZPJ/manufacturer/${doc.id}/model`} />
               ))}
             </select>

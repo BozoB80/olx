@@ -4,8 +4,8 @@ import React from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const ChildrenList = ({ path }) => {
-  const query = collection(db, path)
-  const [docs, loading, error] = useCollectionData(query)
+
+  const [docs] = useCollectionData(collection(db, path))
 
   return (
     <>
