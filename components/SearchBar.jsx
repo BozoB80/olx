@@ -6,17 +6,37 @@ import { useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
 import PublishAdd from "./PublishAdd"
+import { useCollection, useCollectionData } from "react-firebase-hooks/firestore"
+import { collection } from "firebase/firestore"
+import { db } from "@/firebase"
+import Link from "next/link"
+import Image from "next/image"
 
 
 const SearchBar = () => {
-  const [search, setSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchData, setSearchData] = useState(null);
   const [publish, setPublish] = useState(false)
+  const [allAdds] = useCollectionData(collection(db, "/products"),
+  {snapshotListenOptions: { includeMetadataChanges: true }})
+
 
   const loggedIn = useSelector(selectIsLoggedIn)
   const router = useRouter()
 
   const publishAdd = () => {
     loggedIn ? setPublish(true) : router.push('/auth/login')
+  }
+
+  const handleSearchChange = (e) => {
+    const term = e.target.value
+    setSearchTerm(term)
+
+    const filteredAdds = allAdds?.filter((add) =>
+      add.title && add.description.toLowerCase().includes(term.toLowerCase())
+    )
+    setSearchData(filteredAdds)
+    console.log(filteredAdds);
   }
 
   return (
@@ -29,12 +49,34 @@ const SearchBar = () => {
         </div>
         <input
           type="text"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          value={searchTerm}
+          onChange={handleSearchChange}
           placeholder='Search'
           className="w-full focus:outline-none bg-gray-100 sm:bg-white"
         />
-        {search ? <button onClick={() => setSearch('')}><XMarkIcon className="h-6 w-6" /></button> : ''}
+        {searchTerm ? <button onClick={() => setSearchTerm('')}><XMarkIcon className="h-6 w-6" /></button> : ''}
+
+        {searchData && searchData.length !== 0 ? (
+          <div className="absolute w-full top-14 left-0 bg-slate-50 shadow-sm-2 z-[9] p-3">
+            {searchData && searchData.map((item) => {
+              
+              return (
+                <Link href="/">
+                  <div className="w-full flex items-center py-3">
+                    <Image 
+                      src={item.imageURL}
+                      alt={item.title}
+                      width={60}
+                      height={60}
+                      className="w-14 h-14 object-cover"
+                    />
+                    <h1 className="ml-3">{item.title}</h1>
+                  </div>
+                </Link>      
+              )
+            })}
+          </div>
+        ) : null}
         
       </form> 
       <button 
