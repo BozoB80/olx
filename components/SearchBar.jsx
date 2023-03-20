@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { FolderPlusIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { ArrowRightIcon, FolderPlusIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
@@ -10,14 +10,13 @@ import { useCollection, useCollectionData } from "react-firebase-hooks/firestore
 import { collection } from "firebase/firestore"
 import { db } from "@/firebase"
 import Link from "next/link"
-import Image from "next/image"
 
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchData, setSearchData] = useState(null);
   const [publish, setPublish] = useState(false)
-  const [allAdds] = useCollectionData(collection(db, "/products"),
+  const [allAdds] = useCollection(collection(db, "/products"),
   {snapshotListenOptions: { includeMetadataChanges: true }})
 
 
@@ -32,12 +31,18 @@ const SearchBar = () => {
     const term = e.target.value
     setSearchTerm(term)
 
-    const filteredAdds = allAdds?.filter((add) =>
-      add.title && add.description.toLowerCase().includes(term.toLowerCase())
-    )
+    const filteredAdds = allAdds?.docs.filter((add) => {
+      const {title, description} = add.data()
+
+      return (
+        `${title} ${description}`.toLowerCase().includes(term.toLowerCase())
+      )
+    })
     setSearchData(filteredAdds)
     console.log(filteredAdds);
   }
+
+
 
   return (
     <div className='relative flex justify-between items-center w-full sm:gap-5 sm:mt-5'>
@@ -54,23 +59,18 @@ const SearchBar = () => {
           placeholder='Search'
           className="w-full focus:outline-none bg-gray-100 sm:bg-white"
         />
-        {searchTerm ? <button onClick={() => setSearchTerm('')}><XMarkIcon className="h-6 w-6" /></button> : ''}
+        {searchTerm ? <button><XMarkIcon className="h-6 w-6" /></button> : ''}
 
         {searchData && searchData.length !== 0 ? (
           <div className="absolute w-full top-14 left-0 bg-slate-50 shadow-sm-2 z-[9] p-3">
             {searchData && searchData.map((item) => {
-              
+              const { category, title } = item.data()
               return (
-                <Link href="/">
+                <Link href={`/add/${item.id}`} onClick={() => setSearchTerm('')} key={item.id}>
                   <div className="w-full flex items-center py-3">
-                    <Image 
-                      src={item.imageURL}
-                      alt={item.title}
-                      width={60}
-                      height={60}
-                      className="w-14 h-14 object-cover"
-                    />
-                    <h1 className="ml-3">{item.title}</h1>
+                    <h1>{category}</h1>
+                    <p className="ml-3"><ArrowRightIcon className="w-4 h-4" /></p>
+                    <h1 className="ml-3 truncate">{title}</h1>
                   </div>
                 </Link>      
               )
@@ -79,6 +79,7 @@ const SearchBar = () => {
         ) : null}
         
       </form> 
+      
       <button 
         type="button"
         onClick={publishAdd}

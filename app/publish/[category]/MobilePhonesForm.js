@@ -3,7 +3,8 @@
 import { db, storage } from "@/firebase"
 import { selectUserName } from "@/redux/slice/authSlice"
 import { MapPinIcon } from "@heroicons/react/24/outline"
-import { collection } from "firebase/firestore"
+import { Timestamp, addDoc, collection } from "firebase/firestore"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useState } from "react"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { useSelector } from "react-redux"
@@ -22,7 +23,12 @@ const MobilePhonesForm = () => {
     price: 0,
     flash: "",
     system: "",
+    color: "",
+    memory: "",
+    ram: "",
+    screen: "",    
     imageURL: "",
+    description: "",
     category: "Mobile Phones",
     createdBy: user,
   })
@@ -41,7 +47,15 @@ const MobilePhonesForm = () => {
         price: Number(product.price),
         flash: product.flash,
         system: product.system,
+        color: product.color,
+        memory: product.memory,
+        ram: product.ram,
+        screen: product.screen,
         imageURL: product.imageURL,
+        description: product.description,
+        category: product.category,
+        createdBy: product.createdBy,
+        createdAt: Timestamp.now().toDate()
       })
     } catch (error) {
       console.log('You did not add new product');
@@ -55,8 +69,13 @@ const MobilePhonesForm = () => {
       state: "",
       price: 0,
       flash: "",
+      color: "",
       system: "",
+      ram: "",
+      screen: "",
+      memory: "",
       imageURL: "",
+      description: "",
     })
   }
 
@@ -66,26 +85,26 @@ const MobilePhonesForm = () => {
   }
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const filename = file.name; // generate unique filename
-    const uploadTask = storage.ref(`images/${filename}`).put(file); // upload file to cloud storage
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        // get download URL of the uploaded file
-        storage
-          .ref('images')
-          .child(filename)
-          .getDownloadURL()
-          .then((url) => {
-            setImages([...images, url]); // add the URL to the state
+    const file = e.target.files[0]
+    console.log(file);
+
+    const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        }, 
+        (error) => {
+          console.log('upload error');
+        }, 
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setProduct({...product, imageURL: downloadURL})
+            console.log('Image uploaded successfully');
           });
-      }
-    );
+        }
+      );
   }
 
 
@@ -191,7 +210,7 @@ const MobilePhonesForm = () => {
                       <div className="flex relative w-full">
                         <label 
                           htmlFor="available"
-                          className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                          className="w-full cursor-pointer px-1 sm:px-3 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
                         >Available immediately
                         <input 
                           type="radio"
@@ -293,7 +312,7 @@ const MobilePhonesForm = () => {
                       <div className="flex relative w-full">
                         <label 
                           htmlFor="ios"
-                          className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                          className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
                         >iOS
                         <input 
                           type="radio"
@@ -308,7 +327,7 @@ const MobilePhonesForm = () => {
                       </div>
 
                       <div className="flex relative w-full">  
-                        <label htmlFor="android" className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                        <label htmlFor="android" className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
                           Android
                         <input 
                           type="radio"
@@ -329,7 +348,7 @@ const MobilePhonesForm = () => {
                       <div className="flex relative w-full">
                         <label 
                           htmlFor="led"
-                          className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400  rounded-md flex justify-center items-center"
+                          className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
                         >
                           LED
                         </label>
@@ -345,7 +364,7 @@ const MobilePhonesForm = () => {
                       </div>
 
                       <div className="flex relative w-full">  
-                        <label htmlFor="dualLED" className="w-full cursor-pointer px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                        <label htmlFor="dualLED" className="w-full cursor-pointer sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
                           Dual-LED</label>
                         <input 
                           type="radio"
@@ -361,6 +380,112 @@ const MobilePhonesForm = () => {
                   </div>                
                 </div>  
 
+                <div className="flex justify-start items-center w-full gap-4">
+                  <div className="w-full">
+                    <label htmlFor="color" className="uppercase text-xs font-semibold">color</label>
+                    <select 
+                      id="color" 
+                      name="color"
+                      value={product.color} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="" disabled>-- Choose color --</option>                    
+                      <option value="beige">Beige</option>                     
+                      <option value="black">Black</option>
+                      <option value="blue">Blue</option>
+                      <option value="brown">Brown</option>
+                      <option value="gold">Gold</option>
+                      <option value="gray">Gray</option>
+                      <option value="green">Green</option>
+                      <option value="orange">Orange</option>
+                      <option value="purple">Purple</option>
+                      <option value="red">Red</option>
+                      <option value="silver">Silver</option>
+                      <option value="white">White</option>
+                      <option value="yellow">Yellow</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="memory" className="uppercase text-xs font-semibold">internal memory</label>
+                    <select 
+                      id="memory" 
+                      name="memory"
+                      value={product.memory} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="" disabled>-- Choose memory --</option>                    
+                      <option value="128 MB">128 MB</option>                     
+                      <option value="256 MB">256 MB</option>
+                      <option value="512 MB">512 MB</option>
+                      <option value="1 GB">1 GB</option>
+                      <option value="2 GB">2 GB</option>
+                      <option value="4 GB">4 GB</option>
+                      <option value="8 GB">8 GB</option>
+                      <option value="16 GB">16 GB</option>
+                      <option value="32 GB">32 GB</option>
+                      <option value="64 GB">64 GB</option>
+                      <option value="128 GB">128 GB</option>
+                      <option value="256 GB">256 GB</option>
+                      <option value="512 GB">512 GB</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex justify-start items-center w-full gap-4">
+                  <div className="w-full">
+                    <label htmlFor="ram" className="uppercase text-xs font-semibold">RAM</label>
+                    <select 
+                      id="ram" 
+                      name="ram"
+                      value={product.ram} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="" disabled>-- Choose RAM --</option>                    
+                      <option value="128 MB">128 MB</option>                     
+                      <option value="256 MB">256 MB</option>
+                      <option value="512 MB">512 MB</option>
+                      <option value="1 GB">1 GB</option>
+                      <option value="2 GB">2 GB</option>
+                      <option value="4 GB">4 GB</option>
+                      <option value="6 GB">6 GB</option>
+                      <option value="8 GB">8 GB</option>
+                      <option value="12 GB">12 GB</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="screen" className="uppercase text-xs font-semibold">screen size (inch)</label>
+                    <select 
+                      id="screen" 
+                      name="screen"
+                      value={product.screen} 
+                      onChange={(e) => handleInputChange(e)}                    
+                      className="w-full bg-gray-100 text-xs sm:text-sm rounded-md px-3 py-3 outline-none"
+                    >
+                      <option value="" disabled>-- Choose screen size --</option>                    
+                      <option value="2.0">2.0</option>                     
+                      <option value="2.6">2.6</option>
+                      <option value="3.2">3.2</option>
+                      <option value="4.0">4.0</option>
+                      <option value="5.2">5.2</option>
+                      <option value="5.7">5.7</option>
+                      <option value="6.0">6.0</option>
+                      <option value="6.2">6.2</option>
+                      <option value="6.4">6.4</option>
+                      <option value="6.5">6.5</option>
+                      <option value="6.6">6.6</option>
+                      <option value="6.7">6.7</option>
+                      <option value="7.0">7.0</option>
+                      <option value="8.0">8.0</option>
+                      <option value="9.0">9.0</option>
+                      <option value="10.0">10.0</option>
+                    </select>
+                  </div>
+                </div>
+
+
                 <div>
                   <label className="uppercase text-xs font-semibold mt-5">Image:</label>
                   <div className="flex flex-col border-2 rounded-md gap-2">                
@@ -375,6 +500,19 @@ const MobilePhonesForm = () => {
                       className="p-5 border-2 rounded-md"
                     />
                   </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="uppercase text-xs font-semibold mt-5">Product Description</label>
+                  <textarea
+                    name="description"
+                    required
+                    value={product.description}
+                    onChange={(e) => handleInputChange(e)}
+                    cols="30"
+                    rows="10"
+                    className="p-2 border-2 rounded-md"
+                  />
                 </div>
 
                 <button type="submit" className="w-full bg-black text-white active:bg-white active:text-black active:border-2 active:border-black mt-3 p-2 outline-none rounded-md font-semibold ">
