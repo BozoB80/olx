@@ -10,6 +10,7 @@ const addsSlice = createSlice({
   initialState,
   reducers: {
     storeAdds: (state, action) => {
+      //console.log(action.payload);
       state.adds = action.payload.adds;
     },
     storeMobiles: (state, action) => {

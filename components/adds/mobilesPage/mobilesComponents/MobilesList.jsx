@@ -2,9 +2,9 @@
 
 import { AdjustmentsHorizontalIcon, ListBulletIcon, MagnifyingGlassIcon, Squares2X2Icon } from '@heroicons/react/24/outline'
 import React, { useState } from 'react'
-import CarsItem from './CarsItem'
+import CarsItem from './MobilesItem'
 
-const CarsList = ({ adds }) => {
+const MobilesList = ({ adds }) => {
   const [grid, setGrid] = useState(true)
   const [sort, setSort] = useState('latest')
 
@@ -57,4 +57,4 @@ const CarsList = ({ adds }) => {
   )
 }
 
-export default CarsList
+export default MobilesList

@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import CarsFilter from './carsComponents/CarsFilter'
-import CarsList from './carsComponents/CarsList'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '@/firebase'
+import MobilesFilter from './mobilesComponents/MobilesFilter'
+import MobilesList from './mobilesComponents/MobilesList'
 
-const CarsDisplay = () => {
+const MobilesDisplay = () => {
   const [adds, setAdds] = useState([])
 
   const getAdds = () => {
@@ -30,16 +30,15 @@ const CarsDisplay = () => {
   useEffect(() => {
     getAdds()
   }, [])
-  
-  
+
   return (
     <section>
       <div className='flex flex-col sm:flex-row w-full'>        
-        <CarsFilter />
-        <CarsList adds={adds} />
+        <MobilesFilter />
+        <MobilesList adds={adds} />
       </div>      
     </section>
   )
 }
 
-export default CarsDisplay
+export default MobilesDisplay

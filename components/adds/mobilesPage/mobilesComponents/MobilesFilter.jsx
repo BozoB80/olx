@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CarsFilter = () => {
+const MobilesFilter = () => {
   return (
     <div className='flex flex-col p-10 space-y-3'>
       <h4 className='font-bold'>Categories</h4>
@@ -24,4 +24,4 @@ const CarsFilter = () => {
   )
 }
 
-export default CarsFilter
+export default MobilesFilter
