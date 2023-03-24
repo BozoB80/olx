@@ -21,8 +21,8 @@ const MobilesItem = ({add, grid}) => {
           <div className="flex flex-1 flex-col w-full overflow-hidden gap-2 p-2">
             <h1 className="pb-2 truncate">{add.title}</h1>
             <div className="flex gap-2">
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.fuel}</p>
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.mileage}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.state}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.system}</p>
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">

@@ -134,7 +134,7 @@ const PublishAdd = ({ setPublish }) => {
                   </div>
                 )})}
               </div>
-              <div className="flex w-full justify-start items-center my-5">
+              <div onClick={() => setToggle(true)} className="flex w-full justify-start items-center my-5">
                 <div className="flex justify-center items-center border w-16 h-16 rounded-full shadow-lg">
                   <Image 
                     src={ostalo}
@@ -145,6 +145,23 @@ const PublishAdd = ({ setPublish }) => {
                   />  
                 </div>
                 <h1 className="pl-5">Publish something else</h1>
+
+                {toggle && (
+                  <div className="absolute inset-1 bg-[#f1f4f5] z-50 w-3/4 h-auto">
+                    <ul>
+                      {categoryList.map((category) => {
+                        const handlePublish = () => {
+                          setPublish(false)
+                          router.push(`/publish/${category.name}`)
+                        }
+                        return (
+                        <div key={category.id} onClick={handlePublish} className="cursor-pointer p-1 font-semibold">
+                          <li>{category.name}</li>
+                        </div>
+                      )})}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <div className="bg-gray-100 w-full rounded-md mb-3">

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import CarsFilter from './carsComponents/CarsFilter'
 import CarsList from './carsComponents/CarsList'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/firebase'
 
 const CarsDisplay = () => {
@@ -12,7 +12,7 @@ const CarsDisplay = () => {
   const getAdds = () => {
     try {
       const addsRef = collection(db, "products");
-      const q = query(addsRef, orderBy("createdAt", "asc"));
+      const q = query(addsRef, where("category", "==", "Cars"), orderBy("createdAt", "asc"));
       
       onSnapshot(q, (snapshot) => {
         const allAdds = snapshot.docs.map((doc) => ({

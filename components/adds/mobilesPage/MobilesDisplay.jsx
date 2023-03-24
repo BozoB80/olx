@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/firebase'
 import MobilesFilter from './mobilesComponents/MobilesFilter'
 import MobilesList from './mobilesComponents/MobilesList'
@@ -12,7 +12,7 @@ const MobilesDisplay = () => {
   const getAdds = () => {
     try {
       const addsRef = collection(db, "products");
-      const q = query(addsRef, orderBy("createdAt", "asc"));
+      const q = query(addsRef, where("category", "==", "Mobile Phones"), orderBy("createdAt", "asc"));
       
       onSnapshot(q, (snapshot) => {
         const allAdds = snapshot.docs.map((doc) => ({
