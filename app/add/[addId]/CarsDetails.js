@@ -113,11 +113,11 @@ const CarsDetails = ({id}) => {
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Drive:</td>
-                  <td className='text-black/80'>Rear</td>
+                  <td className='text-black/80'>{details?.drive}</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Emission:</td>
-                  <td className='text-black/80'>Euro 5</td>
+                  <td className='text-black/80'>{details?.emission}</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Transmission:</td>
@@ -171,7 +171,7 @@ const CarsDetails = ({id}) => {
                 />
                 <div className='flex flex-col ml-5'>
                   <h1 className='font-semibold'>{details?.createdBy}</h1>
-                  <h1 className='text-gray-400'>Last signed in</h1>
+                  <h1 className='text-gray-400'>Last signed in: {new Date().now - details?.lastLogin}</h1>
                   <div className='flex gap-3'>
                     <Image src={medal1} alt="medal1" width={25} height={25} />
                     <Image src={medal2} alt="medal2" width={25} height={25} />

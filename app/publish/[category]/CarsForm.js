@@ -43,7 +43,9 @@ const CarsForm = () => {
     imageURL: "",
     description: "",
     category: "Cars",
-    createdBy: user,
+    createdBy: auth?.currentUser.displayName,
+    userId: auth?.currentUser.uid,
+    lastLogin: auth?.currentUser.metadata.lastSignInTime
   })
 
   const handleInputChange = (e) => {
@@ -106,6 +108,8 @@ const CarsForm = () => {
         description: product.description,
         category: product.category,
         createdBy: product.createdBy,
+        userId: product.userId,
+        lastLogin: product.lastLogin,
         createdAt: Timestamp.now().toDate()
       });
     } catch (error) {
