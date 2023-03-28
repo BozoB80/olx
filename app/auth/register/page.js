@@ -9,16 +9,32 @@ import { auth, db } from '../../../firebase'
 import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
+import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 
 
 const Register = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const [gender, setGender] = useState('')
-  const [region, setRegion] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  // const [displayName, setDisplayName] = useState('')
+  // const [gender, setGender] = useState('')
+  // const [region, setRegion] = useState('')
   const router = useRouter()
   const loggedIn = useSelector(selectIsLoggedIn)
+  const [formData, setFormData] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    gender: "",
+    region: ""
+  })
+  const { displayName, email, password, gender, region } = formData
+
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value
+    }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +46,13 @@ const Register = () => {
         updateProfile(auth.currentUser, {
           displayName: displayName,
         })
+        const formDataCopy = { ...formData }
+        delete formDataCopy.password
+        formDataCopy.timestamp = serverTimestamp()
+
+        // Save to database
+        setDoc(doc(db, "users", user.uid), formDataCopy)
+
         console.log(user)
         router.push('/auth/greetings')
         loggedIn(true)
@@ -63,8 +86,8 @@ const Register = () => {
               id="email"
               required
               value={email} 
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-200 rounded-sm py-2" 
+              onChange={handleChange}
+              className="w-full bg-gray-200 rounded-sm p-2" 
             />
             <label htmlFor="password" className="uppercase text-xs font-semibold">Password</label>
             <input 
@@ -72,26 +95,26 @@ const Register = () => {
               id="password" 
               required
               value={password} 
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-gray-200 rounded-sm py-2" 
+              onChange={handleChange}
+              className="w-full bg-gray-200 rounded-sm p-2" 
             />
-            <label htmlFor="name" className="uppercase text-xs font-semibold">Your OLX name</label>
+            <label htmlFor="displayName" className="uppercase text-xs font-semibold">Your OLX name</label>
             <input 
               type="text" 
-              id="name"
+              id="displayName"
               required
               value={displayName} 
-              onChange={(e) => setDisplayName(e.target.value)} 
-              className="w-full bg-gray-200 rounded-sm py-2" 
+              onChange={handleChange} 
+              className="w-full bg-gray-200 rounded-sm p-2" 
             />
             <label htmlFor="gender" className="uppercase text-xs font-semibold">Choose gender</label>
             <select
               value={gender} 
-              onChange={(e) => setGender(e.target.value)}
+              onChange={handleChange}
               id="gender" 
-              className="w-full bg-gray-200 rounded-sm py-2 outline-none"
+              className="w-full bg-gray-200 rounded-sm p-2 outline-none"
             >
-              <option defaultValue disabled>Choose gender</option>
+              <option value="" disabled>-- Choose gender --</option>
               <option>Male</option>
               <option>Female</option>
             </select>
@@ -99,9 +122,9 @@ const Register = () => {
             <label htmlFor="region" className="uppercase text-xs font-semibold">Region</label>
             <select 
               value={region} 
-              onChange={(e) => setRegion(e.target.value)}
+              onChange={handleChange}
               id="region" 
-              className="w-full bg-gray-200 rounded-sm py-2 outline-none"
+              className="w-full bg-gray-200 rounded-sm p-2 outline-none"
             >
               <option value="" disabled>-- Choose region --</option>
               <option disabled className="text-red-400">Federation BiH</option>
@@ -129,7 +152,7 @@ const Register = () => {
                 id="terms"
                 name="terms"
                 required
-                className="bg-gray-200 rounded-sm py-2 mr-3" 
+                className="bg-gray-200 rounded-sm p-2 mr-3" 
               />
               <label htmlFor="terms">I consent to <span className="underline">Terms and conditions</span></label> 
             </div>
