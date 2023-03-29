@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore'
 import { db } from '@/firebase'
+import RealEstateList from './realEstateComponents/RealEstateList'
+import RealEstateFilter from './realEstateComponents/RealEstateFilter'
 
 const RealEstateDisplay = () => {
   const [adds, setAdds] = useState([])
@@ -17,7 +19,7 @@ const RealEstateDisplay = () => {
           id: doc.id,
           ...doc.data()
         }))
-        setAdds(allAdds)      
+        setAdds(allAdds)     
       });
       
     } catch (error) {
@@ -30,7 +32,12 @@ const RealEstateDisplay = () => {
   }, [])
 
   return (
-    <div>RealEstateDisplay</div>
+    <section>
+      <div className='flex flex-col sm:flex-row w-full'>        
+        <RealEstateFilter />
+        <RealEstateList adds={adds} />
+      </div>      
+    </section>
   )
 }
 
