@@ -95,8 +95,10 @@ const Header = () => {
                   <p className="px-1 rounded-sm bg-orange-300">56</p>
                 </button>
                 <div className="flex justify-center items-center pl-2 gap-3 border-l border-gray-400">
-                  <UserCircleIcon className="h-10 w-10"  />
-                  <button type="button">{userName}</button>
+                  <Link href={`/profile/${auth.currentUser.displayName}`} className="flex gap-3">
+                    <UserCircleIcon className="h-10 w-10"  />
+                    <button type="button">{userName}</button>
+                  </Link>
                   <button type="button" onClick={() => setToggleMenu(true)}><Bars3Icon className="h-6 w-6" /></button>
                 </div>
               </div>

@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { auth, storage } from "@/firebase";
+import { auth, db, storage } from "@/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 const RealEstateForm = () => {
+  const router = useRouter()
   const [geoLocationEnabled, setGeoLocationEnabled] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
@@ -77,7 +80,7 @@ const RealEstateForm = () => {
 
       location = data.status === "ZERO_RESULTS" && undefined;
 
-      if (location === undefined || location.includes("undefined")) {
+      if (location === undefined) {
         console.error("Please enter a correct address");
         return;
       } else {
@@ -108,7 +111,7 @@ const RealEstateForm = () => {
             }
           },
           (error) => {
-            
+            reject(error)
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -119,14 +122,28 @@ const RealEstateForm = () => {
       });
     };
 
-    const imgUrl = await Promise.all(
-      [...images]
-        .map((image) => storeImage(image))
-        .catch((error) => {
-          console.error("Image is not uploaded");
-          return
-        })
-    );
+    const imgUrls = await Promise.all(
+      [...images].map((image) => storeImage(image))
+    ).catch((error) => {
+      
+      console.error("Images not uploaded");
+      return;
+    });
+
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      geolocation,
+      timestamp: serverTimestamp(),
+      userRef: auth.currentUser.uid
+    }
+    delete formDataCopy.images
+    delete formDataCopy.latitude
+    delete formDataCopy.longitude
+    const docRef = await addDoc(collection(db, "products"), formDataCopy)
+    console.log("Listing created succesfully");
+    router.push(`/add/${docRef.id}`)
+    
   };
 
   return (
