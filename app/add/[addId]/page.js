@@ -6,6 +6,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { doc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import MobileDetails from './MobileDetails';
+import RealEstateDetails from './RealEstateDetails';
 
 
 const page = ({ params }) => {
@@ -16,6 +17,7 @@ const page = ({ params }) => {
     <div>
       {details?.category === "Cars" ? <CarsDetails id={params.addId} />
       : details?.category === "Mobile Phones" ? <MobileDetails id={params.addId} details={details} />
+      : details?.category === "Real Estate" ? <RealEstateDetails id={params.addId} details={details} />
       : "Not constructed yet" }
       
     </div>

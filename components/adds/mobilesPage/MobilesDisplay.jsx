@@ -19,7 +19,8 @@ const MobilesDisplay = () => {
           id: doc.id,
           ...doc.data()
         }))
-        setAdds(allAdds)      
+        setAdds(allAdds)
+        console.log(allAdds);      
       });
       
     } catch (error) {

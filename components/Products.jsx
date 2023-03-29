@@ -29,6 +29,7 @@ const Products = () => {
         dispatch(storeAdds({
           adds: allAdds
         }))
+        console.log(allAdds);
 
         
       });
@@ -46,7 +47,7 @@ const Products = () => {
   return (
     <div className="bg-[#f1f4f5] w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
       {adds?.map((add) => {
-
+        console.log(add);
         const createdAt = add.createdAt.toDate();
         const timeAgo = getTimeAgo(createdAt);
 

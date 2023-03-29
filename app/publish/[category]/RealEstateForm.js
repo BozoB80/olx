@@ -20,6 +20,7 @@ const RealEstateForm = () => {
     longitude: 0,
     images: {},
     description: "",
+    
   });
 
   const {
@@ -134,6 +135,7 @@ const RealEstateForm = () => {
       ...formData,
       imgUrls,
       geolocation,
+      category: "Real Estate",
       timestamp: serverTimestamp(),
       userRef: auth.currentUser.uid
     }
