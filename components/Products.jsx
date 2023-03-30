@@ -29,8 +29,6 @@ const Products = () => {
         dispatch(storeAdds({
           adds: allAdds
         }))
-        console.log(allAdds);
-
         
       });
       
@@ -47,7 +45,7 @@ const Products = () => {
   return (
     <div className="bg-[#f1f4f5] w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
       {adds?.map((add) => {
-        console.log(add);
+        
         const createdAt = add.createdAt.toDate();
         const timeAgo = getTimeAgo(createdAt);
 
@@ -63,8 +61,8 @@ const Products = () => {
           <div className="flex flex-col gap-2 p-2">
             <h1 className="pb-2 truncate">{add.title}</h1>
             <div className="flex gap-2">
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.fuel || add.state}</p>
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.mileage || add.ram}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.fuel || add.state || add.type}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.mileage || add.ram || add.furnished}</p>
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">

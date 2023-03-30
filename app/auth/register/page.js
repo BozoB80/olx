@@ -9,17 +9,11 @@ import { auth, db } from '../../../firebase'
 import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
-import { doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { Timestamp, doc, serverTimestamp, setDoc } from "firebase/firestore"
 
 
 const Register = () => {
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-  // const [displayName, setDisplayName] = useState('')
-  // const [gender, setGender] = useState('')
-  // const [region, setRegion] = useState('')
   const router = useRouter()
-  const loggedIn = useSelector(selectIsLoggedIn)
   const [formData, setFormData] = useState({
     displayName: "",
     email: "",
@@ -28,6 +22,7 @@ const Register = () => {
     region: ""
   })
   const { displayName, email, password, gender, region } = formData
+  const loggedIn = useSelector(selectIsLoggedIn)
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -48,7 +43,7 @@ const Register = () => {
         })
         const formDataCopy = { ...formData }
         delete formDataCopy.password
-        formDataCopy.timestamp = serverTimestamp()
+        formDataCopy.createdAt = Timestamp.now().toDate()
 
         // Save to database
         setDoc(doc(db, "users", user.uid), formDataCopy)

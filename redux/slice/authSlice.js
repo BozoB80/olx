@@ -5,6 +5,9 @@ const initialState = {
   email: null,
   userName: null,
   userID: null,
+  gender: null,
+  region: null,
+  createdAt: null
 }
 
 const authSlice = createSlice({
@@ -12,13 +15,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setActiveUser: (state, action) => {
-      const { email, userName, userID } = action.payload
+      const { email, userName, userID, gender, region, createdAt } = action.payload
       state.isLoggedIn = true;
       state.email = email;
       state.userName = userName;
       state.userID = userID;
     },
-    removeActiveUser: (state, action) => {
+    removeActiveUser: (state) => {
       state.isLoggedIn = false;
       state.email = null;
       state.userName = null;

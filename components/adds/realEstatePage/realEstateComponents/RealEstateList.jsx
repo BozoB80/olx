@@ -39,7 +39,7 @@ const RealEstateList = ({ adds }) => {
 
       <div className={grid ? 'gridStyle' : 'listStyle'}>
         {adds?.length === 0 ? (
-          <p>No products found ever</p>
+          <p>No products found</p>
         ) : (
           <>
             {adds?.map((add) => {
