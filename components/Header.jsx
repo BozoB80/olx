@@ -25,7 +25,7 @@ const Header = () => {
         router.push('/')
         localStorage.clear()
       }).catch((error) => {
-        // An error happened.
+        console.error(error);
       });
   }
 
@@ -33,7 +33,7 @@ const Header = () => {
     onAuthStateChanged(auth, (user) => {
       
       if (user) {
-        console.log(user);
+        
         const uid = user.uid;
         setUserName(user.displayName)
 
@@ -96,7 +96,7 @@ const Header = () => {
                   <p className="px-1 rounded-sm bg-orange-300">56</p>
                 </button>
                 <div className="flex justify-center items-center pl-2 gap-3 border-l border-gray-400">
-                  <Link href={`/profile/${auth.currentUser.displayName}`} className="flex gap-3">
+                  <Link href={`/profile/${auth.currentUser.uid}`} className="flex gap-3">
                     <UserCircleIcon className="h-10 w-10"  />
                     <button type="button">{userName}</button>
                   </Link>

@@ -55,7 +55,8 @@ const MobilePhonesForm = () => {
         description: product.description,
         category: product.category,
         createdBy: product.createdBy,
-        createdAt: Timestamp.now().toDate()
+        createdAt: Timestamp.now().toDate(),
+        userRef: auth.currentUser.uid,
       })
     } catch (error) {
       console.log('You did not add new product');

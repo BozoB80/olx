@@ -110,7 +110,8 @@ const CarsForm = () => {
         createdBy: product.createdBy,
         userId: product.userId,
         lastLogin: product.lastLogin,
-        createdAt: Timestamp.now().toDate()
+        createdAt: Timestamp.now().toDate(),
+        userRef: auth.currentUser.uid,
       });
     } catch (error) {
       console.log('You did not add new product');

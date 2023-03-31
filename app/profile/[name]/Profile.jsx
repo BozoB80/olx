@@ -15,10 +15,12 @@ import medal1 from "../../../assets/medal1.png";
 import medal2 from "../../../assets/medal2.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveUser, selectUserCreatedAt, selectUserID, selectUserName, selectUserRegion, setActiveUser } from "@/redux/slice/authSlice";
+import { removeActiveUser, selectUserID, selectUserName, setActiveUser } from "@/redux/slice/authSlice";
 import { auth, db } from "@/firebase";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   onSnapshot,
   orderBy,
@@ -28,21 +30,29 @@ import {
 import { getTimeAgo } from "@/utils/dateUtils";
 import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
+import { useDocument, useDocumentData } from "react-firebase-hooks/firestore";
 
-const Profile = ({ name }) => {
+const Profile = ({name }) => {
   const [adds, setAdds] = useState([]);
   const [toggleInfo, setToggleInfo] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("Active")
   const [userName, setUserName] = useState('')
   const dispatch = useDispatch()
-  const uName = useSelector(selectUserName);
-  const userId = useSelector(selectUserID);
+
+  const [contact, setContact] = useState(null)
+
+  const [user] = useDocument(doc(db, "users", name))
+  const [userData] = useDocumentData(doc(db, "users", name))
+
+  // const date = userData.createdAt.toDate()
+  // console.log(date);
 
   const fetchUserAdds = () => {
     try {
       const userAddsRef = collection(db, "products");
       const q = query(
         userAddsRef,
-        where("userRef", "==", userId),
+        where("userRef", "==", name),
         orderBy("createdAt", "asc")
       );
 
@@ -53,7 +63,7 @@ const Profile = ({ name }) => {
         }));
 
         setAdds(allAdds);
-        console.log(allAdds);
+        
       });
     } catch (error) {
       console.log("No adds displayed");
@@ -65,22 +75,18 @@ const Profile = ({ name }) => {
 
   useEffect(() => {
     fetchUserAdds();
-  }, [userId]);
+  }, [name]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      
       if (user) {
-        console.log(user);
         const uid = user.uid;
         setUserName(user.displayName)
-
         dispatch(setActiveUser({
           email: user.email,
           userName: user.displayName,
           userID: user.uid,
-        }))
-        
+        }))     
       } else {
         // User is signed out
         setUserName('')
@@ -101,10 +107,10 @@ const Profile = ({ name }) => {
             className="rounded-full"
           />
           <div className="flex flex-col justify-center text-sm">
-            <p>{uName}</p>
+            <p>{userData?.displayName}</p>
             <div className="flex gap-2">
               <MapPinIcon className="w-5 h-5" />
-              <p>Region</p>
+              <p>{userData?.region}</p>
             </div>
           </div>
         </div>
@@ -148,11 +154,11 @@ const Profile = ({ name }) => {
                 <div className="flex flex-col text-sm ">
                   <div className="flex justify-between items-center">
                     <p>Registered</p>
-                    <p>{auth.currentUser.metadata.creationTime}</p>
+                    <p>{userData.gender}</p>
                   </div>
                   <div className="flex justify-between items-center">
                     <p>OLX ID</p>
-                    <p>{userId.slice(0, 4)}</p>
+                    <p>{user.id.slice(0, 4)}</p>
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Online</p>
@@ -174,6 +180,15 @@ const Profile = ({ name }) => {
       </div>
 
       {/* fetch User Adds */}
+
+      <div className="flex flex-col">
+
+        <div>
+          
+
+        </div>
+
+      
 
       <div className="w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         {adds?.map((add) => {
@@ -215,6 +230,8 @@ const Profile = ({ name }) => {
           );
         })}
       </div>
+      </div>
+
     </div>
   );
 };
