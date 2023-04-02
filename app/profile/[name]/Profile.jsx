@@ -15,7 +15,12 @@ import medal1 from "../../../assets/medal1.png";
 import medal2 from "../../../assets/medal2.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveUser, selectUserID, selectUserName, setActiveUser } from "@/redux/slice/authSlice";
+import {
+  removeActiveUser,
+  selectUserID,
+  selectUserName,
+  setActiveUser,
+} from "@/redux/slice/authSlice";
 import { auth, db } from "@/firebase";
 import {
   collection,
@@ -32,17 +37,17 @@ import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDocument, useDocumentData } from "react-firebase-hooks/firestore";
 
-const Profile = ({name }) => {
+const Profile = ({ name }) => {
   const [adds, setAdds] = useState([]);
   const [toggleInfo, setToggleInfo] = useState(false);
-  const [selectedTab, setSelectedTab] = useState("Active")
-  const [userName, setUserName] = useState('')
-  const dispatch = useDispatch()
+  const [selectedTab, setSelectedTab] = useState("Active");
+  const [userName, setUserName] = useState("");
+  const dispatch = useDispatch();
 
-  const [contact, setContact] = useState(null)
+  const [contact, setContact] = useState(null);
 
-  const [user] = useDocument(doc(db, "users", name))
-  const [userData] = useDocumentData(doc(db, "users", name))
+  const [user] = useDocument(doc(db, "users", name));
+  const [userData] = useDocumentData(doc(db, "users", name));
 
   // const date = userData.createdAt.toDate()
   // console.log(date);
@@ -63,7 +68,6 @@ const Profile = ({name }) => {
         }));
 
         setAdds(allAdds);
-        
       });
     } catch (error) {
       console.log("No adds displayed");
@@ -81,23 +85,25 @@ const Profile = ({name }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        setUserName(user.displayName)
-        dispatch(setActiveUser({
-          email: user.email,
-          userName: user.displayName,
-          userID: user.uid,
-        }))     
+        setUserName(user.displayName);
+        dispatch(
+          setActiveUser({
+            email: user.email,
+            userName: user.displayName,
+            userID: user.uid,
+          })
+        );
       } else {
         // User is signed out
-        setUserName('')
-        dispatch(removeActiveUser())
+        setUserName("");
+        dispatch(removeActiveUser());
       }
     });
-  }, [])
+  }, []);
 
   return (
-    <div className="flex w-full p-5">
-      <div className="flex flex-col w-1/6 border-r border-gray-300 pr-5 h-screen">
+    <div className="flex flex-col sm:flex-row w-full p-5">
+      <div className="flex flex-col w-full sm:w-1/5 border-b sm:border-r border-gray-300 sm:pr-5 h-screen">
         <div className="flex gap-3">
           <Image
             src={olxMale}
@@ -119,12 +125,12 @@ const Profile = ({name }) => {
           <Image src={medal2} alt="medal2" width={25} height={25} />
         </div>
 
-        <div className="flex bg-white py-5 gap-3 rounded-[4px]">
-          <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+        <div className="flex justify-center w-full bg-white py-5 gap-3 rounded-[4px]">
+          <button className="flex w-1/2 justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
             <PhoneIcon className="w-5 h-5" />
             <p>Phone</p>
           </button>
-          <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+          <button className="flex w-1/2 justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
             <ChatBubbleLeftIcon className="w-5 h-5" />
             <p>Message</p>
           </button>
@@ -171,7 +177,7 @@ const Profile = ({name }) => {
 
           <div className="flex flex-col space-y-3 py-3">
             <HeartIcon className="w-8 h-8 cursor-pointer" />
-            <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+            <button className="flex w-full justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
               <NoSymbolIcon className="w-5 h-5" />
               <p>Block user</p>
             </button>
@@ -182,56 +188,51 @@ const Profile = ({name }) => {
       {/* fetch User Adds */}
 
       <div className="flex flex-col">
+        <div></div>
 
-        <div>
-          
+        <div className="w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+          {adds?.map((add) => {
+            const createdAt = add.createdAt.toDate();
+            const timeAgo = getTimeAgo(createdAt);
 
+            return (
+              <Link
+                href={`/add/${add.id}`}
+                key={add.id}
+                className="flex flex-col h-[270px] rounded-md bg-white cursor-pointer shadow-lg"
+              >
+                <Image
+                  src={add.imageURL}
+                  alt={add.title}
+                  width={300}
+                  height={300}
+                  className="object-cover w-[274px] h-[160px] rounded-t-md"
+                />
+                <div className="flex flex-col gap-2 p-2">
+                  <h1 className="pb-2 truncate">{add.title}</h1>
+                  <div className="flex gap-2">
+                    <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">
+                      {add.fuel || add.state || add.type}
+                    </p>
+                    <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">
+                      {add.mileage || add.ram || add.furnished}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <h1 className="text-xs">{timeAgo}</h1>
+                    <p className="font-semibold text-sm sm:text-base">
+                      {add.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                      EUR
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-
-      
-
-      <div className="w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {adds?.map((add) => {
-          const createdAt = add.createdAt.toDate();
-          const timeAgo = getTimeAgo(createdAt);
-
-          return (
-            <Link
-              href={`/add/${add.id}`}
-              key={add.id}
-              className="flex flex-col h-[270px] rounded-md bg-white cursor-pointer shadow-lg"
-            >
-              <Image
-                src={add.imageURL}
-                alt={add.title}
-                width={300}
-                height={300}
-                className="object-cover w-[274px] h-[160px] rounded-t-md"
-              />
-              <div className="flex flex-col gap-2 p-2">
-                <h1 className="pb-2 truncate">{add.title}</h1>
-                <div className="flex gap-2">
-                  <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">
-                    {add.fuel || add.state || add.type}
-                  </p>
-                  <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">
-                    {add.mileage || add.ram || add.furnished}
-                  </p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <h1 className="text-xs">{timeAgo}</h1>
-                  <p className="font-semibold text-sm sm:text-base">
-                    {add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-                    EUR
-                  </p>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
       </div>
-      </div>
-
     </div>
   );
 };
