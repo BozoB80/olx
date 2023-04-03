@@ -42,10 +42,10 @@ const Categories = () => {
   }, [])
   
   return (
-    <div className="grid grid-rows-2 grid-flow-col sm:flex justify-between items-center w-full px-3 py-4 overflow-x-scroll gap-5 md:gap-0">
+    <div className="grid grid-rows-2 grid-flow-col px-3 sm:flex justify-between items-center w-full min-w-full sm:px-3 py-4 overflow-x-scroll mask1">
       {categories.map((category) => (
-      <Link href={`/${category.name}`} key={category.id} className="flex flex-col sm:w-36 justify-center items-center">
-        <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-12 sm:w-16 h-12 sm:h-16 rounded-full">
+      <Link href={`/${category.name}`} key={category.id} className="flex flex-col w-20 sm:w-36 px-1 py-2 justify-between items-center">
+        <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-14 sm:w-16 h-14 sm:h-16 rounded-full">
           <Image 
             src={category.imageURL}
             alt={category.id}
@@ -54,7 +54,7 @@ const Categories = () => {
             className="object-contain bg-transparent hover:scale-110 transition-all cursor-pointer"       
           />
         </div>
-        <h3 className="text-xs sm:text-sm mt-1 w-auto text-center truncate">{category.name}</h3>
+        <h3 className="text-xs sm:text-sm mt-1 w-full text-center truncate">{category.name}</h3>
       </Link>  
       ))}     
     </div>

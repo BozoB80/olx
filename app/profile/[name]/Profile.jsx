@@ -102,8 +102,8 @@ const Profile = ({ name }) => {
   }, []);
 
   return (
-    <div className="flex flex-col sm:flex-row w-full p-5">
-      <div className="flex flex-col w-full sm:w-1/5 border-b sm:border-r border-gray-300 sm:pr-5 h-screen">
+    <div className="flex flex-col lg:flex-row w-full p-5">
+      <div className="flex flex-col w-full lg:w-1/5 border-b lg:border-r border-gray-300 sm:pr-5 lg:h-screen">
         <div className="flex gap-3">
           <Image
             src={olxMale}
@@ -190,7 +190,7 @@ const Profile = ({ name }) => {
       <div className="flex flex-col">
         <div></div>
 
-        <div className="w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+        <div className="w-full p-2 sm:p-5 grid gap-2 sm:gap-5 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6">
           {adds?.map((add) => {
             const createdAt = add.createdAt.toDate();
             const timeAgo = getTimeAgo(createdAt);
