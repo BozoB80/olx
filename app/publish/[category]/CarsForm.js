@@ -11,6 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useSelector } from "react-redux"
 import { selectUserName } from "@/redux/slice/authSlice"
 import { useRouter } from "next/navigation"
+import { toast } from "react-hot-toast"
 
 const CarsForm = () => {
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
@@ -139,6 +140,8 @@ const CarsForm = () => {
       imageURL: "",
       description: "",
     })
+
+    toast.success('You succesfully published an add!')
   }
 
   return (

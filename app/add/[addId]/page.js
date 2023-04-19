@@ -15,7 +15,7 @@ const page = ({ params }) => {
 
   return (
     <div>
-      {details?.category === "Cars" ? <CarsDetails id={params.addId} />
+      {details?.category === "Cars" ? <CarsDetails id={params.addId} details={details} />
       : details?.category === "Mobile Phones" ? <MobileDetails id={params.addId} details={details} />
       : details?.category === "Real Estate" ? <RealEstateDetails id={params.addId} details={details} />
       : "Not constructed yet" }

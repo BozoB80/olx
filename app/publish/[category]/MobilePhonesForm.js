@@ -7,6 +7,7 @@ import { Timestamp, addDoc, collection } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useState } from "react"
 import { useCollectionData } from "react-firebase-hooks/firestore"
+import { toast } from "react-hot-toast"
 import { useSelector } from "react-redux"
 
 const MobilePhonesForm = () => {
@@ -78,6 +79,8 @@ const MobilePhonesForm = () => {
       imageURL: "",
       description: "",
     })
+
+    toast.success('You succesfully published an add!')
   }
 
   const handleInputChange = (e) => {

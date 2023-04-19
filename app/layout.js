@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import store from '../redux/store'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
+import ToasterProvider from '@/components/providers/ToasterProvider'
 
 
 export default function RootLayout({ children }) {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <Provider store={store}>
+          <ToasterProvider />
           <Header />
           {children}
           <FooterNav />

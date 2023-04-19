@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectUserName } from "@/redux/slice/authSlice";
+import { toast } from "react-hot-toast";
 
 const RealEstateForm = () => {
   const router = useRouter();
@@ -63,7 +64,8 @@ const RealEstateForm = () => {
       console.error(error);
     }
 
-    
+    toast.success('You succesfully published an add!')
+    router.push('/')    
   };
 
   const handleInputChange = (e) => {
