@@ -14,12 +14,12 @@ import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast"
 
 const CarsForm = () => {
+  const [cars] = useCollectionData(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"))
   const query = collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")
   const [docs] = useCollectionData(query)
   const [toggleLocation, setToggleLocation] = useState(false)
   const user = useSelector(selectUserName)
-  const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"),
-  {snapshotListenOptions: { includeMetadataChanges: true }})
+  const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"))
   const router = useRouter()
   
   const [product, setProduct] = useState({
@@ -163,7 +163,7 @@ const CarsForm = () => {
               className="w-full bg-gray-100 text-sm sm:text-base rounded-md p-3" 
             > 
               <option value="" disabled>-- Choose brand --</option>
-              {docs?.map((doc) => (
+              {cars?.map((doc) => (
                 <option key={doc.name} value={doc.name}>
                   {doc.name}
                 </option>
