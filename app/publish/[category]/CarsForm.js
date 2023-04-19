@@ -9,11 +9,17 @@ import { MapPinIcon } from "@heroicons/react/24/outline"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast"
+import { useSelector } from "react-redux"
+import { selectUserName } from "@/redux/slice/authSlice"
 
 const CarsForm = () => {
   const [cars] = useCollectionData(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer")) 
+  const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"),
+  {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  })
   const [toggleLocation, setToggleLocation] = useState(false)
-  const [models] = useCollection(collection(db, "/categories/PE2j37QZeo1UwY4TKZPJ/manufacturer"))
+  const user = useSelector(selectUserName)
   const router = useRouter()
   
   const [product, setProduct] = useState({
@@ -38,7 +44,7 @@ const CarsForm = () => {
     imageURL: "",
     description: "",
     category: "Cars",
-    createdBy: auth?.currentUser.displayName,    
+    createdBy: user,    
   })
 
   const handleInputChange = (e) => {

@@ -12,6 +12,7 @@ import olxMale from '../../../assets/olx-male.svg'
 import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
 import { getTimeAgo } from '@/utils/dateUtils';
+import UserDetails from '@/components/UserDetails';
 
 const RealEstateDetails = ({ id, details }) => {
   
@@ -116,44 +117,7 @@ const RealEstateDetails = ({ id, details }) => {
         
       </div>
         {/* User */}
-        <div className='flex flex-col space-y-4 sticky top-4'>
-          <div className='w-[332px] bg-white p-4 rounded-[4px]'>
-            <div className='flex flex-col w-full'>
-              <h1 className='text-sm font-semibold mb-3'>USER</h1>
-              <div className='flex justify-start items-center'>
-                <Image
-                  src={olxMale}
-                  alt="avatarphoto"
-                  width={72}
-                  height={72}
-                  className="rounded-full"
-                />
-                <div className='flex flex-col ml-5'>
-                  <h1 className='font-semibold'>{details?.createdBy}</h1>
-                  <h1 className='text-gray-400'>Last signed in</h1>
-                  <div className='flex gap-3'>
-                    <Image src={medal1} alt="medal1" width={25} height={25} />
-                    <Image src={medal2} alt="medal2" width={25} height={25} />
-                  </div>
-                </div>
-              </div>
-              <div className='mt-3 bg-[#f1f4f5] p-2 runded-md font-semibold '>
-                <p className='text-sm'>Usual reply time 1 hour</p>
-              </div>
-            </div>
-          </div>
-
-          <div className='flex w-[332px] bg-white p-4 gap-3 rounded-[4px]'>
-            <button className='flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3'>
-              <PhoneIcon className='w-5 h-5' />
-              <p>Phone</p>
-            </button>
-            <button className='flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3'>
-              <ChatBubbleLeftIcon className='w-5 h-5' />
-              <p>Message</p>
-            </button>
-          </div>
-        </div>
+        <UserDetails details={details} />
       </div>
 
       {/* Small screen */}
