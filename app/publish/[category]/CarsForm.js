@@ -164,7 +164,7 @@ const CarsForm = () => {
             > 
               <option value="" disabled>-- Choose brand --</option>
               {docs?.map((doc) => (
-                <option key={doc.id} value={doc.name}>
+                <option key={doc.name} value={doc.name}>
                   {doc.name}
                 </option>
               ))}

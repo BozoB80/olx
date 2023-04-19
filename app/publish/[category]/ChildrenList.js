@@ -10,7 +10,7 @@ const ChildrenList = ({ path }) => {
   return (
     <>
       {docs?.map((doc) => (
-        <option key={doc.id}>
+        <option key={doc.name}>
           {doc.name}
         </option>
       ))}
