@@ -2,7 +2,7 @@ import React from 'react'
 
 const MobilesFilter = () => {
   return (
-    <div className='flex flex-col p-10 space-y-3'>
+    <div className='hidden sm:flex flex-col p-10 space-y-3'>
       <h4 className='font-bold'>Categories</h4>
       <div className='border-b-2'>
         <button>All</button>

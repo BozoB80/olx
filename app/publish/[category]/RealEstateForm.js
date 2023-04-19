@@ -334,7 +334,7 @@ const RealEstateForm = () => {
                       type="button"
                       id="type"
                       name="type"
-                      value="sale"
+                      value="Sale"
                       onClick={(e) => handleInputChange(e)}
                       className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${
@@ -349,7 +349,7 @@ const RealEstateForm = () => {
                       type="button"
                       id="type"
                       name="type"
-                      value="rent"
+                      value="Rent"
                       onClick={(e) => handleInputChange(e)}
                       className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${

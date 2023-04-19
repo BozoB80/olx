@@ -23,3 +23,8 @@ html{
 .mask1 {
   -webkit-mask-image: -webkit-gradient(linear,left top,right bottom,color-stop(60%,#2d46ed),color-stop(100%,rgba(45,70,237,0)));
 }
+
+.mask2 {
+  -webkit-mask-image: -webkit-gradient(linear,left top,right bottom,color-stop(60%,#2d46ed),color-stop(100%,rgba(45,70,237,0)));
+  transition: -webkit-mask-position-x 0.5s ease-in-out;
+}

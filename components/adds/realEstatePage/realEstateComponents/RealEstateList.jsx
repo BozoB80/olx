@@ -10,9 +10,9 @@ const RealEstateList = ({ adds }) => {
 
   return (
     <div className='flex flex-col w-full bg-[#f1f4f5]'>
-      <div className='flex w-full justify-center items-center px-3 pt-3 sm:p-4'>
+      <div className='flex w-full justify-center items-center px-1 pt-3 sm:p-4'>
         <div className='flex justify-between w-1/3 bg-white px-1 sm:px-6 py-2 rounded-l-md shadow-xl border-r'>
-          <div className='flex gap-3'>
+          <div className='flex gap-1 sm:gap-3'>
             <Squares2X2Icon className='w-6 h-6 cursor-pointer' onClick={() => setGrid(true)} />
             <ListBulletIcon className='w-6 h-6 cursor-pointer' onClick={() => setGrid(false)} />
           </div>

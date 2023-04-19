@@ -1,7 +1,7 @@
 'use client'
 
 import { auth, db } from '@/firebase';
-import { BuildingOfficeIcon, ChatBubbleLeftIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, RectangleStackIcon, ShareIcon, StarIcon, TagIcon } from '@heroicons/react/24/outline';
+import { BuildingOfficeIcon, ChatBubbleLeftIcon, CheckIcon, ClockIcon, EyeIcon, HeartIcon, InformationCircleIcon, MapPinIcon, PhoneIcon, RectangleStackIcon, ShareIcon, StarIcon, TagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ArrowLeftIcon, ChatBubbleLeftRightIcon, EllipsisVerticalIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import { doc } from 'firebase/firestore';
 import Image from 'next/image';
@@ -55,7 +55,7 @@ const RealEstateDetails = ({ id, details }) => {
                 <MapPinIcon className='w-5 h-5' />
                 {details?.address}
               </h1>
-              <h1 className='flex items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
+              <h1 className='flex capitalize items-center text-xs gap-1 border border-black p-1 rounded-[4px]'>
                 <TagIcon className='w-5 h-5' />
                 {details?.type}
               </h1>
@@ -81,7 +81,9 @@ const RealEstateDetails = ({ id, details }) => {
                 </tr>                
                 <tr className='flex justify-between py-2'>
                   <td>Furnished:</td>
-                  <td className='text-black/80'>{details?.furnished}</td>
+                  <td className='text-black/80'>
+                    {details?.furnished === true ? <CheckIcon className='w-5 h-5' /> : <XMarkIcon className='w-5 h-5' /> }
+                  </td>
                 </tr>                
                 <tr className='flex justify-between py-2'>
                   <td>Region:</td>

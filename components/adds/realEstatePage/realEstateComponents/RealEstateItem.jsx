@@ -6,6 +6,7 @@ import React from 'react'
 const RealEstateItem = ({add, grid}) => {
   const createdAt = add.createdAt.toDate();
   const timeAgo = getTimeAgo(createdAt);
+  const price = add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 
   return (
     <div>
@@ -20,14 +21,14 @@ const RealEstateItem = ({add, grid}) => {
           <div className="flex flex-1 flex-col w-full overflow-hidden gap-2 p-2">
             <h1 className="pb-2 truncate">{add.title}</h1>
             <div className="flex gap-2">
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.type}</p>
-              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.furnished}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm capitalize">{add.type}</p>
+              <p className="text-[10px] px-0.5 font-semibold border border-black rounded-sm">{add.furnished = true ? 'Furnished' : 'Not furnished'}</p>
             </div>
             <div className="flex justify-between items-center">
               <h1 className="text-xs">
                 {timeAgo}
               </h1>
-              <p className="font-semibold">{add.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</p>
+              <p className="font-semibold">{price} EUR {add.type === 'rent' ? '/day' : '' }</p>
             </div>
           </div>
         </Link>     
