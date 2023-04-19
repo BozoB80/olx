@@ -1,6 +1,6 @@
 'use client'
 
-import { db, storage } from "@/firebase"
+import { auth, db, storage } from "@/firebase"
 import { selectUserName } from "@/redux/slice/authSlice"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { Timestamp, addDoc, collection } from "firebase/firestore"
