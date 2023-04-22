@@ -125,7 +125,7 @@ const MobileDetails = ({ id, details }) => {
         
       </div>
         {/* User */}
-        <UserDetails details={details} />
+        <UserDetails id={id} details={details} />
       </div>
 
       {/* Small screen */}

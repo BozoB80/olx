@@ -7,12 +7,14 @@ import { ChatBubbleLeftIcon, InformationCircleIcon, PhoneIcon, XMarkIcon } from 
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const UserDetails = ({details}) => {
+const UserDetails = ({ id, details }) => {
   const [contact, setContact] = useState(null)
   const [toggleMessage, settoggleMessage] = useState(false)
   const [message, setMessage] = useState("")
   const userRef = details.userRef
+  const router = useRouter()
 
   useEffect(() => {
     async function getContact() {
@@ -61,14 +63,29 @@ const UserDetails = ({details}) => {
       </div>
 
       <div className="flex w-[332px] bg-white p-4 gap-3 rounded-[4px]">
-        <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-          <PhoneIcon className="w-5 h-5" />
-          <p>Phone</p>
-        </button>
-        <button onClick={() => settoggleMessage(true)} className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-          <ChatBubbleLeftIcon className="w-5 h-5" />
-          <p>Message</p>
-        </button>
+        {userRef === auth?.currentUser?.uid ? (
+          <>
+            <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+              <PhoneIcon className="w-5 h-5" />
+              <p>Statistics</p>
+            </button>
+            <button onClick={() => router.push(`/add/edit/${id}`)} className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+              <ChatBubbleLeftIcon className="w-5 h-5" />
+              <p>Options</p>
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+              <PhoneIcon className="w-5 h-5" />
+              <p>Phone</p>
+            </button>
+            <button onClick={() => settoggleMessage(true)} className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
+              <ChatBubbleLeftIcon className="w-5 h-5" />
+              <p>Message</p>
+            </button>          
+          </>
+        )}
       </div>
     </div>
 
