@@ -14,19 +14,15 @@ import {
 import medal1 from "../../../assets/medal1.png";
 import medal2 from "../../../assets/medal2.png";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   removeActiveUser,
-  selectUserID,
-  selectUserName,
   setActiveUser,
 } from "@/redux/slice/authSlice";
 import { auth, db } from "@/firebase";
 import {
   collection,
   doc,
-  getDoc,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -49,7 +45,7 @@ const Profile = ({ name }) => {
   const [user] = useDocument(doc(db, "users", name));
   const [userData] = useDocumentData(doc(db, "users", name));
 
-  // const date = userData.createdAt.toDate()
+  // const date = new Date(userData.timestamp).toString()
   // console.log(date);
 
   const fetchUserAdds = () => {
@@ -160,7 +156,7 @@ const Profile = ({ name }) => {
                 <div className="flex flex-col text-sm ">
                   <div className="flex justify-between items-center">
                     <p>Registered</p>
-                    <p>{userData.gender}</p>
+                    <p>{userData.createdAt.toDate() || userData.timestamp.toDate()}</p>
                   </div>
                   <div className="flex justify-between items-center">
                     <p>OLX ID</p>

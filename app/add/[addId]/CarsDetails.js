@@ -92,7 +92,7 @@ const CarsDetails = ({id, details}) => {
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Mileage:</td>
-                  <td className='text-black/80'>{details?.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</td>
+                  <td className='text-black/80'>{details?.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} km</td>
                 </tr>
                 <tr className='flex justify-between py-2'>
                   <td>Cubics:</td>
@@ -152,7 +152,7 @@ const CarsDetails = ({id, details}) => {
         
       </div>
         {/* User */}
-        <UserDetails details={details} />        
+        <UserDetails id={id} details={details} />        
       </div>
 
       {/* Small screen */}

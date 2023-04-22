@@ -15,7 +15,6 @@ const MobileEdit = ({ id, details }) => {
     collection(db, "/categories/j2zFFZEg3vvbq91jAQZh/manufacturer")
   );
   const [toggleLocation, setToggleLocation] = useState(false);
-  console.log(details);
 
   const router = useRouter();
   const user = useSelector(selectUserName);
@@ -41,6 +40,11 @@ const MobileEdit = ({ id, details }) => {
   const editMobiles = (e) => {
     e.preventDefault();
     console.log(product);
+
+    if (product.imageURL !== details.imageURL) {
+      const storageRef = ref(storage, details.imageURL)
+      deleteObject(storageRef)
+    }
 
     try {
       setDoc(doc(db, "products", id), {
@@ -111,7 +115,7 @@ const MobileEdit = ({ id, details }) => {
         >
           <div className="w-full">
             <h1 className="text-2xl text-center font-normal mb-4">
-              Mobile Phones
+              Edit your Mobile Phones
             </h1>
             <div className="flex justify-start items-center gap-4">
               <div className="flex flex-col w-full space-y-2">
