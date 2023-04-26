@@ -9,6 +9,7 @@ import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import padlock from '../../../assets/padlock.svg'
 import { sendPasswordResetEmail } from "firebase/auth"
 import { auth } from "@/firebase"
+import { toast } from "react-hot-toast"
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('')
@@ -21,6 +22,7 @@ const ResetPassword = () => {
       .then(() => {
         // Password reset email sent!
         // ..
+        toast.success('Password reset email sent!')
       })
       .catch((error) => {
         const errorCode = error.code;

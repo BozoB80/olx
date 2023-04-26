@@ -59,7 +59,7 @@ const SearchBar = () => {
           placeholder='Search'
           className="w-full focus:outline-none bg-gray-100 sm:bg-white"
         />
-        {searchTerm ? <button><XMarkIcon className="h-6 w-6" /></button> : ''}
+        {searchTerm ? <button><XMarkIcon onClick={() => setSearchData('')} className="h-6 w-6" /></button> : ''}
 
         {searchData && searchData.length !== 0 ? (
           <div className="absolute w-full top-14 left-0 bg-slate-50 shadow-sm-2 z-[9] p-3">

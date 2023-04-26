@@ -4,7 +4,7 @@ import medal1 from '../assets/medal1.png'
 import medal2 from '../assets/medal2.png'
 import Image from "next/image";
 import { ChatBubbleLeftIcon, InformationCircleIcon, PhoneIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,8 +13,29 @@ const UserDetails = ({ id, details }) => {
   const [contact, setContact] = useState(null)
   const [toggleMessage, settoggleMessage] = useState(false)
   const [message, setMessage] = useState("")
+  const [lastSignedIn, setLastSignedIn] = useState('')
   const userRef = details.userRef
   const router = useRouter()
+ 
+  // const loggedIn = () => {
+  //   const uid = userRef
+  
+  //   auth.getUser(uid)
+  //     .then((userRecord) => {
+  //       // See the UserRecord reference doc for the contents of userRecord.
+  //       console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+  //       setLastSignedIn()
+
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error fetching user data:', error);
+  //     });
+
+  // }
+
+  // console.log(loggedIn());
+
+  
 
   useEffect(() => {
     async function getContact() {
@@ -33,6 +54,11 @@ const UserDetails = ({ id, details }) => {
     setMessage(e.target.value)
   }
 
+  useEffect(() => {
+    
+  }, [])
+  
+
   return (
     <>
     <div className="flex flex-col space-y-4 sticky top-4">
@@ -49,7 +75,7 @@ const UserDetails = ({ id, details }) => {
             />
             <div className="flex flex-col ml-5">
               <Link href={`/profile/${userRef}`} className="font-semibold">{details?.createdBy}</Link>
-              <h1 className="text-gray-400">Last signed in</h1>
+              <h1 className="text-gray-400">Last signed in {lastSignedIn}</h1>
               <div className="flex gap-3">
                 <Image src={medal1} alt="medal1" width={25} height={25} />
                 <Image src={medal2} alt="medal2" width={25} height={25} />

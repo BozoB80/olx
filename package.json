@@ -27,8 +27,7 @@
     "react-hot-toast": "^2.4.0",
     "react-redux": "^8.0.5",
     "sanity": "^3.0.0",
-    "styled-components": "^5.2.0",
-    "uuid": "^9.0.0"
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^2.0.1",

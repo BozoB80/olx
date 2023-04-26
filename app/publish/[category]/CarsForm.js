@@ -148,7 +148,7 @@ const CarsForm = () => {
           className="flex flex-col justify-center items-center"
         >
           <div className="w-full">
-            <h1 className="text-2xl text-center font-normal mb-4">Make and Model</h1>
+            <h1 className="text-2xl text-center font-normal mb-4">Publish your car</h1>
             <label htmlFor="make" className="uppercase text-xs font-semibold">Manufacturer</label>
             <select 
               id="make"
@@ -166,7 +166,7 @@ const CarsForm = () => {
               ))}
             </select>
 
-            <label htmlFor="model" className="uppercase text-sm font-semibold">Model</label>
+            <label htmlFor="model" className="uppercase text-xs font-semibold">Model</label>
             <select 
               id="model"
               name="model"
@@ -182,7 +182,7 @@ const CarsForm = () => {
             </select>
 
             <div className="w-full my-4">
-              <h1 className="uppercase text-sm sm:text-base font-semibold">LOCATION</h1>
+              <h1 className="uppercase text-xs font-semibold">Location</h1>
               <div className="flex space-x-1 sm:space-x-4">
                 {!toggleLocation ? (
                   <input  
@@ -604,7 +604,7 @@ const CarsForm = () => {
                     </select>
                   </div>
                   <div className="w-full">
-                    <label htmlFor="kilowatts" className="uppercase text-xs sm:text-sm font-semibold">kilowatts</label>
+                    <label htmlFor="kilowatts" className="uppercase text-xs font-semibold">kilowatts</label>
                     <input 
                       type="number"
                       name="kilowatts"

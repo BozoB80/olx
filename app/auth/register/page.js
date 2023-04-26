@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "@/redux/slice/authSlice"
 import { Timestamp, doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { toast } from "react-hot-toast"
 
 
 const Register = () => {
@@ -42,7 +43,6 @@ const Register = () => {
           displayName: displayName,
         })
         const formDataCopy = { ...formData }
-        delete formDataCopy.password
         formDataCopy.createdAt = Timestamp.now().toDate()
 
         // Save to database
@@ -51,6 +51,7 @@ const Register = () => {
         console.log(user)
         router.push('/auth/greetings')
         loggedIn(true)
+        toast.success('Registration complete')
       })
       .catch((error) => {
         const errorCode = error.code;

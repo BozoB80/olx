@@ -45,8 +45,7 @@ const Profile = ({ name }) => {
   const [user] = useDocument(doc(db, "users", name));
   const [userData] = useDocumentData(doc(db, "users", name));
 
-  // const date = new Date(userData.timestamp).toString()
-  // console.log(date);
+  const date = userData && userData.createdAt.toDate().toLocaleDateString('en-GB')
 
   const fetchUserAdds = () => {
     try {
@@ -76,6 +75,8 @@ const Profile = ({ name }) => {
   useEffect(() => {
     fetchUserAdds();
   }, [name]);
+
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -156,7 +157,7 @@ const Profile = ({ name }) => {
                 <div className="flex flex-col text-sm ">
                   <div className="flex justify-between items-center">
                     <p>Registered</p>
-                    <p>{userData.createdAt.toDate() || userData.timestamp.toDate()}</p>
+                    <p>{date && date}</p>
                   </div>
                   <div className="flex justify-between items-center">
                     <p>OLX ID</p>
