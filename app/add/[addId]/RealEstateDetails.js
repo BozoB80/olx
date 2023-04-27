@@ -13,8 +13,11 @@ import medal1 from '../../../assets/medal1.png'
 import medal2 from '../../../assets/medal2.png'
 import { getTimeAgo } from '@/utils/dateUtils';
 import UserDetails from '@/components/UserDetails';
+import HeartButton from '@/components/HeartButton';
+import { useState } from 'react';
 
 const RealEstateDetails = ({ id, details }) => {
+  const [like, setLike] = useState(false)
   
   const router = useRouter()
 
@@ -33,9 +36,9 @@ const RealEstateDetails = ({ id, details }) => {
             <h1 className='text-3xl font-bold'>{details?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</h1>
             <div className='flex justify-between items-center'>
               <p>{details?.category}</p>
-              <div className='flex gap-3'>
+              <div className='flex items-center justify-center gap-3'>
                 <ShareIcon className='w-6 h-6' />
-                <HeartIcon className='w-6 h-6' />
+                <HeartButton like={like} id={id} />
               </div>
             </div>
             <Image 

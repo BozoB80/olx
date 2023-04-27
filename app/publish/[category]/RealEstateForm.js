@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { auth, db, storage } from "@/firebase";
-import { v4 as uuidv4 } from "uuid";
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {

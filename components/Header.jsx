@@ -124,16 +124,16 @@ const Header = () => {
                   <MenuItem label="Promotions" onClick={() => {}} icon={<TrophyIcon className="w-6 h-6" />} />
                   <MenuItem label="Orders" onClick={() => {}} icon={<TruckIcon className="w-6 h-6" />} />
                   <h1 className="bg-gray-100 p-3 my-1 text-xs">SAVED</h1>
-                  <MenuItem label="Saved Adds" onClick={logoutUser} icon={<NewspaperIcon className="w-6 h-6" />} />
-                  <MenuItem label="Saved Users" onClick={logoutUser} icon={<UserIcon className="w-6 h-6" />} />
-                  <MenuItem label="Saved Searches" onClick={logoutUser} icon={<MagnifyingGlassIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Adds" onClick={() => {router.push('/myolx/saved/adds'), setToggleMenu(false)}} icon={<NewspaperIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Users" onClick={() => {}} icon={<UserIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Searches" onClick={() => {}} icon={<MagnifyingGlassIcon className="w-6 h-6" />} />
                   <h1 className="bg-gray-100 p-3 my-1 text-xs">OTHER LINKS</h1>
                   <MenuItem label="OLX shops" onClick={() => {}} icon={<BuildingStorefrontIcon className=" bg-red-600 rounded-md text-white p-1 w-6 h-6"/>} />
-                  <MenuItem label="User Support" onClick={logoutUser} icon={<LifebuoyIcon className="w-6 h-6" />} />
-                  <MenuItem label="Activate OLX Pro" onClick={logoutUser} icon={<KeyIcon className="w-6 h-6" />} />
-                  <MenuItem label="Marketing" onClick={logoutUser} icon={<ArrowTrendingUpIcon className="w-6 h-6" />} />
-                  <MenuItem label="Blocked Users" onClick={logoutUser} icon={<LockClosedIcon className="w-6 h-6" />} />
-                  <MenuItem label="Settings" onClick={logoutUser} icon={<Cog8ToothIcon className="w-6 h-6" />} />
+                  <MenuItem label="User Support" onClick={() => {}} icon={<LifebuoyIcon className="w-6 h-6" />} />
+                  <MenuItem label="Activate OLX Pro" onClick={() => {}} icon={<KeyIcon className="w-6 h-6" />} />
+                  <MenuItem label="Marketing" onClick={() => {}} icon={<ArrowTrendingUpIcon className="w-6 h-6" />} />
+                  <MenuItem label="Blocked Users" onClick={() => {}} icon={<LockClosedIcon className="w-6 h-6" />} />
+                  <MenuItem label="Settings" onClick={() => {}} icon={<Cog8ToothIcon className="w-6 h-6" />} />
                   <MenuItem label="Logout" onClick={logoutUser} icon={<ArrowLeftOnRectangleIcon className="w-6 h-6" />} />
                 </div>
               )}
