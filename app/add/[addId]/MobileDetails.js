@@ -10,6 +10,7 @@ import medal2 from '../../../assets/medal2.png'
 import { getTimeAgo } from '@/utils/dateUtils';
 import Link from 'next/link';
 import UserDetails from '@/components/UserDetails';
+import HeartButton from '@/components/HeartButton';
 
 const MobileDetails = ({ id, details }) => {
   const router = useRouter()
@@ -29,9 +30,9 @@ const MobileDetails = ({ id, details }) => {
             <h1 className='text-3xl font-bold'>{details?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</h1>
             <div className='flex justify-between items-center'>
               <p>{details?.category}</p>
-              <div className='flex gap-3'>
+              <div className='flex items-center justify-center gap-3'>
                 <ShareIcon className='w-6 h-6' />
-                <HeartIcon className='w-6 h-6' />
+                <HeartButton id={id} />
               </div>
             </div>
             <Image 
@@ -140,8 +141,8 @@ const MobileDetails = ({ id, details }) => {
           />
           <div className='absolute w-full px-3 flex justify-between top-5'>
             <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />
-            <div className='flex gap-3'>
-              <StarIcon className='w-6 h-6 text-white' />
+            <div className='flex justify-center items-center gap-3'>
+              <HeartButton id={id} small />
               <ShareIcon className='w-6 h-6 text-white' />
               <EllipsisVerticalIcon className='w-6 h-6 text-white' />
             </div>

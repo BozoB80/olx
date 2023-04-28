@@ -113,7 +113,6 @@ const CarsForm = () => {
     } catch (error) {
       console.log('You did not add new product');
     }
-
     setProduct({
       manufacturer: "",
       model: "",

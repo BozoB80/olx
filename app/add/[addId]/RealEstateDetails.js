@@ -17,7 +17,6 @@ import HeartButton from '@/components/HeartButton';
 import { useState } from 'react';
 
 const RealEstateDetails = ({ id, details }) => {
-  const [like, setLike] = useState(false)
   
   const router = useRouter()
 
@@ -38,7 +37,7 @@ const RealEstateDetails = ({ id, details }) => {
               <p>{details?.category}</p>
               <div className='flex items-center justify-center gap-3'>
                 <ShareIcon className='w-6 h-6' />
-                <HeartButton like={like} id={id} />
+                <HeartButton id={id} />
               </div>
             </div>
             <Image 
@@ -137,8 +136,8 @@ const RealEstateDetails = ({ id, details }) => {
           />
           <div className='absolute w-full px-3 flex justify-between top-5'>
             <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />
-            <div className='flex gap-3'>
-              <StarIcon className='w-6 h-6 text-white' />
+            <div className='flex justify-center items-center gap-3'>
+              <HeartButton id={id} small />
               <ShareIcon className='w-6 h-6 text-white' />
               <EllipsisVerticalIcon className='w-6 h-6 text-white' />
             </div>
