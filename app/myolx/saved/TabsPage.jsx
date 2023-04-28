@@ -15,7 +15,7 @@ const TabsPage = () => {
 
   return (
     <div>
-      <ul className="flex">
+      <ul className="flex justify-center sm:justify-start items-center">
         <li
           className={
             activeTab === "adds"
@@ -25,7 +25,7 @@ const TabsPage = () => {
         >
           <Link
             href="/myolx/saved/adds"
-            className="block px-4 py-2 transition hover:scale-105"
+            className="block pr-4 py-2 transition hover:scale-105"
             onClick={() => handleTabClick("adds")}
           >
             Adds
