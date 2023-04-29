@@ -32,6 +32,7 @@ import { getTimeAgo } from "@/utils/dateUtils";
 import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDocument, useDocumentData } from "react-firebase-hooks/firestore";
+import HeartUserButton from "@/components/HeartUserButton";
 
 const Profile = ({ name }) => {
   const [adds, setAdds] = useState([]);
@@ -172,8 +173,8 @@ const Profile = ({ name }) => {
             </>
           )}
 
-          <div className="flex flex-col space-y-3 py-3">
-            <HeartIcon className="w-8 h-8 cursor-pointer" />
+          <div className="flex flex-col justify-center items-start space-y-3 py-3">
+            <HeartUserButton id={name} />
             <button className="flex w-full justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
               <NoSymbolIcon className="w-5 h-5" />
               <p>Block user</p>

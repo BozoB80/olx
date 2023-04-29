@@ -124,9 +124,9 @@ const Header = () => {
                   <MenuItem label="Promotions" onClick={() => {}} icon={<TrophyIcon className="w-6 h-6" />} />
                   <MenuItem label="Orders" onClick={() => {}} icon={<TruckIcon className="w-6 h-6" />} />
                   <h1 className="bg-gray-100 p-3 my-1 text-xs">SAVED</h1>
-                  <MenuItem label="Saved Adds" onClick={() => {router.push('/myolx/saved/adds'), setToggleMenu(false)}} icon={<NewspaperIcon className="w-6 h-6" />} />
-                  <MenuItem label="Saved Users" onClick={() => {router.push('/myolx/saved/users'), setToggleMenu(false)}} icon={<UserIcon className="w-6 h-6" />} />
-                  <MenuItem label="Saved Searches" onClick={() => {router.push('/myolx/saved/searches'), setToggleMenu(false)}} icon={<MagnifyingGlassIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Adds" onClick={() => {router.push('/myolx/saved/adds?tab=adds'), setToggleMenu(false)}} icon={<NewspaperIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Users" onClick={() => {router.push('/myolx/saved/users?tab=users'), setToggleMenu(false)}} icon={<UserIcon className="w-6 h-6" />} />
+                  <MenuItem label="Saved Searches" onClick={() => {router.push('/myolx/saved/searches?tab=searches'), setToggleMenu(false)}} icon={<MagnifyingGlassIcon className="w-6 h-6" />} />
                   <h1 className="bg-gray-100 p-3 my-1 text-xs">OTHER LINKS</h1>
                   <MenuItem label="OLX shops" onClick={() => {}} icon={<BuildingStorefrontIcon className=" bg-red-600 rounded-md text-white p-1 w-6 h-6"/>} />
                   <MenuItem label="User Support" onClick={() => {}} icon={<LifebuoyIcon className="w-6 h-6" />} />

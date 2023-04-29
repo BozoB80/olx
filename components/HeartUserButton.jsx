@@ -11,7 +11,7 @@ import { selectUserID } from "@/redux/slice/authSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const HeartButton = ({ id, small }) => {
+const HeartUserButton = ({ id, small }) => {
   const [clicked, setClicked] = useState(false);
   const router = useRouter();
   const userId = useSelector(selectUserID);
@@ -22,19 +22,19 @@ const HeartButton = ({ id, small }) => {
       return;
     }
 
-    const savedAddsRef = doc(db, "users", userId, "savedAdds", id);
-    const savedAddsDoc = await getDoc(savedAddsRef);
+    const savedUsersRef = doc(db, "users", userId, "savedUsers", id);
+    const savedUsersDoc = await getDoc(savedUsersRef);
 
-    if (savedAddsDoc.exists()) {
+    if (savedUsersDoc.exists()) {
       // Remove like if product is already liked
-      await deleteDoc(savedAddsRef);
-      toast.success("Add removed from favorites");
+      await deleteDoc(savedUsersRef);
+      toast.success("User removed from favorites");
       setClicked(false);
     } else {
       // Add like if product is not already liked
       const newLike = { likedRef: id };
-      await setDoc(doc(db, "users", userId, "savedAdds", id), newLike);
-      toast.success("Added to favorites");
+      await setDoc(doc(db, "users", userId, "savedUsers", id), newLike);
+      toast.success("You saved user to favorites");
       setClicked(true);
     }
   }
@@ -44,9 +44,9 @@ const HeartButton = ({ id, small }) => {
       if (!userId) {
         return;
       }
-      const savedAddsRef = doc(db, "users", userId, "savedAdds", id);
-      const savedAddsDoc = await getDoc(savedAddsRef);
-      if (savedAddsDoc.exists()) {
+      const savedUsersRef = doc(db, "users", userId, "savedUsers", id);
+      const savedUsersDoc = await getDoc(savedUsersRef);
+      if (savedUsersDoc.exists()) {
         setClicked(true);
       } else {
         setClicked(false);
@@ -66,4 +66,4 @@ const HeartButton = ({ id, small }) => {
   )
 }
 
-export default HeartButton;
+export default HeartUserButton;

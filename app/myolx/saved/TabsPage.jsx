@@ -5,9 +5,12 @@ import Link from "next/link";
 import SavedAdds from "./adds/SavedAdds";
 import SavedUsers from "./users/SavedUsers";
 import SavedSearches from "./searches/SavedSearches";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const TabsPage = () => {
   const [activeTab, setActiveTab] = useState("adds");
+  const router = useRouter()
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
