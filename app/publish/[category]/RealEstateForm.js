@@ -239,7 +239,10 @@ const RealEstateForm = () => {
                       </div>
 
                       <div className="flex relative w-full">  
-                        <label htmlFor="notAvailable" className="w-full cursor-pointer px-1 sm:px-5 py-1 sm:py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center">
+                        <label 
+                          htmlFor="notAvailable" 
+                          className="w-full cursor-pointer sm:px-5 py-3 border-2 text-xs sm:text-sm border-gray-400 text-gray-400 rounded-md flex justify-center items-center"
+                        >
                           Not available
                         <input 
                           type="radio"
@@ -335,7 +338,7 @@ const RealEstateForm = () => {
                       name="type"
                       value="Sale"
                       onClick={(e) => handleInputChange(e)}
-                      className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
+                      className={`w-full p-1 sm:p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${
                             product.type === "sale"
                               ? "bg-[#f1f4f5] border-2 border-black"
@@ -350,7 +353,7 @@ const RealEstateForm = () => {
                       name="type"
                       value="Rent"
                       onClick={(e) => handleInputChange(e)}
-                      className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
+                      className={`w-full py-3 sm:p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${
                             product.type === "rent"
                               ? "bg-[#f1f4f5] border-2 border-black"
@@ -372,7 +375,7 @@ const RealEstateForm = () => {
                       name="furnished"
                       value={true}
                       onClick={(e) => handleBooleanChange(e)}
-                      className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
+                      className={`w-full py-3 sm:p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${
                             product.furnished
                               ? "bg-[#f1f4f5] border-2 border-black"
@@ -387,7 +390,7 @@ const RealEstateForm = () => {
                       name="furnished"
                       value={false}
                       onClick={(e) => handleBooleanChange(e)}
-                      className={`w-full p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
+                      className={`w-full py-3 sm:p-3 border text-xs sm:text-base border-gray-400 rounded-md flex justify-center items-center 
                           ${
                             !product.furnished
                               ? "bg-[#f1f4f5] border-2 border-black"
