@@ -6,17 +6,20 @@ import {
   ChatBubbleLeftIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  FolderPlusIcon,
   HeartIcon,
   MapPinIcon,
   NoSymbolIcon,
+  PencilSquareIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import medal1 from "../../../assets/medal1.png";
 import medal2 from "../../../assets/medal2.png";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   removeActiveUser,
+  selectIsLoggedIn,
   setActiveUser,
 } from "@/redux/slice/authSlice";
 import { auth, db } from "@/firebase";
@@ -33,10 +36,13 @@ import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDocument, useDocumentData } from "react-firebase-hooks/firestore";
 import HeartUserButton from "@/components/HeartUserButton";
+import Button from "@/components/Button";
+import PublishAdd from "@/components/PublishAdd";
 
 const Profile = ({ name }) => {
   const [adds, setAdds] = useState([]);
   const [toggleInfo, setToggleInfo] = useState(false);
+  const [publish, setPublish] = useState(false)
   const [selectedTab, setSelectedTab] = useState("Active");
   const [userName, setUserName] = useState("");
   const dispatch = useDispatch();
@@ -124,15 +130,20 @@ const Profile = ({ name }) => {
         </div>
 
         <div className="flex justify-center w-full bg-white py-5 gap-3 rounded-[4px]">
-          <button className="flex w-1/2 justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
-            <PhoneIcon className="w-5 h-5" />
-            <p>Phone</p>
-          </button>
-          <button className="flex w-1/2 justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
-            <ChatBubbleLeftIcon className="w-5 h-5" />
-            <p>Message</p>
-          </button>
+          {name === auth?.currentUser?.uid ? (
+            <>
+              <Button label="Settings" icon={<PencilSquareIcon className="w-5 h-5" />} />
+              <Button label="Publish" dark icon={<FolderPlusIcon className="w-5 h-5" />} onClick={() => setPublish(true)} />
+            </>
+          ) : (
+            <>
+              <Button label="Phone" icon={<PhoneIcon className="w-5 h-5" />} />
+              <Button label="Message" icon={<ChatBubbleLeftIcon className="w-5 h-5" />} onClick={() => router.push(`/add/edit/${id}`)} />
+            </>
+          )}
         </div>
+
+        {publish && <PublishAdd setPublish={setPublish} />}
 
         <div className="relative">
           {!toggleInfo && (
@@ -173,13 +184,12 @@ const Profile = ({ name }) => {
             </>
           )}
 
-          <div className="flex flex-col justify-center items-start space-y-3 py-3">
-            <HeartUserButton id={name} />
-            <button className="flex w-full justify-center text-sm font-semibold gap-2 border-2 border-black hover:border-4 rounded-[4px] p-3">
-              <NoSymbolIcon className="w-5 h-5" />
-              <p>Block user</p>
-            </button>
-          </div>
+          {name !== auth?.currentUser?.uid && (
+            <div className="flex flex-col justify-center items-start space-y-3 py-3">
+              <HeartUserButton id={name} />
+              <Button label="Block User" icon={<NoSymbolIcon className="w-5 h-5" />} />
+            </div>
+          )}
         </div>
       </div>
 

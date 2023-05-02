@@ -5,12 +5,15 @@ import Link from "next/link";
 import SavedAdds from "./adds/SavedAdds";
 import SavedUsers from "./users/SavedUsers";
 import SavedSearches from "./searches/SavedSearches";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const TabsPage = () => {
   const [activeTab, setActiveTab] = useState("adds");
+  const searchParams  = useSearchParams()
   const router = useRouter()
+
+  console.log(searchParams.get('tab'));
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

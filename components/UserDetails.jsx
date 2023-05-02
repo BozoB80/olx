@@ -8,6 +8,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Button from "./Button";
 
 const UserDetails = ({ id, details }) => {
   const [contact, setContact] = useState(null)
@@ -17,26 +18,6 @@ const UserDetails = ({ id, details }) => {
   const userRef = details.userRef
   const router = useRouter()
  
-  // const loggedIn = () => {
-  //   const uid = userRef
-  
-  //   auth.getUser(uid)
-  //     .then((userRecord) => {
-  //       // See the UserRecord reference doc for the contents of userRecord.
-  //       console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
-  //       setLastSignedIn()
-
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fetching user data:', error);
-  //     });
-
-  // }
-
-  // console.log(loggedIn());
-
-  
-
   useEffect(() => {
     async function getContact() {
       const docRef = doc(db, "users", userRef);
@@ -91,25 +72,13 @@ const UserDetails = ({ id, details }) => {
       <div className="flex w-[332px] bg-white p-4 gap-3 rounded-[4px]">
         {userRef === auth?.currentUser?.uid ? (
           <>
-            <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-              <PhoneIcon className="w-5 h-5" />
-              <p>Statistics</p>
-            </button>
-            <button onClick={() => router.push(`/add/edit/${id}`)} className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-              <ChatBubbleLeftIcon className="w-5 h-5" />
-              <p>Options</p>
-            </button>
+            <Button label="Statistics" icon={<PhoneIcon className="w-5 h-5" />} />
+            <Button label="Options" icon={<ChatBubbleLeftIcon className="w-5 h-5" />} onClick={() => router.push(`/add/edit/${id}`)} />
           </>
         ) : (
           <>
-            <button className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-              <PhoneIcon className="w-5 h-5" />
-              <p>Phone</p>
-            </button>
-            <button onClick={() => settoggleMessage(true)} className="flex w-full justify-center text-sm font-semibold gap-2 border border-black hover:border-4 rounded-[4px] p-3">
-              <ChatBubbleLeftIcon className="w-5 h-5" />
-              <p>Message</p>
-            </button>          
+            <Button label="Phone" icon={<PhoneIcon className="w-5 h-5" />} />
+            <Button label="Message" icon={<ChatBubbleLeftIcon className="w-5 h-5" />} onClick={() => settoggleMessage(true)} />        
           </>
         )}
       </div>

@@ -23,7 +23,11 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
       'mist': {'max': '1030px'}
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        'button': 'inset 0 0 0 4px black'
+      }
+    },
   },
   plugins: [],
 }
