@@ -84,7 +84,6 @@ const Profile = ({ name }) => {
   }, [name]);
 
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

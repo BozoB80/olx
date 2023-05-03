@@ -33,6 +33,10 @@ const FooterNav = () => {
   const isLoggedIn = () => {
     loggedIn ? setToggleMenu(true) : router.push('/auth/login')
   }
+
+  const profileLink = () => {
+    loggedIn ? router.push(`/profile/${userId}`) : router.push('/auth/login')
+  }
   
 
   const handleScroll = debounce(() => {
@@ -68,7 +72,7 @@ const FooterNav = () => {
         variants={slideIn('up', 'spring', 0.2, 0.5)}
         initial="hidden"
         whileInView="show"
-        className={`flex fixed ${visible ? 'bottom-0 z-50' : '-bottom-50 -z-10'} bg-white shadow-black shadow-2xl w-full justify-around items-center py-2`}
+        className={`flex fixed ${visible ? 'bottom-0 z-50' : '-bottom-96 -z-50'} bg-white shadow-black shadow-2xl w-full justify-around items-center py-2`}
       >
         <Link href="/" className="flex flex-col justify-center items-center">
           <HomeIcon className="w-5 h-5" />
@@ -82,10 +86,10 @@ const FooterNav = () => {
           <PlusCircleIcon className="w-5 h-5" />
           <p className="text-xs">Publish</p>
         </div>
-        <Link href={`/profile/${userId}`} className="flex flex-col justify-center items-center">
+        <div onClick={profileLink} className="flex flex-col justify-center items-center">
           <UserIcon className="w-5 h-5" />
           <p className="text-xs">Profile</p>
-        </Link>
+        </div>
         <div onClick={isLoggedIn} className="flex flex-col justify-center items-center">
           <Bars3Icon className="w-5 h-5" />
           <p className="text-xs">My OLX</p>

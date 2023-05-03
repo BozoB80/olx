@@ -10,6 +10,8 @@ import { useCollection, useCollectionData } from "react-firebase-hooks/firestore
 import { collection } from "firebase/firestore"
 import { db } from "@/firebase"
 import Link from "next/link"
+import { motion } from "framer-motion"
+import { slideIn } from "@/utils/motion"
 
 
 const SearchBar = () => {
@@ -39,7 +41,7 @@ const SearchBar = () => {
       )
     })
     setSearchData(filteredAdds)
-    console.log(filteredAdds);
+    
   }
 
 
@@ -59,14 +61,19 @@ const SearchBar = () => {
           placeholder='Search'
           className="w-full focus:outline-none bg-gray-100 sm:bg-white"
         />
-        {searchTerm ? <button><XMarkIcon onClick={() => setSearchData('')} className="h-6 w-6" /></button> : ''}
+        {searchTerm ? <button><XMarkIcon onClick={() => setSearchTerm('')} className="h-6 w-6" /></button> : ''}
 
         {searchData && searchData.length !== 0 ? (
-          <div className="absolute w-full top-14 left-0 bg-slate-50 shadow-sm-2 z-[9] p-3">
+          <motion.div
+            variants={slideIn('down', 'tween', 0, 0.5)}
+            initial="hidden"
+            whileInView="show"
+            className="absolute w-full top-14 left-0 bg-slate-50 shadow-xl z-[9] p-3"
+          >
             {searchData && searchData.map((item) => {
               const { category, title } = item.data()
               return (
-                <Link href={`/add/${item.id}`} onClick={() => setSearchTerm('')} key={item.id}>
+                <Link href={`/add/${item.id}`} onClick={() => {setSearchData(''), setSearchTerm('')}} key={item.id}>
                   <div className="w-full flex items-center py-3">
                     <h1>{category}</h1>
                     <p className="ml-3"><ArrowRightIcon className="w-4 h-4" /></p>
@@ -75,7 +82,7 @@ const SearchBar = () => {
                 </Link>      
               )
             })}
-          </div>
+          </motion.div>
         ) : null}
         
       </form> 

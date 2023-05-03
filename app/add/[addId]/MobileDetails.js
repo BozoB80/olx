@@ -11,6 +11,7 @@ import { getTimeAgo } from '@/utils/dateUtils';
 import Link from 'next/link';
 import UserDetails from '@/components/UserDetails';
 import HeartButton from '@/components/HeartButton';
+import OtherUserAdds from '@/components/user/OtherUserAdds';
 
 const MobileDetails = ({ id, details }) => {
   const router = useRouter()
@@ -32,7 +33,7 @@ const MobileDetails = ({ id, details }) => {
               <p>{details?.category}</p>
               <div className='flex items-center justify-center gap-3'>
                 <ShareIcon className='w-6 h-6' />
-                <HeartButton id={id} />
+                <HeartButton id={id} userRef={details?.userRef} />
               </div>
             </div>
             <Image 
@@ -123,6 +124,7 @@ const MobileDetails = ({ id, details }) => {
           </button>
         </div>
 
+        <OtherUserAdds id={id} />
         
       </div>
         {/* User */}
@@ -142,7 +144,7 @@ const MobileDetails = ({ id, details }) => {
           <div className='absolute w-full px-3 flex justify-between top-5'>
             <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />
             <div className='flex justify-center items-center gap-3'>
-              <HeartButton id={id} small />
+              <HeartButton id={id} small userRef={details?.userRef} />
               <ShareIcon className='w-6 h-6 text-white' />
               <EllipsisVerticalIcon className='w-6 h-6 text-white' />
             </div>

@@ -10,6 +10,7 @@ import medal2 from '../../../assets/medal2.png'
 import { getTimeAgo } from '@/utils/dateUtils';
 import UserDetails from '@/components/UserDetails';
 import HeartButton from '@/components/HeartButton';
+import OtherUserAdds from '@/components/user/OtherUserAdds';
 
 
 const CarsDetails = ({id, details}) => {
@@ -31,7 +32,7 @@ const CarsDetails = ({id, details}) => {
               <p>{details?.category}</p>
               <div className='flex items-center justify-center gap-3'>
                 <ShareIcon className='w-6 h-6' />
-                <HeartButton id={id} />
+                <HeartButton id={id} userRef={details?.userRef} />
               </div>
             </div>
             <Image 
@@ -137,7 +138,7 @@ const CarsDetails = ({id, details}) => {
           </div>
         </div>
 
-        <div className=' flex flex-col w-[832px] space-y-3 bg-white p-4 rounded-[4px]'>
+        <div className='flex flex-col w-[832px] space-y-3 bg-white p-4 rounded-[4px]'>
           <h1 className='text-2xl'>Ask a question:</h1>
           <textarea 
             cols="30"
@@ -150,6 +151,7 @@ const CarsDetails = ({id, details}) => {
           </button>
         </div>
 
+        <OtherUserAdds id={id} />
         
       </div>
         {/* User */}
@@ -169,7 +171,7 @@ const CarsDetails = ({id, details}) => {
           <div className='absolute w-full px-3 flex justify-between top-5'>
             <ArrowLeftIcon onClick={() => router.back()} className='w-6 h-6 text-white' />
             <div className='flex justify-center items-center gap-3'>
-              <HeartButton id={id} small />
+              <HeartButton id={id} small userRef={details?.userRef} />
               <ShareIcon className='w-6 h-6 text-white' />
               <EllipsisVerticalIcon className='w-6 h-6 text-white' />
             </div>
@@ -288,7 +290,7 @@ const CarsDetails = ({id, details}) => {
             </button>
 
             <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
+              <OtherUserAdds id={id} />
             </div>
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>

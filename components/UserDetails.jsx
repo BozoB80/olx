@@ -3,7 +3,7 @@ import olxMale from '../assets/olx-male.svg'
 import medal1 from '../assets/medal1.png'
 import medal2 from '../assets/medal2.png'
 import Image from "next/image";
-import { ChatBubbleLeftIcon, InformationCircleIcon, PhoneIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ChartBarSquareIcon, ChatBubbleLeftIcon, InformationCircleIcon, PencilSquareIcon, PhoneIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/firebase";
 import Link from "next/link";
@@ -34,10 +34,6 @@ const UserDetails = ({ id, details }) => {
   const handleMessage = (e) => {
     setMessage(e.target.value)
   }
-
-  useEffect(() => {
-    
-  }, [])
   
 
   return (
@@ -72,8 +68,8 @@ const UserDetails = ({ id, details }) => {
       <div className="flex w-[332px] bg-white p-4 gap-3 rounded-[4px]">
         {userRef === auth?.currentUser?.uid ? (
           <>
-            <Button label="Statistics" icon={<PhoneIcon className="w-5 h-5" />} />
-            <Button label="Options" icon={<ChatBubbleLeftIcon className="w-5 h-5" />} onClick={() => router.push(`/add/edit/${id}`)} />
+            <Button label="Statistics" dark icon={<ChartBarSquareIcon className="w-5 h-5" />} />
+            <Button label="Options" icon={<PencilSquareIcon className="w-5 h-5" />} onClick={() => router.push(`/add/edit/${id}`)} />
           </>
         ) : (
           <>

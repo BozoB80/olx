@@ -11,7 +11,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center z-10">
         <div className="w-full flex flex-col sm:flex-row justify-between items-start p-2 sm:p-0 gap-5 sm:gap-16">
           {footerInfo.map((info, i) => (
             <ul key={i} className="w-full space-y-2">
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="w-full text-start py-3">
+        <div className="w-full text-start px-2 sm:px-0 py-3">
           <h1 className="font-light text-md">Copyright © OLX-bb {new Date().getFullYear()}. All rights reserved.</h1>
         </div>          
       </div>

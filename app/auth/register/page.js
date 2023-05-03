@@ -61,7 +61,7 @@ const Register = () => {
   }
 
   return (
-    <div className='relative flex justify-center items-center w-full h-screen mx-auto bg-[#012f34]'>
+    <div className='relative flex justify-center items-center w-full px-3 py-20 mx-auto bg-[#012f34]'>
       <div className='flex flex-col justify-center w-[400px] h-auto items-center rounded-md p-4 z-10 bg-white'>
           <Link href="/">
             <Image 

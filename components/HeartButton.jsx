@@ -11,10 +11,10 @@ import { selectUserID } from "@/redux/slice/authSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const HeartButton = ({ id, small }) => {
-  const [clicked, setClicked] = useState(false);
-  const router = useRouter();
-  const userId = useSelector(selectUserID);
+const HeartButton = ({ id, userRef, small }) => {
+  const [clicked, setClicked] = useState(false)
+  const router = useRouter()
+  const userId = useSelector(selectUserID)
 
   const toggleLike = async () => {
     if (!userId) {
@@ -56,7 +56,7 @@ const HeartButton = ({ id, small }) => {
   }, [userId, id])
 
   return (
-    <div onClick={toggleLike} className="flex justify-center items-center">
+    <div onClick={toggleLike} className={`${userRef === userId ? 'hidden' : 'flex'} justify-center items-center`}>
       {clicked ? (
         <HeartIcon className="w-8 h-8 mx-1 cursor-pointer transition hover:scale-110 text-red-600" />
       ) : (
