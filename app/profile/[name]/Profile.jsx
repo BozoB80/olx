@@ -107,7 +107,7 @@ const Profile = ({ name }) => {
 
   return (
     <div className="flex flex-col lg:flex-row w-full p-1 sm:p-5">
-      <div className="flex flex-col w-full lg:w-1/5 border-b lg:border-r border-gray-300 sm:pr-5 lg:h-screen">
+      <div className="flex flex-col w-full lg:w-1/5 lg:border-r border-gray-300 sm:pr-5 lg:h-[50vh]">
         <div className="flex gap-3">
           <Image
             src={olxMale}
@@ -149,7 +149,7 @@ const Profile = ({ name }) => {
           {!toggleInfo && (
             <div
               onClick={() => setToggleInfo(true)}
-              className="flex justify-between"
+              className="flex justify-between pb-5"
             >
               <h1>Information</h1>
               <ChevronDownIcon className="w-5 h-5 cursor-pointer" />

@@ -7,6 +7,7 @@ import store from '../redux/store'
 import Header from '@/components/Header'
 import FooterNav from '@/components/FooterNav'
 import ToasterProvider from '@/components/providers/ToasterProvider'
+import Footer from '@/components/Footer'
 
 
 export default function RootLayout({ children }) {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <FooterNav />
+          <Footer />
         </Provider>
       </body>
     </html>

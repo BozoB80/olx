@@ -77,9 +77,9 @@ const Header = () => {
               <Link href="/">Marketing</Link>
               <Link href="/">Blog</Link>
               <Link href="/">Create Add</Link>
-              <Link href="/" className="flex">
+              <Link href="/" className="flex items-center">
                 Other
-                <ChevronDownIcon className="h-6 w-6" />
+                <ChevronDownIcon className="h-5 w-5" />
               </Link>
             </div>
 

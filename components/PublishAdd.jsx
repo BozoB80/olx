@@ -7,21 +7,28 @@ import { useSelector } from "react-redux"
 import { selectCategories } from "@/redux/slice/categorySlice"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import Link from "next/link"
+import { motion } from "framer-motion"
+import { slideAnimation } from "@/utils/motion"
 
 const PublishAdd = ({ setPublish }) => {
   const [toggle, setToggle] = useState(false)
   const categoryList = useSelector(selectCategories)
   const router = useRouter()
 
+  const onClose = () => {
+    setTimeout(() => {
+      setPublish(false)
+    }, 200)
+  }
+
   return (
         <>
         <div className="hidden sm:block absolute -top-20 -left-5 right-0 bottom-0 z-40 w-screen h-screen bg-slate-400/50">
-          <div className="absolute inset-1/3 w-[550px] h-[550px] bg-white rounded-md">
+          <motion.div {...slideAnimation('up')}  className="absolute inset-1/3 w-[550px] h-[550px] bg-white rounded-md">
             <div className="flex flex-col w-full justify-center items-center p-3">
               <div className="flex w-full justify-between items-center">
                 <h1 className="text-xl">Publish add</h1>
-                <button type="button" onClick={() => setPublish(false)}>
+                <button type="button" onClick={onClose}>
                   <XMarkIcon className="h-6 w-6" />
                 </button>
               </div>
@@ -99,11 +106,11 @@ const PublishAdd = ({ setPublish }) => {
                 Become OLX pro
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Small Screen */}
-        <div className="absolute top-0 left-0 right-0 bottom-0 sm:hidden z-50">
+        <motion.div {...slideAnimation('up')} className="absolute top-0 left-0 right-0 bottom-0 sm:hidden z-50">
           <div className="bg-white w-full h-full">
             <div className="flex flex-col w-full justify-center items-center p-3">
               <div className="flex w-full justify-between items-center">
@@ -187,9 +194,8 @@ const PublishAdd = ({ setPublish }) => {
               </button>
             </div>
           </div>         
-        </div>
-
-        </>
+        </motion.div>
+      </>
   )
 }
 
