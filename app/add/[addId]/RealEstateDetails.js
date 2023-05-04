@@ -15,6 +15,7 @@ import { getTimeAgo } from '@/utils/dateUtils';
 import UserDetails from '@/components/UserDetails';
 import HeartButton from '@/components/HeartButton';
 import { useState } from 'react';
+import OtherUserAdds from '@/components/user/OtherUserAdds';
 
 const RealEstateDetails = ({ id, details }) => {
   
@@ -172,25 +173,7 @@ const RealEstateDetails = ({ id, details }) => {
           </div>
 
           <div className='bg-[#f1f4f5] p-2 w-full'>
-            <div className='p-2 bg-white shadow-md rounded-[4px] w-full'>
-              <div className='flex justify-start items-center'>
-                <Image
-                  src={olxMale}
-                  alt="avatarphoto"
-                  width={56}
-                  height={56}
-                  className="rounded-full"
-                />
-                <div className='flex flex-col ml-5'>
-                  <h1 className='font-semibold'>{details?.createdBy}</h1>
-                  <div className='flex gap-3'>
-                    <Image src={medal1} alt="medal1" width={25} height={25} />
-                    <Image src={medal2} alt="medal2" width={25} height={25} />
-                  </div>
-                  <p className='text-sm'>Usual reply time 1 hour</p>
-                </div>
-              </div>
-            </div>
+            <UserDetails id={id} details={details} />
 
             <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
               <h4 className='uppercase text-sm'>Category</h4>
@@ -239,8 +222,8 @@ const RealEstateDetails = ({ id, details }) => {
               <h1 className='uppercase text-sm'>Questions & Answers (0)</h1>
             </button>
 
-            <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
+            <div className='my-2 bg-white shadow-md rounded-[4px] w-full'>
+              <OtherUserAdds id={id} />
             </div>
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>

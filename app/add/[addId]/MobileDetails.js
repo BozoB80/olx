@@ -22,10 +22,10 @@ const MobileDetails = ({ id, details }) => {
 
   return (
     <div className='bg-[#f1f4f5] w-full py-10 flex justify-center items-start gap-6 '>
-      <div className='hidden sm:flex w-[1180px] gap-6'>
+      <div className='hidden xl:flex xl:w-[1180px] gap-6'>
       <div className=' flex flex-col space-y-4'>
         {/* Main details */}
-        <div className='w-[832px] bg-white p-4 rounded-[4px]'>
+        <div className='lg:w-[832px] bg-white p-4 rounded-[4px]'>
           <div className='flex flex-col w-full space-y-3'>
             <h1 className='text-2xl uppercase'>{details?.title}</h1>
             <h1 className='text-3xl font-bold'>{details?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} EUR</h1>
@@ -132,7 +132,7 @@ const MobileDetails = ({ id, details }) => {
       </div>
 
       {/* Small screen */}
-      <div className='absolute top-0 w-full z-50 bg-white sm:hidden'>
+      <div className='absolute top-0 w-full z-50 bg-white xl:hidden'>
         <div className='relative'>
           <Image 
             src={details?.imageURL}
@@ -179,25 +179,7 @@ const MobileDetails = ({ id, details }) => {
           </div>
 
           <div className='bg-[#f1f4f5] p-2 w-full'>
-            <div className='p-2 bg-white shadow-md rounded-[4px] w-full'>
-              <div className='flex justify-start items-center'>
-                <Image
-                  src={olxMale}
-                  alt="avatarphoto"
-                  width={56}
-                  height={56}
-                  className="rounded-full"
-                />
-                <div className='flex flex-col ml-5'>
-                  <Link href={`/profile/${details?.createdBy}`} className='font-semibold'>{details?.createdBy}</Link>
-                  <div className='flex gap-3'>
-                    <Image src={medal1} alt="medal1" width={25} height={25} />
-                    <Image src={medal2} alt="medal2" width={25} height={25} />
-                  </div>
-                  <p className='text-sm'>Usual reply time 1 hour</p>
-                </div>
-              </div>
-            </div>
+            <UserDetails id={id} details={details} />
 
             <div className='p-2 my-2 bg-white shadow-md rounded-[4px] w-full'>
               <h4 className='uppercase text-sm'>Category</h4>
@@ -254,8 +236,8 @@ const MobileDetails = ({ id, details }) => {
               <h1 className='uppercase text-sm'>Questions & Answers (0)</h1>
             </button>
 
-            <div className='p-2 my-4 bg-white shadow-md rounded-[4px] w-full'>
-              <h4 className='uppercase text-xs'>Similar adds</h4>
+            <div className='my-2 bg-white shadow-md rounded-[4px] w-full'>
+              <OtherUserAdds id={id} />
             </div>
 
             <button className='flex w-full py-1 gap-3 justify-center items-center border border-black rounded-[4px]'>

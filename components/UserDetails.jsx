@@ -39,9 +39,9 @@ const UserDetails = ({ id, details }) => {
   return (
     <>
     <div className="flex flex-col space-y-4 sticky top-4">
-      <div className="w-[332px] bg-white p-4 rounded-[4px]">
+      <div className="sm:w-[332px] bg-white p-4 rounded-[4px]">
         <div className="flex flex-col w-full">
-          <h1 className="text-sm font-semibold mb-3">USER</h1>
+          <h1 className="hidden sm:block text-sm font-semibold mb-3">USER</h1>
           <div className="flex justify-start items-center">
             <Image
               src={olxMale}
@@ -65,7 +65,7 @@ const UserDetails = ({ id, details }) => {
         </div>
       </div>
 
-      <div className="flex w-[332px] bg-white p-4 gap-3 rounded-[4px]">
+      <div className="hidden sm:flex w-[332px] bg-white p-4 gap-3 rounded-[4px]">
         {userRef === auth?.currentUser?.uid ? (
           <>
             <Button label="Statistics" dark icon={<ChartBarSquareIcon className="w-5 h-5" />} />
