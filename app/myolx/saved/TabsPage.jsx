@@ -15,9 +15,16 @@ const TabsPage = () => {
 
   console.log(searchParams.get('tab'));
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  const handleTabClick = (searchParams) => {
+    setActiveTab(searchParams);
   };
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, []);
 
   return (
     <div>

@@ -8,6 +8,8 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/firebase"
 import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast"
+import { motion } from "framer-motion"
+import { slideAnimation } from "@/utils/motion"
 
 
 const Login = () => {
@@ -37,7 +39,7 @@ const Login = () => {
 
   return (
     <div className='relative flex justify-center items-center w-full px-3 py-20 mx-auto bg-[#012f34]'>
-      <div className='flex flex-col justify-center w-[400px] h-auto items-center rounded-md p-4 z-10 bg-white'>
+      <motion.div {...slideAnimation('up')} className='flex flex-col justify-center w-[400px] h-auto items-center rounded-md p-4 z-10 bg-white'>
           <Link href="/">
             <Image 
               src={logo}
@@ -83,7 +85,7 @@ const Login = () => {
             <Link href="/auth/register" className="uppercase font-bold">Register</Link>
           </div>
 
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -43,7 +43,7 @@ const Categories = () => {
   
   return (
     <>
-      <div className="hidden px-3 sm:flex justify-between items-center w-full min-w-full sm:px-3 py-4 overflow-x-scroll">
+      <div className="hidden px-3 sm:flex justify-between items-center w-full min-w-full sm:px-3 py-4">
         {categories.map((category) => (
         <Link href={`/${category.name}`} key={category.id} className="flex flex-col w-20 sm:w-36 px-1 py-2 justify-between items-center">
           <div style={{ backgroundColor: category.bgColor }} className="flex justify-center items-center border w-14 sm:w-16 h-14 sm:h-16 rounded-full">

@@ -13,25 +13,22 @@ const useFetchCollection = (collectionName) => {
       const docRef = collection(db, collectionName);
       const q = query(docRef, orderBy("createdAt", "desc"));
       onSnapshot(q, (snapshot) => {
-        // console.log(snapshot.docs);
         const allData = snapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
-        }));
-        // console.log(allData);
-        setData(allData);
-        
-      });
+          ...doc.data()
+        }))
+        setData(allData)        
+      })
     } catch (error) {
-      
+      console.log('No adds displayed')
     }
-  };
+  }
 
   useEffect(() => {
-    getCollection();
-  }, []);
+    getCollection()
+  }, [])
 
-  return { data };
-};
+  return { data }
+}
 
 export default useFetchCollection;
