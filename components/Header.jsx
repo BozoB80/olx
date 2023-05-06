@@ -93,7 +93,7 @@ const Header = () => {
             ) : (
             <div className="relative flex">
               <div className="flex justify-center items-center gap-3">
-                <Link href="/">
+                <Link href="/messages">
                   <ChatBubbleBottomCenterTextIcon className="h-6 w-6" />
                 </Link>
                 <button type="button" className="flex pl-2 gap-2 border-l border-gray-400">

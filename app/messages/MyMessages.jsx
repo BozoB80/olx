@@ -4,19 +4,51 @@ import Container from "@/components/Container";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
+import Box from '@mui/material/Box';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <div>{children}</div>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const MyMessages = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState(0)
 
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
-  }
+  };
 
   return (
     <Container bground>
@@ -33,19 +65,23 @@ const MyMessages = () => {
             <MagnifyingGlassIcon className="absolute top-7 left-7 w-6 h-6" />           
           </form>
 
-          <Box sx={{ width: '100%', typography: 'body1' }}>
-            <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList onChange={handleTabChange} aria-label="lab API tabs example">
-                  <Tab label="Item One" value="1" />
-                  <Tab label="Item Two" value="2" />
-                  <Tab label="Item Three" value="3" />
-                </TabList>
-              </Box>
-              <TabPanel value="1">Item One</TabPanel>
-              <TabPanel value="2">Item Two</TabPanel>
-              <TabPanel value="3">Item Three</TabPanel>
-            </TabContext>
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs value={value} variant="fullWidth" centered onChange={handleTabChange} aria-label="basic tabs example">
+                <Tab label="Inbox" {...a11yProps(0)} className="focus:bg-black focus:text-white" />
+                <Tab label="Saved" {...a11yProps(1)} className="focus:bg-black focus:text-white" />
+                <Tab label="Questions" {...a11yProps(2)} className="focus:bg-black focus:text-white" />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              First message
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              Item Two
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              Item Three
+            </TabPanel>
           </Box>
         </div>
         <div>

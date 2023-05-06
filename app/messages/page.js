@@ -4,7 +4,7 @@ const MessagesPage = () => {
 
   return (
     <div>
-      {/* <MyMessages /> */}
+      <MyMessages />
     </div>
   );
 }
